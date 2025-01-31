@@ -1,0 +1,53 @@
+# Ignorar archivos y carpetas generales
+.DS_Store
+.vscode/
+.idea/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Ignorar dependencias de Node.js (Frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Ignorar build de React (Frontend)
+frontend/build/
+frontend/.cache/
+frontend/dist/
+
+# Ignorar archivos de entorno (sensibles)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Ignorar configuraciones de Tailwind CSS
+frontend/tailwind.config.js
+
+# Ignorar archivos de Python (Backend)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignorar entornos virtuales de Python
+venv/
+env/
+.venv/
+
+# Ignorar configuraciones de MongoDB
+data/db/
+
+# Ignorar archivos de Vercel
+.vercel/
+
+# Ignorar archivos de Docker
+docker-compose.override.yml

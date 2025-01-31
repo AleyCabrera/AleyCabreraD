@@ -1,0 +1,318 @@
+:root {
+    /*Establece una variable personalizada que contiene un valor de color.*/
+    --color-primario: #020745;
+    --color-secundario: #ffff00;
+    --color-terciario: #d5d5d5;
+    --color-cuaternario: #91dfff;
+    --color-quintenario: rgb(255, 255, 255);
+    --font-family: 'Orbitron', sans-serif;
+    --sm: 1.4rem;
+    --md: 1.6rem;
+    --lg: 1.8rem;
+    --xl: 2.4rem;
+    --border-radius: 2rem;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilos generales */
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+}
+
+body {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(255, 255, 255, 0.8);
+}
+
+/*Estilos del Header*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: var(--color-primario);
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 100%;
+}
+
+.nav .image img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+    border: 0.2rem solid var(--color-secundario);
+    padding: 0.5rem;
+    margin: 1rem 0 1rem 4rem;
+}
+
+.nav .image img:hover {
+    border: 0.2rem solid var(--color-quintenario);
+}
+
+.lista {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    margin-left: 70rem;
+}
+
+.lista .items {
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-size: var(--md);
+    padding: 0.5rem;
+    position: relative;
+    margin: 0 1rem;
+    list-style: none;
+    padding-bottom: 0.5rem;
+}
+
+.lista .items:hover {
+    color: var(--color-quintenario);
+}
+
+.lista .items:active {
+    color: var(--color-secundario);
+}
+
+.lista .items::before {
+    content: "";
+    position: absolute;
+    height: 0.1rem;
+    width: 0;
+    bottom: 0;
+    transition: all .3s ease;
+}
+
+.lista .items:hover::before {
+    content: "";
+    position: absolute;
+    height: 0.2rem;
+    width: 70%;
+    bottom: 0;
+    background-color: var(--color-secundario);
+}
+
+/*Estilos del Main*/
+main {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    width: 70%;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.titulo h1 {
+    font-size: var(--lg);
+    font-weight: bold;
+    color: var(--color-primario);
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5rem;
+}
+
+.titulo p {
+    font-size: var(--md);
+    color: var(--color-primario);
+    width: 100%;
+    justify-content: justify;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3rem;
+}
+
+.contacto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.formulario {
+    background: var(--color-cuaternario);
+    text-align: center;
+    box-shadow: 0px 0px 20px 5px rgb(170, 170, 170);
+    border-radius: 1rem;
+    width: 90%;
+    height: 50rem;
+    margin: 3rem auto 0 auto;
+    padding: 2rem 3rem 0;
+    animation: bounce 1.5s infinite;
+}
+
+.nombre,
+.correo,
+.telefono,
+.mensaje {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: var(--sm);
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+}
+
+.nombre input,
+.correo input,
+.telefono input,
+.mensaje textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    height: 3rem;
+    background-color: var(--color-quintenario);
+    color: var(--color-primario);
+    font-size: var(--sm);
+}
+
+.mensaje textarea {
+    resize: none;
+    height: 10rem;
+}
+
+::-webkit-input-placeholder {
+    color: var(--color-terciario);
+}
+
+:-moz-placeholder {
+    color: var(--color-primario);
+}
+
+.nombre input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+.correo input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+.telefono input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+
+.entry {
+    display: block;
+    margin: 1rem auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.5s ease 0s;
+    box-shadow: 0px 0px 25px 2px #AAA;
+}
+
+.shadow {
+    box-shadow: 0px 0px 60px 5px #AAA;
+    opacity: 0.5;
+    border-radius: 100px;
+    width: 50%;
+    margin: 50px auto 0 auto;
+    padding: 0 20px;
+    animation: shadow 1.5s infinite;
+}
+
+.submit {
+    border-radius: 5px;
+    padding: 10px;
+    width: 150px;
+    color: var(--color-primario);
+    background-color: var(--color-secundario);
+    border: none;
+    border-bottom: 5px solid rgb(249, 249, 178);
+    margin-top: 150px;
+    transform: translateY(-120px);
+}
+
+
+.submit:hover {
+    border-bottom: 0.5rem solid var(--color-primario);
+    box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
+}
+
+
+@keyframes bounce{
+    0% {}
+
+    50% {
+        transform: translate(0, 8px);
+    }
+}
+
+@keyframes shadow {
+    0% {}
+
+    50% {
+        opacity: 0.8;
+        width: 50%;
+    }
+}
+
+
+

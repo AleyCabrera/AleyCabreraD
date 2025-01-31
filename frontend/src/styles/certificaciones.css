@@ -1,0 +1,283 @@
+:root {
+    /*Establece una variable personalizada que contiene un valor de color.*/
+    --color-primario: #020745;
+    --color-secundario: #ffff00;
+    --color-terciario: rgb(213, 213, 213);
+    --color-cuaternario: #91dfff;
+    --color-quintenario: #ffffff;
+    --font-family: 'Orbitron', sans-serif;
+    --sm: 1.4rem;
+    --md: 1.6rem;
+    --lg: 1.8rem;
+    --xl: 2.4rem;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilos generales */
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+}
+
+body {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(213, 213, 213, 0.8);
+}
+
+/*Estilos del Header*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: var(--color-terciario);
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 100%;
+}
+
+.nav .image img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+    border: 0.2rem solid var(--color-primario);
+    padding: 0.5rem;
+    margin: 1rem 0 1rem 4rem;
+}
+
+.nav .image img:hover {
+    border: 0.2rem solid var(--color-secundario);
+}
+
+.lista {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    margin-left: 70rem;
+}
+
+.lista .items {
+    text-decoration: none;
+    color: var(--color-primario);
+    font-size: var(--md);
+    padding: 0.5rem;
+    position: relative;
+    margin: 0 1rem;
+    list-style: none;
+    padding-bottom: 0.5rem;
+}
+
+.lista .items:hover {
+    color: var(--color-quintenario);
+}
+
+.lista .items:active {
+    color: var(--color-secundario);
+}
+
+.lista .items::before {
+    content: "";
+    position: absolute;
+    height: 0.1rem;
+    width: 0;
+    bottom: 0;
+    transition: all .3s ease;
+}
+
+.lista .items:hover::before {
+    content: "";
+    position: absolute;
+    height: 0.2rem;
+    width: 70%;
+    bottom: 0;
+    background-color: var(--color-secundario);
+}
+
+/* Estilos del Main */
+main {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    margin-top: 6rem;
+    padding-bottom: 7rem;
+}
+
+h1 {
+    font-size: var(--xl);
+    color: var(--color-primario);
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5rem;
+}
+
+.certificaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+    justify-self: center;
+}
+
+.entidades p {
+    display: flex;
+    font-size: var(--md);
+    font-weight: bolder;
+    color: var(--color-primario);
+    text-align: left;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    margin-right: 108rem;
+    border-bottom: 0.1rem solid var(--color-primario);
+    letter-spacing: 0.5rem;
+}
+
+
+
+
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5rem;
+    margin-top: 2rem;
+    width: 80%;
+    justify-self: center;
+}
+
+.card {
+    background-color: #fff;
+    justify-self: center;
+    width: 25rem;
+    height: 30rem;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+
+
+
+
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-primario);
+    color: var(--color-secundario);
+    padding: 2rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-top: 5rem;
+}
+
+.redes-email {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 12rem;
+}
+
+.social .icon {
+    font-size: 3rem;
+    margin: 0 1rem;
+    color: var(--color-secundario);
+    cursor: pointer;
+}
+
+.social .icon:hover {
+    color: var(--color-cuaternario);
+}
+
+.email {
+    display: flex;
+    align-items: center;
+    margin-right: 12rem;
+}
+
+.email a {
+    font-size: 2rem;
+    margin: 0 1rem;
+    color: var(--color-secundario);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5rem;
+}
+
+.email a:hover {
+    color: var(--color-cuaternario);
+}
+
+.line {
+    width: 82%;
+    height: 0.1rem;
+    background-color: var(--color-secundario);
+    margin: 2rem 0;
+}
+
+.derechos {
+    font-size: var(--sm);
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+}
