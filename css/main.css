@@ -5,6 +5,7 @@
     --color-terciario: #d5d5d5;
     --color-cuaternario: #91dfff;
     --color-quintenario: #ffffff;
+    --color-hover: #3ebffa;
     --font-family-principal: 'Orbitron', sans-serif;
     --font-family-secundaria: 'Roboto', sans-serif;
     --xs: 1.2rem;
@@ -12,6 +13,8 @@
     --md: 1.6rem;
     --lg: 1.8rem;
     --xl: 2.4rem;
+    --border-radius: 0.5rem;
+    --transition-speed: 0.3s;
 }
 
 *,
@@ -44,23 +47,31 @@ body {
     width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: rgb(255, 255, 0, 0.5);
 }
 
 
-/*Estilos del Header*/
-header {
+/* En este bloque de CSS se definen los Estilos del Header para la barra de navegación de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+.sobremi,
+.proyectos,
+.certificaciones,
+.blog,
+.contacto {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* grid-column: 1 / 4;
-    grid-row: 1 / 2; */
-    background-color: var(--color-cuaternario);
     height: 8rem;
     width: 100%;
     position: fixed;
     z-index: 1000;
 }
+
+.sobremi {
+    background-color: var(--color-cuaternario);
+}
+
+.proyectos {
+        background-color: var(--color-secundario);
+    }
 
 .nav {
     display: flex;
@@ -71,6 +82,7 @@ header {
     height: 100%;
 }
 
+/* Estilos para los logos de la barra de navegación de las paginas sobre mi, proyectos, certificaciones, blog y contacto */
 .logocontainer {
     display: flex;
     align-items: center;
@@ -85,36 +97,71 @@ header {
     transition: background-color 500ms;
 }
 
-.pelogo {
+.pelogo_sobremi, .pelogo_proyectos, .pelogo_certificaciones, .pelogo_blog, .pelogo_contacto {
     display: block;
     position: relative;
     width: 70px;
     height: 60px;
-    background: #91dfff;
-    background: linear-gradient(135deg, #91dfff 0%, #91dfff 100%);
     font-family: Trebuchet MS, sans-serif;
-    font-size: 50px;
-    /* Ajustado para que encaje en el tamaño de 100px */
+    font-size: 50px;/* Ajustado para que encaje en el tamaño de 100px */
     font-weight: bold;
-    color: var(--color-cuaternario);
     text-align: center;
-    line-height: 70px;
-    /* Ajustado para centrar el contenido */
+    line-height: 70px;/* Ajustado para centrar el contenido */
 }
 
-.pelogo img {
+.pelego_sobremi {
+    background: var(--color-cuaternario);
+    background: linear-gradient(135deg, var(--color-cuaternario) 0%, var(--color-cuaternario) 100%);
+    color: var(--color-cuaternario);
+}
+
+.pelego_proyectos {
+    background: var(--color-secundario);
+    background: linear-gradient(135deg, var(--color-secundario) 0%, var(--color-secundario) 100%);
+    color: var(--color-secundario);
+}
+
+.pelogo_certificaciones {
+    background: var(--color-primario);
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-primario) 100%);
+    color: var(--color-primario);
+}
+
+.pelogo_blog {
+    background: var(--color-secundario);
+    background: linear-gradient(135deg, var(--color-secundario) 0%, var(--color-secundario) 100%);
+    color: var(--color-secundario);
+}
+
+.pelogo_contacto {
+    background: var(--color-primario);
+    background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-primario) 100%);
+    color: var(--color-primario);
+}
+
+.pelogo_sobremi img, .pelogo_proyectos img, .pelogo_certificaciones img, .pelogo_blog img, .pelogo_contacto img {
     width: 60px;
     height: 60px;
 }
 
-.loader {
+.loader_sobremi  {
     display: block;
     position: absolute;
-    background-color: #020745;
+    background-color: var(--color-primario);
 }
 
-.loader:hover {
+.loader_sobremi:hover {
     background-color: var(--color-secundario);
+}
+
+.loader_proyectos {
+    display: block;
+    position: absolute;
+    background-color: var(--color-primario);
+}
+
+.loader_proyectos:hover {
+    background-color: var(--color-cuaternario);
 }
 
 /*Pretty complex animation, so each side needs its own @keyframes.*/
@@ -163,6 +210,7 @@ header {
     }
 }
 
+/*Estilos de la barra de navegación en las listas de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 .lista {
     display: flex;
     list-style: none;
@@ -170,11 +218,11 @@ header {
     margin-right: 3rem;
 }
 
-.lista .items {
+.lista .items_sobremi, .lista .items_proyectos, .lista .items_certificaciones, .lista .items_blog, .lista .items_contacto {
     text-decoration: none;
     font-family: var(--font-family-principal);
-    color: var(--color-primario);
     font-size: var(--md);
+    font-weight: bolder;
     padding: 0.5rem;
     position: relative;
     margin: 0 1rem;
@@ -183,16 +231,23 @@ header {
     letter-spacing: 0.15rem;
 }
 
+/*Estilos de los colores de los item de navegacion de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+.lista .items_sobremi, .lista .items_proyectos {
+    color: var(--color-primario);
+}
 
-.lista .items:hover {
+
+/*Estilos de los hover para los item de navegacion de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+/*Estilos de psudoelementos y pseudoclases para .sobremi*/
+.lista .items_sobremi:hover {
     color: var(--color-secundario);
 }
 
-.lista .items:active {
+.lista .items_sobremi:active {
     color: var(--color-cuaternario);
 }
 
-.lista .items::before {
+.lista .items_sobremi::before {
     content: "";
     position: absolute;
     height: 0.1rem;
@@ -201,7 +256,7 @@ header {
     transition: all .3s ease;
 }
 
-.lista .items:hover::before {
+.lista .items_sobremi:hover::before {
     content: "";
     position: absolute;
     height: 0.2rem;
@@ -210,8 +265,36 @@ header {
     background-color: var(--color-primario);
 }
 
-/*Estilos del Main*/
-main {
+/*Estilos de psudoelementos y pseudoclases para .proyectos*/
+.lista .items_proyectos:hover {
+    color: var(--color-cuaternario);
+}
+
+.lista .items_proyectos:active {
+    color: var(--color-cuaternario);
+}
+
+.lista .items_proyectos::before {
+    content: "";
+    position: absolute;
+    height: 0.1rem;
+    width: 0;
+    bottom: 0;
+    transition: all .3s ease;
+}
+
+.lista .items_proyectos:hover::before {
+    content: "";
+    position: absolute;
+    height: 0.2rem;
+    width: 70%;
+    bottom: 0;
+    background-color: var(--color-primario);
+}
+
+
+/*Estilos del Main de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+.main_sobremi {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -223,7 +306,22 @@ main {
     padding-bottom: 7rem;
 }
 
-.video-fondo {
+.main_proyectos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    margin-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+
+
+/*Estilos y configuracion de videos para las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+/* video de fondo para pagina sobre mi */
+.video_sobremi {
     position: fixed;
     top: 0;
     left: 0;
@@ -237,7 +335,7 @@ main {
 }
 
 /* Video dinámico */
-.video-fondo video {
+.video_sobremi video {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -251,15 +349,90 @@ main {
     /* Cubre toda el área sin distorsionar el video */
 }
 
-.video-fondo .color-overlay {
+.video_sobremi .color_overlay_sobremi {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(145, 223, 255, 0.8);
-    /* opacity: 0.5; */
+    background-color: var(--color-cuaternario);
+    opacity: 0.8;
+    z-index: 1;
 }
+
+/* video de fondo para pagina proyectos */
+.video_proyectos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Video con ajuste dinámico */
+.video_proyectos video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 70%;
+    object-fit: cover;
+}
+
+/* Capa de color con opacidad */
+.video_proyectos .color_overlay_proyectos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-secundario);
+    opacity: 0.5;
+}
+
+
+
+/*Estilos para titulos principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
+/*titulo sobre mi*/
+.descripcion .sobre_mi {
+    font-family: var(--font-family-principal);
+    font-size: var(--xl);
+    color: var(--color-primario);
+    margin-bottom: 2rem;
+    border-bottom-width: 0.3rem;
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-primario);
+    box-shadow: var(--color-terciario) 0rem 0.2rem;
+    letter-spacing: 0.15rem;
+}
+
+/* titulo proyectos */
+.titulo_proyectos {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 150vh;
+    width: 100%;
+}
+
+.titulo_proyectos .h1_proyectos {
+    font-family: var(--font-family-principal);
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-primario);
+    padding-left: 12rem;
+    letter-spacing: 0.8rem;
+}
+
+
+
+
 
 .contenedor {
     display: grid;
@@ -301,17 +474,7 @@ main {
     grid-auto-rows: minmax(1rem, auto);
 }
 
-.descripcion .sobremi {
-    font-family: var(--font-family-principal);
-    font-size: var(--xl);
-    color: var(--color-primario);
-    margin-bottom: 2rem;
-    border-bottom-width: 0.3rem;
-    border-bottom-style: solid;
-    border-bottom-color: var(--color-primario);
-    box-shadow: var(--color-terciario) 0rem 0.2rem;
-    letter-spacing: 0.15rem;
-}
+
 
 .descripcion p {
     font-family: var(--font-family-secundaria);
@@ -322,7 +485,7 @@ main {
     text-align: justify;
 }
 
-.certificaciones {
+.certificaciones_contenedor {
     display: grid;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
@@ -333,7 +496,7 @@ main {
     grid-auto-rows: minmax(1rem, auto);
 }
 
-.certificaciones .certificaciones_titulo {
+.certificaciones_contenedor .certificaciones_titulo {
     font-family: var(--font-family-principal);
     font-size: var(--xl);
     color: var(--color-primario);
@@ -345,7 +508,7 @@ main {
     letter-spacing: 0.15rem;
 }
 
-.certificaciones p {
+.certificaciones_contenedor p {
     font-family: var(--font-family-secundaria);
     font-size: var(--md);
     color: var(--color-primario);
@@ -354,7 +517,7 @@ main {
     text-align: justify;
 }
 
-.certificaciones a {
+.certificaciones_contenedor a {
     font-size: var(--md);
     color: var(--color-secundario);
     font-weight: bolder;
@@ -364,7 +527,7 @@ main {
     text-decoration: none;
 }
 
-.certificaciones a:hover {
+.certificaciones_contenedor a:hover {
     color: var(--color-primario);
     transition: all 0.3s ease;
 }
@@ -421,7 +584,7 @@ main {
     /* Animación continua */
 }
 
-.carrusel img {
+.carrusel a img {
     width: 20rem;
     height: 20rem;
     margin: 0 2rem;

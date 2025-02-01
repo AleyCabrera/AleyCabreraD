@@ -18,13 +18,13 @@
     <meta property="og:title" content="Aley Cabrera | Desarrollador de Software y Ciberseguridad">
     <meta property="og:description"
         content="Desarrollo de software, desarrollo web full stack, análisis de sistemas y ciberseguridad. Soluciones innovadoras, escalables y seguras para impulsar tu negocio en el mundo digital.">
-    <meta property="og:image" content="/frontend/src/assets/imagenes/AleyCabrera1.png">
+    <meta property="og:image" content="assets/imagenes/AleyCabrera1.png">
     <meta property="og:url" content="https://tusitio.com/index.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"><!--Establece el modo de compatibilidad del navegador.-->
-    <link rel="icon" href="/frontend/public/aleycabrera.ico" type="image/x-icon">
+    <link rel="icon" href="assets/iconos/aleycabrera.ico" type="image/x-icon">
     <!--Establece el icono de la página.-->
-    <link rel="stylesheet" type="text/css" href="/frontend/src/styles/proyectos.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--Establece la hoja de estilos de la página.-->
     <link rel="stylesheet" href="/" media="screen and (min-width: 320px)">
     <!--Establece la hoja de estilos de la página mobile S.-->
@@ -50,47 +50,47 @@
 </head>
 
 <body>
-    <header>
+    <header class="proyectos">
         <nav class="nav">
             <!-- Contenedor del logo -->
             <div class="logocontainer" id="logocontainer">
-                <div class="pelogo" id="pelogo">
-                    <a href="/frontend/public/index.html">
-                        <img src="/frontend/src/assets/imagenes/logo.png" alt="Logo Aley Cabrera" title="Aley Cabrera D" aria-label="Logo Aley Cabrera">
+                <div class="pelogo_proyectos" id="pelogo">
+                    <a href="./index.html">
+                        <img src="assets/imagenes/logo.png" alt="Logo Aley Cabrera" title="Aley Cabrera D" aria-label="Logo Aley Cabrera">
                     </a>
                 </div>
-                <div class="loader" style="left:0.4vh; top:0; height:0.4vh; width:0; animation:slide1 2s linear forwards infinite">
+                <div class="loader_proyectos" style="left:0.4vh; top:0; height:0.4vh; width:0; animation:slide1 2s linear forwards infinite">
                 </div>
-                <div class="loader"
+                <div class="loader_proyectos"
                     style="right:0; top:0.4vh; width:0.4vh; height:0; animation:slide2 2s linear forwards infinite; animation-delay:0.8s">
                 </div>
-                <div class="loader"
+                <div class="loader_proyectos"
                     style="right:0.4vh; bottom:0; height:0.4vh; width:0; animation:slide3 2s linear forwards infinite"></div>
-                <div class="loader"
+                <div class="loader_proyectos"
                     style="left:0; bottom:0.4vh; width:0.4vh; height:0; animation:slide4 2s linear forwards infinite; animation-delay:0.8s">
                     <!-- loader -->
                 </div>
             </div>
 
             <ul class="lista">
-                <a href="./frontend/src/pages/sobremi.html" class="items">Sobre mí</a><!--direige a la sección sobre mi-->
-                <a href="/frontend/src/pages/proyectos.html" class="items">Proyectos</a><!--direige a la sección proyectos-->
-                <a href="/frontend/src/pages/blog.html" class="items">Blog</a><!--dirige a la sección blog-->
-                <a href="/frontend/src/pages/contacto.html" class="items">Contacto</a><!--dirige a la sección contacto-->
+                <a href="sobremi.html" class="items_proyectos">Sobre mí</a><!--direige a la sección sobre mi-->
+                <a href="proyectos.html" class="items_proyectos">Proyectos</a><!--direige a la sección proyectos-->
+                <a href="blog.html" class="items_proyectos">Blog</a><!--dirige a la sección blog-->
+                <a href="contacto.html" class="items_proyectos">Contacto</a><!--dirige a la sección contacto-->
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="title">
-            <section class="video-fondo">
+    <main class="main_proyectos">
+        <section class="titulo_proyectos">
+            <section class="video_proyectos">
                 <video autoplay loop muted playsinline loading="lazy">
-                    <source src="/frontend/src/assets/videos/Proyectos.webm" type="video/mp4">
+                    <source src="assets/videos/Proyectos.webm" type="video/mp4">
                     Tu navegador no soporta la reproducción de videos.
                 </video>
-                <div class="color-overlay"></div>
+                <div class="color_overlay_proyectos"></div>
             </section>
-            <h1>Proyectos</h1>
+            <h1 class="h1_proyectos">Proyectos</h1>
         </section>
 
         <section class="proyectos-contenedor">

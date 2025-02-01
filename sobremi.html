@@ -48,44 +48,44 @@
     <title>Sobre mi | Desarrador de Software</title><!--Establece el título de la página.-->
 </head>
 <body>
-    <header>
+    <header class="sobremi">
         <nav class="nav">
             <!-- Contenedor del logo -->
             <div class="logocontainer" id="logocontainer">
-                <div class="pelogo" id="pelogo">
+                <div class="pelogo_sobremi" id="pelogo">
                     <a href="./index.html">
                         <img src="assets/imagenes/logo2.png" alt="Logo Aley Cabrera" title="Aley Cabrera D">
                     </a>
                 </div>
-                <div class="loader"
+                <div class="loader_sobremi"
                     style="left:0.4vh; top:0; height:0.4vh; width:0; animation:slide1 2s linear forwards infinite">
                 </div>
-                <div class="loader"
+                <div class="loader_sobremi"
                     style="right:0; top:0.4vh; width:0.4vh; height:0; animation:slide2 2s linear forwards infinite; animation-delay:0.8s">
                 </div>
-                <div class="loader"
+                <div class="loader_sobremi"
                     style="right:0.4vh; bottom:0; height:0.4vh; width:0; animation:slide3 2s linear forwards infinite">
                 </div>
-                <div class="loader"
+                <div class="loader_sobremi"
                     style="left:0; bottom:0.4vh; width:0.4vh; height:0; animation:slide4 2s linear forwards infinite; animation-delay:0.8s">
                 </div>
             </div>
     
             <ul class="lista">
-                <a href="sobremi.html" class="items">Sobre mí</a><!--direige a la sección sobre mi-->
-                <a href="proyectos.html" class="items">Proyectos</a><!--direige a la sección proyectos-->
-                <a href="blog.html" class="items">Blog</a><!--dirige a la sección blog-->
-                <a href="contacto.html" class="items">Contacto</a><!--dirige a la sección contacto-->
+                <a href="sobremi.html" class="items_sobremi">Sobre mí</a><!--direige a la sección sobre mi-->
+                <a href="proyectos.html" class="items_sobremi">Proyectos</a><!--direige a la sección proyectos-->
+                <a href="blog.html" class="items_sobremi">Blog</a><!--dirige a la sección blog-->
+                <a href="contacto.html" class="items_sobremi">Contacto</a><!--dirige a la sección contacto-->
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="video-fondo">
+    <main class="main_sobremi">
+        <section class="video_sobremi">
             <video autoplay loop muted playsinline loading="lazy">
                 <source src="assets/videos/Fondo.webm" type="video/mp4">
             </video>
-            <div class="color-overlay"></div>
+            <div class="color_overlay_sobremi"></div>
         </section>
         <section class="contenedor">
             <section class="img-personal">
@@ -94,7 +94,7 @@
             
             <section class="descripcion">
                 <article>
-                    <h1 class="sobremi">Sobre mí</h1>
+                    <h1 class="sobre_mi">Sobre mí</h1>
                     <p>Estudiante apasionado de Ingeniería de Sistemas, Administración de Empresas y Tecnología en Análisis y
                         Desarrollo de
                         Software, con una sólida base técnica y certificaciones de prestigio internacional, como el soporte de
@@ -131,7 +131,7 @@
             </section>
 
             <!-- Ejemplo de mejora en el CTA de certificaciones -->
-            <section class="certificaciones">
+            <section class="certificaciones_contenedor">
                 <h2 class="certificaciones_titulo">Certificaciones</h2>
                 <p>"Mi viaje en la tecnología en especial en desarrollo de software y ciberseguridad está respaldado por horas de
                     aprendizaje, práctica y
@@ -148,96 +148,156 @@
 
                 <div class="carrusel">
                     <div>
-                        <img src="assets/logos/html-5.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/HTML" title="HTML" target="_blank">
+                            <img src="assets/logos/html-5.png" alt="HTML5">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/css-3.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/CSS" title="CSS" target="_blank">
+                            <img src="assets/logos/css-3.png" alt="CSS3">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/javascript.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/JavaScript" title="JavaScript" target="_blank">
+                            <img src="assets/logos/javascript.png" alt="JavaScript">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/node.png" alt="">
+                        <a href="https://nodejs.org/es/" title="Node.js" target="_blank">
+                            <img src="assets/logos/node.png" alt="Node.js">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/react.png" alt="">
+                        <a href="https://react.dev/" title="React" target="_blank">
+                            <img src="assets/logos/react.png" alt="React">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/typescript.png" alt="">
+                        <a href="https://www.typescriptlang.org/" title="TypeScript" target="_blank">
+                            <img src="assets/logos/typescript.png" alt="TypeScript">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/python.png" alt="">
+                        <a href="https://www.python.org/" title="Python" target="_blank">
+                            <img src="assets/logos/python.png" alt="Python">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/jquery.png" alt="">
+                        <a href="https://api.jquery.com/" title="jQuery" target="_blank">
+                            <img src="assets/logos/jquery.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/angular.png" alt="">
+                        <a href="https://angular.io/" title="Angular" target="_blank">
+                            <img src="assets/logos/angular.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/veu.png" alt="">
+                        <a href="https://vuejs.org/" title="Vue.js" target="_blank">
+                            <img src="assets/logos/veu.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/express.png" alt="">
+                        <a href="https://expressjs.com/" title="Express" target="_blank">
+                            <img src="assets/logos/express.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/mongo.png" alt="">
+                        <a href="https://www.mongodb.com/" title="MongoDB" target="_blank">
+                            <img src="assets/logos/mongo.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/mysql.png" alt="">
+                        <a href="https://www.mysql.com/" title="MySQL" target="_blank">
+                            <img src="assets/logos/mysql.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/java.png" alt="">
+                        <a href="https://www.java.com/es/" title="Java" target="_blank">
+                            <img src="assets/logos/java.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/cchar.png" alt="">
+                        <a href="https://learn.microsoft.com/es-es/dotnet/csharp/" title="C#" target="_blank">
+                            <img src="assets/logos/cchar.png" alt="">
+                        </a>
                     </div>
             
             
                     <div>
-                        <img src="assets/logos/html-5.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/HTML" title="HTML" target="_blank">
+                            <img src="assets/logos/html-5.png" alt="HTML5">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/css-3.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/CSS" title="CSS" target="_blank">
+                            <img src="assets/logos/css-3.png" alt="CSS3">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/javascript.png" alt="">
+                        <a href="https://developer.mozilla.org/es/docs/Web/JavaScript" title="JavaScript" target="_blank">
+                            <img src="assets/logos/javascript.png" alt="JavaScript">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/node.png" alt="">
+                        <a href="https://nodejs.org/es/" title="Node.js" target="_blank">
+                            <img src="assets/logos/node.png" alt="Node.js">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/react.png" alt="">
+                        <a href="https://react.dev/" title="React" target="_blank">
+                            <img src="assets/logos/react.png" alt="React">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/typescript.png" alt="">
+                        <a href="https://www.typescriptlang.org/" title="TypeScript" target="_blank">
+                            <img src="assets/logos/typescript.png" alt="TypeScript">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/python.png" alt="">
+                        <a href="https://www.python.org/" title="Python" target="_blank">
+                            <img src="assets/logos/python.png" alt="Python">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/jquery.png" alt="">
+                        <a href="https://api.jquery.com/" title="jQuery" target="_blank">
+                            <img src="assets/logos/jquery.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/angular.png" alt="">
+                        <a href="https://angular.io/" title="Angular" target="_blank">
+                            <img src="assets/logos/angular.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/veu.png" alt="">
+                        <a href="https://vuejs.org/" title="Vue.js" target="_blank">
+                            <img src="assets/logos/veu.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/express.png" alt="">
+                        <a href="https://expressjs.com/" title="Express" target="_blank">
+                            <img src="assets/logos/express.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/mongo.png" alt="">
+                        <a href="https://www.mongodb.com/" title="MongoDB" target="_blank">
+                            <img src="assets/logos/mongo.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/mysql.png" alt="">
+                        <a href="https://www.mysql.com/" title="MySQL" target="_blank">
+                            <img src="assets/logos/mysql.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/java.png" alt="">
+                        <a href="https://www.java.com/es/" title="Java" target="_blank">
+                            <img src="assets/logos/java.png" alt="">
+                        </a>
                     </div>
                     <div>
-                        <img src="assets/logos/cchar.png" alt="">
+                        <a href="https://learn.microsoft.com/es-es/dotnet/csharp/" title="C#" target="_blank">
+                            <img src="assets/logos/cchar.png" alt="">
+                        </a>
                     </div>
                 </div>
             </section>
