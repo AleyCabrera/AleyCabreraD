@@ -50,42 +50,109 @@
 </head>
 
 <body>
-    <header class="proyectos">
+    <header class="blog">
         <nav class="nav">
             <!-- Contenedor del logo -->
             <div class="logocontainer" id="logocontainer">
-                <div class="pelogo_proyectos" id="pelogo">
+                <div class="pelogo_blog" id="pelogo">
                     <a href="./index.html">
-                        <img src="assets/imagenes/logo.png" alt="Logo Aley Cabrera" title="Aley Cabrera D"
+                        <img src="assets/imagenes/logo3.png" alt="Logo Aley Cabrera" title="Aley Cabrera D"
                             aria-label="Logo Aley Cabrera">
                     </a>
                 </div>
-                <div class="loader"
+                <div class="loader_blog"
                     style="left:0.4vh; top:0; height:0.4vh; width:0; animation:slide1 2s linear forwards infinite">
                 </div>
-                <div class="loader"
+                <div class="loader_blog"
                     style="right:0; top:0.4vh; width:0.4vh; height:0; animation:slide2 2s linear forwards infinite; animation-delay:0.8s">
                 </div>
-                <div class="loader"
+                <div class="loader_blog"
                     style="right:0.4vh; bottom:0; height:0.4vh; width:0; animation:slide3 2s linear forwards infinite">
                 </div>
-                <div class="loader"
+                <div class="loader_blog"
                     style="left:0; bottom:0.4vh; width:0.4vh; height:0; animation:slide4 2s linear forwards infinite; animation-delay:0.8s">
                     <!-- loader -->
                 </div>
             </div>
     
             <ul class="lista">
-                <a href="sobremi.html" class="items">Sobre mí</a><!--direige a la sección sobre mi-->
-                <a href="proyectos.html" class="items">Proyectos</a><!--direige a la sección proyectos-->
-                <a href="blog.html" class="items">Blog</a><!--dirige a la sección blog-->
-                <a href="contacto.html" class="items">Contacto</a><!--dirige a la sección contacto-->
+                <a href="sobremi.html" class="items_blog">Sobre mí</a><!--direige a la sección sobre mi-->
+                <a href="proyectos.html" class="items_blog">Proyectos</a><!--direige a la sección proyectos-->
+                <a href="blog.html" class="items_blog">Blog</a><!--dirige a la sección blog-->
+                <a href="contacto.html" class="items_blog">Contacto</a><!--dirige a la sección contacto-->
             </ul>
         </nav>
     </header>
-    <b>
-        En construcción
-    </b>
+    
+    <main class="main_blog">
+        <section class="video_blog">
+            <video autoplay loop muted playsinline loading="lazy">
+                <source src="assets/videos/Linea Digital.webm" type="video/mp4">
+            </video>
+            <div class="color_overlay_blog"></div>
+        </section>
+
+        <section class="contenedor_blog">
+            <section id="inicio" class="hero">
+                <div class="hero-content">
+                    <h1>Bienvenido a Mi Blog</h1>
+                    <p>Explora mis pensamientos, proyectos y experiencias.</p>
+                    <a href="#blog" class="btn">Leer Más</a>
+                </div>
+            </section>
+            
+            <section id="blog" class="blog-posts">
+                <h2>Últimas Entradas del Blog</h2>
+                <div class="posts-grid">
+                    <article class="post">
+                        <img src="https://via.placeholder.com/300" alt="Imagen del post 1">
+                        <h3>Título del Post 1</h3>
+                        <p>Descripción breve del post 1. Aquí puedes hablar sobre el tema del post.</p>
+                        <a href="#" class="btn">Leer Más</a>
+                    </article>
+                    <article class="post">
+                        <img src="https://via.placeholder.com/300" alt="Imagen del post 2">
+                        <h3>Título del Post 2</h3>
+                        <p>Descripción breve del post 2. Aquí puedes hablar sobre el tema del post.</p>
+                        <a href="#" class="btn">Leer Más</a>
+                    </article>
+                    <article class="post">
+                        <img src="https://via.placeholder.com/300" alt="Imagen del post 3">
+                        <h3>Título del Post 3</h3>
+                        <p>Descripción breve del post 3. Aquí puedes hablar sobre el tema del post.</p>
+                        <a href="#" class="btn">Leer Más</a>
+                    </article>
+                </div>
+            </section>
+            
+            <section id="proyectos" class="featured-projects">
+                <h2>Proyectos Destacados</h2>
+                <div class="projects-grid">
+                    <div class="project">
+                        <img src="https://via.placeholder.com/400" alt="Imagen del proyecto 1">
+                        <h3>Proyecto 1</h3>
+                        <p>Descripción breve del proyecto 1.</p>
+                    </div>
+                    <div class="project">
+                        <img src="https://via.placeholder.com/400" alt="Imagen del proyecto 2">
+                        <h3>Proyecto 2</h3>
+                        <p>Descripción breve del proyecto 2.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+        
+        
+        <section id="contacto" class="contact">
+            <h2>Contacto</h2>
+            <form action="#" method="post">
+                <input type="text" name="name" placeholder="Tu nombre" required>
+                <input type="email" name="email" placeholder="Tu email" required>
+                <textarea name="message" placeholder="Tu mensaje" required></textarea>
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </section>
+    </main>
 </body>
 
 </html>
