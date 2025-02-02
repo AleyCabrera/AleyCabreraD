@@ -1,7 +1,9 @@
+/*Diseñado por Aley Cabrera D*/
+
 :root {
     /*Establece una variable personalizada que contiene un valor de color.*/
     --color-primario: #020745;
-    --color-secundario: #ffff00;
+    --color-secundario: rgb(255, 255, 0);
     --color-terciario: #d5d5d5;
     --color-cuaternario: #91dfff;
     --color-quintenario: #ffffff;
@@ -74,6 +76,10 @@ body {
 
 .blog {
     background-color: var(--color-terciario);
+}
+
+.contacto {
+    background-color: var(--color-primario);
 }
 
 .nav {
@@ -177,6 +183,16 @@ body {
     background-color: var(--color-secundario);
 }
 
+.loader_contacto {
+    display: block;
+    position: absolute;
+    background-color: var(--color-secundario);
+}
+
+.loader_contacto:hover {
+    background-color: var(--color-cuaternario);
+}
+
 /*Pretty complex animation, so each side needs its own @keyframes.*/
 
 @keyframes slide1 {
@@ -247,6 +263,10 @@ body {
 /*Estilos de los colores de los item de navegacion de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 .lista .items_sobremi, .lista .items_proyectos, .lista .items_blog {
     color: var(--color-primario);
+}
+
+.lista .items_contacto {
+    color: var(--color-secundario);
 }
 
 
@@ -332,6 +352,33 @@ body {
     background-color: var(--color-primario);
 }
 
+/*Estilos de psudoelementos y pseudoclases para .contacto*/
+.lista .items_contacto:hover {
+    color: var(--color-cuaternario);
+}
+
+.lista .items_contacto:active {
+    color: var(--color-cuaternario);
+}
+
+.lista .items_contacto::before {
+    content: "";
+    position: absolute;
+    height: 0.1rem;
+    width: 0;
+    bottom: 0;
+    transition: all .3s ease;
+}
+
+.lista .items_contacto:hover::before {
+    content: "";
+    position: absolute;
+    height: 0.2rem;
+    width: 70%;
+    bottom: 0;
+    background-color: var(--color-secundario);
+}
+
 
 /*Estilos del Main de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 .main_sobremi {
@@ -347,12 +394,13 @@ body {
 }
 
 .main_proyectos {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 7rem;
+    background-color: rgb(255, 255, 0, 0.5);
 }
 
 .main_blog {
@@ -362,10 +410,23 @@ body {
     align-items: center;
     width: 100%;
     margin-top: 5rem;
-    padding-bottom: 7rem;
-    /* background-color: var(--color-sextario); */
 }
 
+.main_contacto {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+    align-items: center;
+}
 
 /*Estilos y configuracion de videos para las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 /* video de fondo para pagina sobre mi */
@@ -441,45 +502,6 @@ body {
     opacity: 0.5;
 }
 
-/* video de fondo para pagina blog */
-.video_blog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    /* Asegura que el video quede detrás del contenido */
-    overflow: hidden;
-    pointer-events: none;
-    /* Evita interferir con el contenido clickeable */
-}
-
-/* Video dinámico */
-.video_blog video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Centra el video */
-    width: 100vw;
-    /* Asegura que el video ocupe todo el ancho de la ventana */
-    height: 100vh;
-    /* Asegura que el video ocupe toda la altura de la ventana */
-    object-fit: cover;
-    /* Cubre toda el área sin distorsionar el video */
-}
-
-.video_blog .color_overlay_sobremi {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-primario);
-    opacity: 0.8;
-}
-
 
 /*Estilos para titulos principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 /*titulo sobre mi*/
@@ -516,7 +538,36 @@ body {
     letter-spacing: 0.8rem;
 }
 
+.titulo_contacto {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    width: 70%;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
 
+.titulo_contacto .h1_contacto {
+    font-size: var(--lg);
+    font-weight: bold;
+    color: var(--color-primario);
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.2rem;
+}
+
+.titulo_contacto .p_contacto {
+    font-size: var(--md);
+    color: var(--color-primario);
+    width: 100%;
+    justify-content: justify;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.2rem;
+}
 
 
 /* Estilos para contenedores principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto */
@@ -709,11 +760,15 @@ body {
     background-color: var(--color-secundario);
     gap: 2rem;
     padding: 1rem;
-    width: 100%;
+    width: 80%;
     height: auto;
+    justify-self: center;
     justify-items: center;
     padding-top: 8rem;
     padding-bottom: 5rem;
+    margin-bottom: 8rem;
+    position: relative;/* Asegura que esté por encima de .proyectos_main */
+    z-index: 1;/* Lo coloca por encima de .proyectos_main */
 }
 
 .proyecto {
@@ -768,10 +823,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-sextario);
-    opacity: 0.8;
-    color: var(--color-primario);
-    padding: 1rem;
     width: 100%;
     height: auto;
     position: relative;
@@ -780,135 +831,167 @@ body {
     padding-bottom: 5rem;
 }
 
-/* Footer */
-footer {
+.contenedor_blog {
+    background-image: linear-gradient(135deg, #f7f9f9, #ababab, #858587, #565656, #858587, #ababab, #f7f9f9);
+    background-size: 500%;
+    background-color: var(--color-primary);
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    background-color: var(--color-secundario);
-    color: var(--color-primario);
-    padding: 1rem;
+    padding: 20px;
     width: 100%;
-    position: relative;
-    z-index: 1;
-    padding-top: 2rem;
+    animation: gradient 20s linear 0s infinite;
 }
 
-.redes-email {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    margin-bottom: 1rem;
-}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
 
-.social {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    /* margin-left: 12rem; */
-}
+    50% {
+        background-position: 100% 50%;
+    }
 
-.social .icon {
-    font-size: 3rem;
-    margin: 0 1rem;
-    color: var(--color-primario);
-    cursor: pointer;
-}
-
-.social .icon:hover {
-    color: var(--color-terciario);
-    transition: all 0.3s ease;
-    transform: scale(1.2);
-}
-
-.email {
-    display: flex;
-    align-items: center;
-}
-
-.email a {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    font-weight: bolder;
-    margin: 0 1rem;
-    color: var(--color-primario);
-    cursor: pointer;
-    text-decoration: none;
-    letter-spacing: 0.5rem;
-}
-
-.email a:hover {
-    color: var(--color-terciario);
-    transition: all 0.3s ease;
-    transform: scale(1.2);
-}
-
-.line {
-    width: 80%;
-    height: 0.2rem;
-    background-color: var(--color-primario);
-    margin: 2rem 0;
-}
-
-.derechos {
-    font-family: var(--font-family);
-    font-size: var(--sm);
-    font-weight: bolder;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.2rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
-
-
-
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #0056b3;
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* Hero Section */
-.hero {
-    background-color: #f2f2f2;
-    color: #dd0c0c;
+.titulo_blog {
+    background-color: var(--color-quintenario);
+    color: var(--color-primario);
+    width: 85%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    padding-top: 3rem;
+}
+
+.titulo_contenido .h1_blog {
+    font-family: var(--font-family-principal);
+    font-weight: bolder;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    margin-left: 3rem;
+}
+
+.titulo_contenido .p_blog {
+    font-family: var(--font-family-principal);
+    font-weight: lighter;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    letter-spacing: .4rem;
+}
+
+.img_blog {
+    position: relative;
+    /* Permite posicionar elementos hijos de manera absoluta */
+    /*display: inline-block; Ajusta el contenedor al tamaño de la imagen */
+}
+
+.img_blog img {
+    display: block;
+    /* Elimina el espacio inferior que tienen las imágenes por defecto */
+    width: 100%;
+    /* Ajusta la imagen al ancho del contenedor */
+    height: 100%;
+    /* Mantiene la proporción de la imagen */
+}
+
+/* Estilos para el texto */
+.p_blog_comentario {
+    position: absolute;
+    /* Posiciona el texto encima de la imagen */
+    top: 50%;
+    /* Lo coloca en el centro vertical */
+    left: 50%;
+    /* Lo coloca en el centro horizontal */
+    transform: translate(-50%, -50%);
+    /* Centra el texto exactamente en el medio */
+    color: var(--color-quintenario);
+    /* Color del texto */
+    font-family: var(--font-family-principal);
+    font-size: var(--xl);
+    /* Tamaño del texto */
+    font-weight: lighter;
+    /* Grosor del texto */
     text-align: center;
-    padding: 100px 20px;
+    /* Alinea el texto al centro */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo semitransparente para mejorar la legibilidad */
+    padding: 1rem 2rem;
+    /* Espaciado interno */
+    border-radius: .5rem;
+    /* Bordes redondeados */
+    margin: 0;
+    /* Elimina el margen por defecto del párrafo */
+    letter-spacing: .4rem;
 }
 
-.hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+.btn_blog {
+    position: absolute;
+    top: 60%;
+    left: 47.5%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--color-hover);
+    color: var(--color-primario);
+    font-size: var(--md);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-left: 3rem;
+    margin-top: 1rem;
+    text-decoration: none;
+    letter-spacing: .2rem;
 }
 
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
+.btn_blog:hover {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    box-shadow: var(--color-quintenario) 0.2rem 0.3rem;
+    opacity: 0.8;
 }
 
-/* Blog Posts Section */
-.blog-posts {
-    padding: 50px 20px;
+.espacio_blog {
+    height: 10rem;
+}
+
+/* Estilos para blogs posts */
+.blog_posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 85%;
+    height: auto;
+    background-color: var(--color-sextario);
+    padding: 3rem;
+}
+
+.h2_blog {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: var(--font-family-principal);
+    font-weight: bolder;
+    font-size: 3rem;
+    width: 50rem;
     text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
 }
 
 .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
 }
 
 .post {
@@ -939,10 +1022,29 @@ footer {
     color: #666;
 }
 
-/* Featured Projects Section */
-.featured-projects {
-    padding: 50px 20px;
+/* Estilos para la sección de proyectos destacados */
+.proyectos_destacados {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 85%;
+    height: auto;
+    background-color: var(--color-sextario);
+    padding: 3rem;
+}
+
+.proyectos_destacados .h2_blog {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-family: var(--font-family-principal);
+    font-weight: bolder;
+    font-size: 3rem;
+    width: 50rem;
     text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
 
 .projects-grid {
@@ -1006,3 +1108,325 @@ footer {
     resize: vertical;
     height: 150px;
 }
+
+/* Estilos para la seccion contenedora de contacto */
+.contacto_contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.formulario {
+    background: var(--color-cuaternario);
+    text-align: center;
+    box-shadow: 0px 0px 20px 5px rgb(170, 170, 170);
+    border-radius: 1rem;
+    width: 90%;
+    height: 50rem;
+    margin: 3rem auto 0 auto;
+    padding: 2rem 3rem 0;
+    animation: bounce 1.5s infinite;
+}
+
+.nombre,
+.correo,
+.telefono,
+.mensaje {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 1rem;
+    width: 100%;
+    font-size: var(--sm);
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+}
+
+.nombre input,
+.correo input,
+.telefono input,
+.mensaje textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    height: 3rem;
+    background-color: var(--color-quintenario);
+    color: var(--color-primario);
+    font-size: var(--sm);
+}
+
+.mensaje textarea {
+    resize: none;
+    height: 10rem;
+}
+
+::-webkit-input-placeholder {
+    color: var(--color-terciario);
+}
+
+:-moz-placeholder {
+    color: var(--color-primario);
+}
+
+.nombre input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+.correo input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+.telefono input:hover {
+    background-color: var(--color-secundario);
+    border-bottom: 5px solid var(--color-terciario);
+    height: 30px;
+    width: 100%;
+}
+
+
+.entry {
+    display: block;
+    margin: 1rem auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.5s ease 0s;
+    box-shadow: 0px 0px 25px 2px #AAA;
+}
+
+.shadow {
+    box-shadow: 0px 0px 60px 5px #AAA;
+    opacity: 0.5;
+    border-radius: 100px;
+    width: 50%;
+    margin: 50px auto 0 auto;
+    padding: 0 20px;
+    animation: shadow 1.5s infinite;
+}
+
+.submit {
+    border-radius: 5px;
+    padding: 10px;
+    width: 150px;
+    color: var(--color-primario);
+    background-color: var(--color-secundario);
+    border: none;
+    border-bottom: 5px solid rgb(249, 249, 178);
+    margin-top: 150px;
+    transform: translateY(-120px);
+}
+
+
+.submit:hover {
+    border-bottom: 0.5rem solid var(--color-primario);
+    box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
+}
+
+
+@keyframes bounce {
+    0% {}
+
+    50% {
+        transform: translate(0, 8px);
+    }
+}
+
+@keyframes shadow {
+    0% {}
+
+    50% {
+        opacity: 0.8;
+        width: 50%;
+    }
+}
+
+/* Footer */
+.footer_sobremi, .footer_proyectos, .footer_blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding-top: 2rem;
+}
+
+.footer_sobremi {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+}
+
+.footer_proyectos {
+    background-color: var(--color-primario);
+    color: var(--color-secundario);
+}
+
+.footer_blog {
+    background-color: var(--color-quintenario);
+    color: var(--color-primario);
+}
+
+.redes-email {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 1rem;
+}
+
+.social_sobremi, .social_proyectos, .social_blog {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.social_sobremi .icon {
+    font-size: 3rem;
+    margin: 0 1rem;
+    color: var(--color-primario);
+    cursor: pointer;
+}
+
+.social_proyectos .icon {
+    font-size: 3rem;
+    margin: 0 1rem;
+    color: var(--color-secundario);
+    cursor: pointer;
+}
+
+.social_blog .icon {
+    font-size: 3rem;
+    margin: 0 1rem;
+    color: var(--color-primario);
+    cursor: pointer;
+}
+
+.social_sobremi .icon:hover {
+    color: var(--color-cuaternario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.social_proyectos .icon:hover {
+    color: var(--color-terciario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.social_blog .icon:hover {
+    color: var(--color-secundario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.email {
+    display: flex;
+    align-items: center;
+}
+
+.email .ac_sobremi {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: bolder;
+    margin: 0 1rem;
+    color: var(--color-primario);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5rem;
+}
+
+.email .ac_sobremi:hover {
+    color: var(--color-cuaternario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.email .ac_proyectos {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: bolder;
+    margin: 0 1rem;
+    color: var(--color-secundario);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5rem;
+}
+
+.email .ac_proyectos:hover {
+    color: var(--color-terciario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.email .ac_blog {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: bolder;
+    margin: 0 1rem;
+    color: var(--color-primario);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.5rem;
+}
+
+.email .ac_blog:hover {
+    color: var(--color-secundario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.line_sobremi, .line_proyectos, .line_blog {
+    width: 80%;
+    height: 0.2rem;
+    margin: 2rem 0;
+}
+
+.line_sobremi {
+    background-color: var(--color-primario);
+}
+
+.line_proyectos {
+    background-color: var(--color-secundario);
+}
+
+.line_blog {
+    background-color: var(--color-primario);
+}
+
+.derechos {
+    font-family: var(--font-family);
+    font-size: var(--sm);
+    font-weight: bolder;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+

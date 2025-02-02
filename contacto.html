@@ -15,22 +15,26 @@
         content="Desarrollo de software, Desarrollo web full stack, Análisis de sistemas, Ciberseguridad, Soluciones tecnológicas personalizadas, Programación web, Desarrollo de aplicaciones, Seguridad informática, Optimización de sistemas, Automatización de procesos, Protección de datos, Diseño de sistemas escalables">
     <!--Establece palabras clave para la página, permite mejorar la búsqueda y da posicionamiento SEO-->
     <meta http-equiv="X-UA-Compatible" content="ie=edge"><!--Establece el modo de compatibilidad del navegador.-->
-    <link rel="icon" href="/src/assets/iconos/aleycabrera.ico" type="image/x-icon"><!--Establece el icono de la página.-->
-    <link rel="stylesheet" type="text/css" href="/src/styles/contacto.css">
+    <link rel="icon" href="assets/imagenes/AleyCabrera1.png" type="image/x-icon"><!--Establece el icono de la página.-->
+    <meta property="og:url" content="https://tusitio.com/index.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"><!--Establece el modo de compatibilidad del navegador.-->
+    <link rel="icon" href="assets/iconos/aleycabrera.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!--Establece la hoja de estilos de la página.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 320px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 320px)">
     <!--Establece la hoja de estilos de la página mobile S.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 375px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 375px)">
     <!--Establece la hoja de estilos de la página mobile M.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 425px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 425px)">
     <!--Establece la hoja de estilos de la página mobile L.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 768px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 768px)">
     <!--Establece la hoja de estilos de la página Tablet.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 1024px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 1024px)">
     <!--Establece la hoja de estilos de la página laptop.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 1440px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 1440px)">
     <!--Establece la hoja de estilos de la página laptop L.-->
-    <link rel="stylesheet" href="/" media="screen and (min-widht: 2560px)">
+    <link rel="stylesheet" href="/" media="screen and (min-width: 2560px)">
     <!--Establece la hoja de estilos de la página 4K.-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,28 +45,46 @@
     <title>Contacto | Desarrador de Software</title><!--Establece el título de la página.-->
 </head>
 <body>
-    <header>
+    <header class="contacto">
         <nav class="nav">
-            <div class="image">
-                <a href="/src/pages/index.html">
-                    <img src="/src/assets/imagenes/logo1.png" alt="logo Aley Cabrera" title="Aley Cabrera D">
-                </a>
+            <!-- Contenedor del logo -->
+            <div class="logocontainer" id="logocontainer">
+                <div class="pelogo_contacto" id="pelogo">
+                    <a href="./index.html">
+                        <img src="assets/imagenes/logo1.png" alt="Logo Aley Cabrera" title="Aley Cabrera D"
+                            aria-label="Logo Aley Cabrera">
+                    </a>
+                </div>
+                <div class="loader_contacto"
+                    style="left:0.4vh; top:0; height:0.4vh; width:0; animation:slide1 2s linear forwards infinite">
+                </div>
+                <div class="loader_contacto"
+                    style="right:0; top:0.4vh; width:0.4vh; height:0; animation:slide2 2s linear forwards infinite; animation-delay:0.8s">
+                </div>
+                <div class="loader_contacto"
+                    style="right:0.4vh; bottom:0; height:0.4vh; width:0; animation:slide3 2s linear forwards infinite">
+                </div>
+                <div class="loader_contacto"
+                    style="left:0; bottom:0.4vh; width:0.4vh; height:0; animation:slide4 2s linear forwards infinite; animation-delay:0.8s">
+                    <!-- loader -->
+                </div>
             </div>
     
             <ul class="lista">
-                <a href="/src/pages/sobremi.html" class="items">Sobre mí</a>
-                <a href="/src/pages/proyectos.html" class="items">Proyectos</a>
-                <a href="/src/pages/contacto.html" class="items">Contacto</a>
+                <a href="sobremi.html" class="items_contacto">Sobre mí</a><!--direige a la sección sobre mi-->
+                <a href="proyectos.html" class="items_contacto">Proyectos</a><!--direige a la sección proyectos-->
+                <a href="blog.html" class="items_contacto">Blog</a><!--dirige a la sección blog-->
+                <a href="contacto.html" class="items_contacto">Contacto</a><!--dirige a la sección contacto-->
             </ul>
         </nav>
     </header>
 
-    <main>
-        <div class="titulo">
-            <h1>¡Hola! Soy Aley Cabrera</h1>
-            <p>Si tienes alguna pregunta, sugerencia o simplemente quieres hablar conmigo, no dudes en ponerte en contacto conmigo.</p>
+    <main class="main_contacto">
+        <div class="titulo_contacto">
+            <h1 class="h1_contacto">¡Hola! Soy Aley Cabrera</h1>
+            <p class="p_contacto">Si tienes alguna pregunta, sugerencia o simplemente quieres hablar conmigo, no dudes en ponerte en contacto conmigo.</p>
         </div>
-        <section class="contacto">
+        <section class="contacto_contenedor">
             <form class="formulario" action="">
                 <div class="nombre">
                     Nombre y Apellido
@@ -89,21 +111,5 @@
             <div class="shadow"></div>
         </section>
     </main>
-
-    <footer>
-        <section class="redes-email">
-            <div class="social">
-                <a href="https://github.com/AleyCabrera" target="_blank" class="icon"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/alycabdel/" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/AlyCabde" target="_blank" class="icon"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.linkedin.com/in/aley-cabrera/" target="_blank" class="icon"><i
-                        class="fab fa-linkedin"></i></a>
-                <a href="/" target="_blank" class="icon"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-            <div class="email">
-                <a href="aley.cabrera@gmail.com" class="ac">aley.cabrera@gmail.com</a>
-            </div>
-        </section>
-    </footer>
 </body>
 </html>
