@@ -85,4 +85,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 })
 
 
+// Efecto de desplazamiento suave al hacer clic en los enlaces de certificaciones
+function toggleCertificaciones(element) {
+            let container = element.nextElementSibling;
+            let arrow = element.querySelector('.arrow');
+            let logo = container.nextElementSibling; // Obtiene el logo
+
+            if (container.classList.contains('active')) {
+                container.classList.remove('active');
+                arrow.classList.remove('active');
+                setTimeout(() => {
+                    logo.style.opacity = "1";
+                    logo.style.pointerEvents = "auto";
+                }, 300); // Espera la animación antes de mostrar el logo
+            } else {
+                container.classList.add('active');
+                arrow.classList.add('active');
+                logo.style.opacity = "0";
+                logo.style.pointerEvents = "none";
+            }
+        }
+
 

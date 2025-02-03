@@ -1,11 +1,15 @@
-/*Diseñado por Aley Cabrera D*/
+/* Diseñado por Aley Cabrera D */
+
+/* ==========================================================================
+    Variables y Configuraciones Globales
+   ========================================================================== */
 
 :root {
     /*Establece una variable personalizada que contiene un valor de color.*/
     --color-primario: #020745;
-    --color-secundario: rgb(255, 255, 0);
+    --color-secundario: #ffff00;
     --color-terciario: #d5d5d5;
-    --color-cuaternario: #91dfff;
+    --color-cuaternario: rgb(145, 223, 255);
     --color-quintenario: #ffffff;
     --color-sextario: #f1eeee;
     --color-hover: #3ebffa;
@@ -19,6 +23,11 @@
     --border-radius: 0.5rem;
     --transition-speed: 0.3s;
 }
+
+
+/* ==========================================================================
+    Reset y Estilos Base
+   ========================================================================== */
 
 *,
 *::after,
@@ -51,6 +60,10 @@ body {
 }
 
 
+/* ==========================================================================
+    Estilos Específicos por Página del Header
+   ========================================================================== */
+
 /* En este bloque de CSS se definen los Estilos del Header para la barra de navegación de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 .sobremi,
 .proyectos,
@@ -80,6 +93,10 @@ body {
 
 .contacto {
     background-color: var(--color-primario);
+}
+
+.certificaciones {
+    background-color: var(--color-terciario);
 }
 
 .nav {
@@ -136,7 +153,7 @@ body {
     color: var(--color-primario);
 }
 
-.pelogo_blog {
+.pelogo_blog, .pelogo_certificaciones {
     background: var(--color-terciario);
     background: linear-gradient(135deg, var(--color-terciario) 0%, var(--color-terciario) 100%);
     color: var(--color-terciario);
@@ -173,13 +190,17 @@ body {
     background-color: var(--color-cuaternario);
 }
 
-.loader_blog {
+.loader_blog, .loader_certificaciones {
     display: block;
     position: absolute;
     background-color: var(--color-primario);
 }
 
 .loader_blog:hover {
+    background-color: var(--color-secundario);
+}
+
+.loader_certificaciones:hover {
     background-color: var(--color-secundario);
 }
 
@@ -261,7 +282,7 @@ body {
 }
 
 /*Estilos de los colores de los item de navegacion de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
-.lista .items_sobremi, .lista .items_proyectos, .lista .items_blog {
+.lista .items_sobremi, .lista .items_proyectos, .lista .items_blog, .lista .items_certificaciones {
     color: var(--color-primario);
 }
 
@@ -380,6 +401,37 @@ body {
 }
 
 
+.lista .items_certificaciones:hover {
+    color: var(--color-secundario);
+}
+
+.lista .items_certificaciones:active {
+    color: var(--color-cuaternario);
+}
+
+.lista .items_certificaciones::before {
+    content: "";
+    position: absolute;
+    height: 0.1rem;
+    width: 0;
+    bottom: 0;
+    transition: all .3s ease;
+}
+
+.lista .items_certificaciones:hover::before {
+    content: "";
+    position: absolute;
+    height: 0.2rem;
+    width: 70%;
+    bottom: 0;
+    background-color: var(--color-primario);
+}
+
+
+/* ==========================================================================
+    Estilos Específicos por Página del Main
+   ========================================================================== */
+
 /*Estilos del Main de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 .main_sobremi {
     display: flex;
@@ -421,11 +473,21 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    padding: 1rem;
     margin-top: 5rem;
     margin-bottom: 2rem;
     justify-items: center;
     align-items: center;
+}
+
+.main_certificaciones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    margin-top: 6rem;
+    padding-bottom: 7rem;
 }
 
 /*Estilos y configuracion de videos para las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
@@ -538,35 +600,86 @@ body {
     letter-spacing: 0.8rem;
 }
 
+/* titulo pagina blog */
+.titulo_blog {
+    background-color: var(--color-quintenario);
+    color: var(--color-primario);
+    width: 85%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    padding-top: 3rem;
+}
+
+.titulo_contenido .h1_blog {
+    font-family: var(--font-family-principal);
+    font-weight: bolder;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    margin-left: 3rem;
+}
+
+.titulo_contenido .p_blog {
+    font-family: var(--font-family-principal);
+    font-weight: lighter;
+    font-size: var(--md);
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    letter-spacing: .4rem;
+}
+
+/* titulo pagina contacto */
 .titulo_contacto {
     display: flex;
     flex-direction: column;
     justify-items: flex-start;
     align-items: flex-start;
-    width: 70%;
+    width: 100%;
     margin-top: 1rem;
     padding-bottom: 1rem;
+    position: relative;
+    top: 0;
+    right: 8%;
+}
+
+.titulo_contacto .h1_contacto .p_contacto {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    padding-right: 4rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.2rem;
+    transform: translate(-50%, -50%);
 }
 
 .titulo_contacto .h1_contacto {
-    font-size: var(--lg);
-    font-weight: bold;
+    font-family: var(--font-family-principal);
     color: var(--color-primario);
-    text-align: left;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    letter-spacing: 0.2rem;
+    font-weight: bolder;
+    font-size: var(--xl);
+    padding-bottom: 1rem;
 }
 
 .titulo_contacto .p_contacto {
-    font-size: var(--md);
+    font-family: var(--font-family-principal);
     color: var(--color-primario);
-    width: 100%;
-    justify-content: justify;
-    text-align: left;
-    margin-top: 1rem;
+    font-weight: lighter;
+    font-size: var(--sm);
+    letter-spacing: 0.3rem;
+}
+
+/* titulo para pagina certificaciones */
+.titulo_certificaciones {
+    font-family: var(--font-family-principal);
+    font-size: var(--lg);
+    color: var(--color-primario);
+    text-align: center;
+    margin-top: 3rem;
     margin-bottom: 1rem;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.5rem;
 }
 
 
@@ -620,7 +733,7 @@ body {
     text-align: justify;
 }
 
-.certificaciones_contenedor {
+.btn_certificaciones_contenedor {
     display: grid;
     grid-column: 2 / 3;
     grid-row: 3 / 4;
@@ -631,7 +744,7 @@ body {
     grid-auto-rows: minmax(1rem, auto);
 }
 
-.certificaciones_contenedor .certificaciones_titulo {
+.btn_certificaciones_contenedor .btn_certificaciones_titulo {
     font-family: var(--font-family-principal);
     font-size: var(--xl);
     color: var(--color-primario);
@@ -643,7 +756,7 @@ body {
     letter-spacing: 0.15rem;
 }
 
-.certificaciones_contenedor p {
+.btn_certificaciones_contenedor p {
     font-family: var(--font-family-secundaria);
     font-size: var(--md);
     color: var(--color-primario);
@@ -652,7 +765,7 @@ body {
     text-align: justify;
 }
 
-.certificaciones_contenedor a {
+.btn_certificaciones_contenedor a {
     font-size: var(--md);
     color: var(--color-secundario);
     font-weight: bolder;
@@ -662,12 +775,12 @@ body {
     text-decoration: none;
 }
 
-.certificaciones_contenedor a:hover {
+.btn_certificaciones_contenedor a:hover {
     color: var(--color-primario);
     transition: all 0.3s ease;
 }
 
-/* Ejemplo de mejora en el estilo del CTA */
+/* Estilo del CTA */
 .cta-button {
     display: inline-block;
     width: 20%;
@@ -856,35 +969,7 @@ body {
     }
 }
 
-/* Hero Section */
-.titulo_blog {
-    background-color: var(--color-quintenario);
-    color: var(--color-primario);
-    width: 85%;
-    height: auto;
-    position: relative;
-    z-index: 1;
-    text-align: left;
-    padding-top: 3rem;
-}
-
-.titulo_contenido .h1_blog {
-    font-family: var(--font-family-principal);
-    font-weight: bolder;
-    font-size: 5rem;
-    margin-bottom: 1rem;
-    margin-left: 3rem;
-}
-
-.titulo_contenido .p_blog {
-    font-family: var(--font-family-principal);
-    font-weight: lighter;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 3rem;
-    letter-spacing: .4rem;
-}
-
+/* Estilos para el contenedor de pagina blog */
 .img_blog {
     position: relative;
     /* Permite posicionar elementos hijos de manera absoluta */
@@ -952,7 +1037,7 @@ body {
     background-color: var(--color-terciario);
     color: var(--color-primario);
     cursor: pointer;
-    animation: pulse 2s infinite;
+    /* animation: pulse 2s infinite; */
     box-shadow: var(--color-quintenario) 0.2rem 0.3rem;
     opacity: 0.8;
 }
@@ -1082,34 +1167,71 @@ body {
     color: #666;
 }
 
-/* Contact Section */
-.contact {
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.contact form {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact input,
-.contact textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.contact textarea {
-    resize: vertical;
-    height: 150px;
-}
-
 /* Estilos para la seccion contenedora de contacto */
+.titulo_main_contacto {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 0)), to(rgb(145, 223, 255)));
+    background: linear-gradient(235deg, rgb(255, 255, 0) 0%, rgb(145, 223, 255) 100%, rgb(145, 223, 255) 100%);
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.grid {
+    position: relative;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    -webkit-perspective: 600px;
+    perspective: 600px;
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    grid-gap: 20px;
+    max-width: 680px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.grid div {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 20px;
+    color: transparent;
+    box-shadow: 30px 30px 30px -20px rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+}
+
+.grid div:nth-child(odd) {
+    -webkit-animation: 1000ms ease-in-out infinite alternate pulse;
+    animation: 1000ms ease-in-out infinite alternate pulse;
+}
+
+.grid div:nth-child(even) {
+    -webkit-animation: 1000ms 1000ms ease-in-out infinite alternate pulse;
+    animation: 1000ms 1000ms ease-in-out infinite alternate pulse;
+}
+
+@-webkit-keyframes pulse {
+    to {
+        -webkit-transform: translate3d(0px, 0px, -60px);
+        transform: translate3d(0px, 0px, -60px);
+        box-shadow: 15px 15px 20px -20px rgba(0, 0, 0, 0.8);
+    }
+}
+
+@keyframes pulse {
+    to {
+        -webkit-transform: translate3d(0px, 0px, -60px);
+        transform: translate3d(0px, 0px, -60px);
+        box-shadow: 15px 15px 20px -20px rgba(0, 0, 0, 0.8);
+    }
+}
+
 .contacto_contenedor {
     display: flex;
     flex-direction: column;
@@ -1196,7 +1318,6 @@ body {
     width: 100%;
 }
 
-
 .entry {
     display: block;
     margin: 1rem auto;
@@ -1253,8 +1374,134 @@ body {
     }
 }
 
+/* Estilos para la seccion de pagina de certificaciones */
+.certificaciones_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    width: 80%;
+    justify-self: center;
+}
+
+.entidades {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    /* margin-top: 1rem;
+    width: 100%; */
+    /* justify-self: center; */
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.p_certificaciones {
+    font-family: var(--font-family-principal);
+    color: var(--color-primario);
+    font-size: var(--xl);
+    font-weight: bolder;
+    letter-spacing: 0.1rem;
+    align-self: flex-start;
+    text-align: left;
+    border-bottom: var(--color-primario) 0.3rem solid;
+    cursor: pointer;
+}
+
+.card_container_certificaciones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 3rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    padding-top: 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    justify-self: center;
+    background-color: var(--color-terciario);
+    max-height: 1000px;
+    overflow: hidden;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease, transform 0.5s ease-out;
+}
+
+/* Cuando está activo, se expande */
+.card_container_certificaciones.active {
+    max-height: 1000px;
+    /* Un valor suficientemente grande */
+    opacity: 1;
+}
+
+.card_container_certificaciones.hidden {
+    opacity: 1;
+    max-height: 0;
+    transform: scaleY(1);
+}
+
+.arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.arrow.active {
+    transform: rotate(180deg);
+}
+
+.logo-container {
+    display: flex;
+    justify-content: flex-start;
+    left: 2rem;
+    align-items: center;
+    height: 50px;
+    /* Ajusta el tamaño del logo */
+    /* transition: opacity 0.5s ease; */
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    position: relative;
+    margin-bottom: 8rem;
+}
+
+.logo-container img {
+    max-width: 150px;
+    /* Tamaño del logo */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Ocultar la imagen cuando se expande */
+.card_container_certificaciones.active+.logo-container {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+.card {
+    background-color: #fff;
+    justify-self: center;
+    width: 25rem;
+    height: 30rem;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #555;
+}
+
 /* Footer */
-.footer_sobremi, .footer_proyectos, .footer_blog {
+.footer_sobremi, .footer_proyectos, .footer_blog, .footer_certificaciones {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1281,6 +1528,11 @@ body {
     color: var(--color-primario);
 }
 
+.footer_certificaciones {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+}
+
 .redes-email {
     display: flex;
     justify-content: space-between;
@@ -1289,7 +1541,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.social_sobremi, .social_proyectos, .social_blog {
+.social_sobremi, .social_proyectos, .social_blog, .social_certificaciones {
     display: flex;
     align-items: center;
     width: 100%;
@@ -1316,6 +1568,13 @@ body {
     cursor: pointer;
 }
 
+.social_certificaciones .icon {
+    font-size: 3rem;
+    margin: 0 1rem;
+    color: var(--color-primario);
+    cursor: pointer;
+}
+
 .social_sobremi .icon:hover {
     color: var(--color-cuaternario);
     transition: all 0.3s ease;
@@ -1329,6 +1588,12 @@ body {
 }
 
 .social_blog .icon:hover {
+    color: var(--color-secundario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.social_certificaciones .icon:hover {
     color: var(--color-secundario);
     transition: all 0.3s ease;
     transform: scale(1.2);
@@ -1373,7 +1638,7 @@ body {
     transform: scale(1.2);
 }
 
-.email .ac_blog {
+.email .ac_blog, .ac_certificaciones {
     font-family: var(--font-family);
     font-size: 1.6rem;
     font-weight: bolder;
@@ -1390,7 +1655,13 @@ body {
     transform: scale(1.2);
 }
 
-.line_sobremi, .line_proyectos, .line_blog {
+.email .ac_certificaciones:hover {
+    color: var(--color-secundario);
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+.line_sobremi, .line_proyectos, .line_blog, .line_certificaciones {
     width: 80%;
     height: 0.2rem;
     margin: 2rem 0;
@@ -1405,6 +1676,10 @@ body {
 }
 
 .line_blog {
+    background-color: var(--color-primario);
+}
+
+.line_certificaciones {
     background-color: var(--color-primario);
 }
 
