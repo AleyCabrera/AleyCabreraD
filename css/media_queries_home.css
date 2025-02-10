@@ -97,6 +97,64 @@
 
     }
 
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        max-width: 10000px;
+        /* Limitar el ancho.maxcdn.css */
+    }
+
+    section {
+        display: grid;
+        grid-template-columns: 15% 70%;
+        align-items: left;
+        justify-content: center;
+    }
+
+    .saludo {
+        text-align: left;
+        color: var(--color-cuaternario);
+        font-size: var(--md);
+        word-spacing: 0.5rem;
+        letter-spacing: 0.15rem;
+        margin-top: 25rem;
+        margin-bottom: 1rem;
+        /* padding-top: 20rem; */
+    }
+
+    .nombre {
+        text-align: left;
+        font-family: var(--font-family-principal);
+        color: var(--color-secundario);
+        font-size: var(--xl);
+        word-spacing: 0.5rem;
+        letter-spacing: 0.2rem;
+        margin-top: 0.1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .descripcion {
+        text-align: left;
+        color: var(--color-terciario);
+        font-size: var(--sm);
+        margin-bottom: 1.4rem;
+        word-spacing: 0.5rem;
+        letter-spacing: 0.4rem;
+    }
+
+    h3 {
+        text-align: left;
+        color: var(--color-cuaternario);
+        font-size: var(--md);
+        margin-top: 1rem;
+        margin-bottom: 1.2rem;
+        word-spacing: 0.5rem;
+        letter-spacing: 0.15rem;
+    }
 
     /* FOOTER */
     footer {
