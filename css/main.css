@@ -9,7 +9,7 @@
     --color-primario: #020745;
     --color-secundario: #ffff00;
     --color-terciario: #d5d5d5;
-    --color-cuaternario: rgb(145, 223, 255);
+    --color-cuaternario: #91dfff;
     --color-quintenario: #ffffff;
     --color-sextario: #f1eeee;
     --color-hover: #3ebffa;
@@ -20,6 +20,9 @@
     --md: 1.6rem;
     --lg: 1.8rem;
     --xl: 2.4rem;
+    --xxl: 3.2rem;
+    --xxxl: 4.2rem;
+    --xxxxl: 5.2rem;
     --border-radius: 0.5rem;
     --transition-speed: 0.3s;
 }
@@ -41,7 +44,9 @@
     display: none;
 }
 
-/* Estilos generales */
+/* ==========================================================================
+    Estilos Generales
+   ========================================================================== */
 html {
     font-size: 62.5%;/*Establece el tamaño de fuente predeterminado para el documento.*/
     scroll-behavior: smooth;/*Establece un estilo para el comportamiento de desplazamiento suave.*/
@@ -123,6 +128,7 @@ body {
     transition: background-color 500ms;
 }
 
+/* Estilos para los logos de la barra de navegación de las paginas sobre mi, proyectos, certificaciones, blog y contacto */
 .pelogo_sobremi, .pelogo_proyectos, .pelogo_certificaciones, .pelogo_blog, .pelogo_contacto {
     display: block;
     position: relative;
@@ -214,7 +220,7 @@ body {
     background-color: var(--color-cuaternario);
 }
 
-/*Pretty complex animation, so each side needs its own @keyframes.*/
+/* animacion para el logo de la barra de navegación de las paginas sobre mi, proyectos, certificaciones, blog y contacto */
 
 @keyframes slide1 {
     50% {
@@ -289,7 +295,6 @@ body {
 .lista .items_contacto {
     color: var(--color-secundario);
 }
-
 
 /*Estilos de los hover para los item de navegacion de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 /*Estilos de psudoelementos y pseudoclases para .sobremi*/
@@ -400,7 +405,6 @@ body {
     background-color: var(--color-secundario);
 }
 
-
 .lista .items_certificaciones:hover {
     color: var(--color-secundario);
 }
@@ -433,11 +437,14 @@ body {
    ========================================================================== */
 
 /*Estilos del Main de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
-.main_sobremi {
+.main_sobremi, .main_blog, .main_certificaciones {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.main_sobremi {
     min-height: 100vh;
     max-height: 1000vh;
     width: 100%;
@@ -456,10 +463,6 @@ body {
 }
 
 .main_blog {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     margin-top: 5rem;
 }
@@ -480,15 +483,15 @@ body {
 }
 
 .main_certificaciones {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     width: 100%;
     margin-top: 6rem;
     padding-bottom: 7rem;
 }
+
+/* ==========================================================================
+    Estilos Específicos por Página del Video
+   ========================================================================== */
 
 /*Estilos y configuracion de videos para las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 /* video de fondo para pagina sobre mi */
@@ -498,11 +501,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-    /* Asegura que el video quede detrás del contenido */
+    z-index: -1;/* Asegura que el video quede detrás del contenido */
     overflow: hidden;
-    pointer-events: none;
-    /* Evita interferir con el contenido clickeable */
+    pointer-events: none;/* Evita interferir con el contenido clickeable */
 }
 
 /* Video dinámico */
@@ -510,14 +511,10 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    /* Centra el video */
-    width: 100vw;
-    /* Asegura que el video ocupe todo el ancho de la ventana */
-    height: 100vh;
-    /* Asegura que el video ocupe toda la altura de la ventana */
-    object-fit: cover;
-    /* Cubre toda el área sin distorsionar el video */
+    transform: translate(-50%, -50%);/* Centra el video */
+    width: 100vw;/* Asegura que el video ocupe todo el ancho de la ventana */
+    height: 100vh;/* Asegura que el video ocupe toda la altura de la ventana */
+    object-fit: cover;/* Cubre toda el área sin distorsionar el video */
 }
 
 .video_sobremi .color_overlay_sobremi {
@@ -565,6 +562,9 @@ body {
 }
 
 
+/* ==========================================================================
+    Estilos Especificos para los titulos de las paginas sobre mi, proyectos, certificaciones, blog y contacto
+   ========================================================================== */
 /*Estilos para titulos principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto*/
 /*titulo sobre mi*/
 .descripcion .sobre_mi {
@@ -683,8 +683,11 @@ body {
 }
 
 
+/* ==========================================================================
+    Estilos Especificos para los contenedores principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto
+   ========================================================================== */
 /* Estilos para contenedores principales de las paginas sobre mi, proyectos, certificaciones, blog y contacto */
-/* Estilos para contenedor sobre mi */
+/* Estilos sobre mi */
 .contenedor {
     display: grid;
     grid-template-columns: 1fr;
@@ -865,6 +868,9 @@ body {
     transform: translateX(100%);
 }
 
+/* ==========================================================================
+    ESTILOS PROYECTOS
+   ========================================================================== */
 /* Estilos para el contenedor de pagina proyectos */
 .proyectos_contenedor {
     display: grid;
@@ -930,6 +936,9 @@ body {
     clip-path: polygon(36% 0, 100% 0, 100% 75.2%, 65% 100%, 0 100%, 0 24%);
 }
 
+/* ==========================================================================
+    Estilos Blog
+   ========================================================================== */
 /* Estilos para el contenedor de pagina blog */
 .contenedor_blog {
     display: flex;
@@ -977,41 +986,26 @@ body {
 }
 
 .img_blog img {
-    display: block;
-    /* Elimina el espacio inferior que tienen las imágenes por defecto */
-    width: 100%;
-    /* Ajusta la imagen al ancho del contenedor */
-    height: 100%;
-    /* Mantiene la proporción de la imagen */
+    display: block;/* Elimina el espacio inferior que tienen las imágenes por defecto */
+    width: 100%;/* Ajusta la imagen al ancho del contenedor */
+    height: 100%;/* Mantiene la proporción de la imagen */
 }
 
 /* Estilos para el texto */
 .p_blog_comentario {
-    position: absolute;
-    /* Posiciona el texto encima de la imagen */
-    top: 50%;
-    /* Lo coloca en el centro vertical */
-    left: 50%;
-    /* Lo coloca en el centro horizontal */
-    transform: translate(-50%, -50%);
-    /* Centra el texto exactamente en el medio */
-    color: var(--color-quintenario);
-    /* Color del texto */
+    position: absolute;/* Posiciona el texto encima de la imagen */
+    top: 50%;/* Lo coloca en el centro vertical */
+    left: 50%;/* Lo coloca en el centro horizontal */
+    transform: translate(-50%, -50%);/* Centra el texto exactamente en el medio */
+    color: var(--color-quintenario);/* Color del texto */
     font-family: var(--font-family-principal);
-    font-size: var(--xl);
-    /* Tamaño del texto */
-    font-weight: lighter;
-    /* Grosor del texto */
-    text-align: center;
-    /* Alinea el texto al centro */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Fondo semitransparente para mejorar la legibilidad */
-    padding: 1rem 2rem;
-    /* Espaciado interno */
-    border-radius: .5rem;
-    /* Bordes redondeados */
-    margin: 0;
-    /* Elimina el margen por defecto del párrafo */
+    font-size: var(--xl);/* Tamaño del texto */
+    font-weight: lighter;/* Grosor del texto */
+    text-align: center;/* Alinea el texto al centro */
+    background-color: rgba(0, 0, 0, 0.5);/* Fondo semitransparente para mejorar la legibilidad */
+    padding: 1rem 2rem;/* Espaciado interno */
+    border-radius: .5rem;/* Bordes redondeados */
+    margin: 0;/* Elimina el margen por defecto del párrafo */
     letter-spacing: .4rem;
 }
 
@@ -1031,6 +1025,15 @@ body {
     margin-top: 1rem;
     text-decoration: none;
     letter-spacing: .2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn_blog:hover {
@@ -1167,7 +1170,9 @@ body {
     color: #666;
 }
 
-/* Estilos para la seccion contenedora de contacto */
+/* ==========================================================================
+    Estilos Contacto
+   ========================================================================== */
 .titulo_main_contacto {
     background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 0)), to(rgb(145, 223, 255)));
     background: linear-gradient(235deg, rgb(255, 255, 0) 0%, rgb(145, 223, 255) 100%, rgb(145, 223, 255) 100%);
@@ -1350,12 +1355,10 @@ body {
     transform: translateY(-120px);
 }
 
-
 .submit:hover {
     border-bottom: 0.5rem solid var(--color-primario);
     box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
 }
-
 
 @keyframes bounce {
     0% {}
@@ -1374,7 +1377,10 @@ body {
     }
 }
 
-/* Estilos para la seccion de pagina de certificaciones */
+
+/* ==========================================================================
+    Estilo Certificaciones
+   ========================================================================== */
 .certificaciones_container {
     display: flex;
     flex-direction: column;
@@ -1500,7 +1506,10 @@ body {
     color: #555;
 }
 
-/* Footer */
+
+/* ==========================================================================
+    Estilo de footer para las paginas sobre mi, proyectos, certificaciones, blog y contacto
+   ========================================================================== */
 .footer_sobremi, .footer_proyectos, .footer_blog, .footer_certificaciones {
     display: flex;
     flex-direction: column;
@@ -1694,14 +1703,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
+
 
 
 

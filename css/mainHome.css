@@ -171,6 +171,14 @@ header {
     }
 }
 
+/* MENÚ HAMBURGUESA PARA MÓVILES */
+.menu-hamburguesa {
+    display: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: var(--color-terciario);
+}
+
 .lista {
     display: flex;
     list-style: none;
@@ -501,3 +509,5 @@ h3 {
     color: var(--color-terciario);
     transform: scale(1.2);
 }
+
+

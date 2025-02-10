@@ -104,6 +104,16 @@ function toggleCertificaciones(element) {
                 logo.style.opacity = "0";
                 logo.style.pointerEvents = "none";
             }
-        }
+}
+
+// menu toggle para dispositivos moviles
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.querySelector(".lista");
+
+    menuToggle.addEventListener("click", function () {
+        menu.classList.toggle("active");
+    });
+});
 
 

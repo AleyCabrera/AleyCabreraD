@@ -22,13 +22,13 @@
     <link rel="icon" href="assets/iconos/aleycabrera.ico" type="image/x-icon"><!--Establece el icono de la página.-->
     <link rel="stylesheet" type="text/css" href="css/mainHome.css">
     <!--Establece la hoja de estilos de la página.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 320px)"><!--Establece la hoja de estilos de la página mobile S.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 375px)"><!--Establece la hoja de estilos de la página mobile M.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 425px)"><!--Establece la hoja de estilos de la página mobile L.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 768px)"><!--Establece la hoja de estilos de la página Tablet.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 1024px)"><!--Establece la hoja de estilos de la página laptop.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 1440px)"><!--Establece la hoja de estilos de la página laptop L.-->
-    <link rel="stylesheet" href="/" media="screen and (min-width: 2560px)">
+    <link rel="stylesheet" href="/css/media_queries_home.css" media="screen and (max-width: 320px)"><!--Establece la hoja de estilos de la página mobile S.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 375px)"><!--Establece la hoja de estilos de la página mobile M.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 425px)"><!--Establece la hoja de estilos de la página mobile L.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 768px)"><!--Establece la hoja de estilos de la página Tablet.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 1024px)"><!--Establece la hoja de estilos de la página laptop.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 1440px)"><!--Establece la hoja de estilos de la página laptop L.-->
+    <link rel="stylesheet" href="/" media="screen and (max-width: 2560px)">
     <!--Establece la hoja de estilos de la página 4K.-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><!--Establece la fuente de google.-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!--Establece la fuente de google.-->
@@ -66,6 +66,11 @@
                 <a href="blog.html" class="items">Blog</a><!--dirige a la sección blog-->
                 <a href="contacto.html" class="items">Contacto</a><!--dirige a la sección contacto-->
             </ul>
+            
+            <!-- Menú hamburguesa (para móviles) -->
+            <div class="menu-hamburguesa" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
     
