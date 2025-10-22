@@ -1946,7 +1946,7 @@
         /* Footer */
         .cyber-footer {
             background-color: var(--dark-bg);
-            padding: 50px 0 20px;
+            padding: 40px 0 20px;
             border-top: 1px solid rgba(0, 240, 255, 0.2);
         }
 
@@ -1958,18 +1958,12 @@
             align-items: center;
         }
 
-        .footer-logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 30px;
-        }
-
         .footer-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .footer-links a {
@@ -1988,8 +1982,8 @@
         .footer-credits {
             text-align: center;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            margin-top: 20px;
+            font-size: 1.2rem;
+            margin-top: 5px;
         }
 
         /* Audio control */
