@@ -60,7 +60,11 @@
             });
 
             // Efecto typing cíclico
-            const roles = ["Desarrollador de Software", "Analista en Ciberseguridad", "Apasionado por la IA", "Apasionado por La tecnología"];
+            const roles = ["Desarrollador de Software Full Stack",
+                            "Analista en Ciberseguridad",
+                            "Entusiasta de la Inteligencia Artificial",
+                            "Amante de la Automatización y la Robótica",
+                            "Explorador de Tecnologías Futuristas"];
             let roleIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
