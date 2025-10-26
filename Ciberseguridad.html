@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificaciones en Ciberseguridad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --primary-neon: #00f0ff;
+            --accent-color: #7b00ff;
+            --accent-color-2: #ff00a0;
+            --font-main: 'Poppins', sans-serif;
+            --card-bg: rgba(20, 20, 43, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--dark-bg);
+            color: white;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header estilizado como la página principal */
+        .cert-header {
+            text-align: center;
+            padding: 80px 0 50px;
+            background: linear-gradient(to bottom, var(--darker-bg), var(--dark-bg));
+            position: relative;
+        }
+
+        .cert-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-neon), transparent);
+        }
+
+        .cert-title {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .cert-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-neon);
+            border-radius: 2px;
+        }
+
+        .cert-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 700px;
+            margin: 30px auto 40px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* Filtros mejorados */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--primary-neon);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-neon);
+            color: var(--dark-bg);
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Instituciones con diseño mejorado */
+        .institution-section {
+            margin-bottom: 60px;
+        }
+
+        .institution-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px 25px;
+            background: linear-gradient(to right, rgba(20, 20, 43, 0.4), rgba(20, 20, 43, 0.7));
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .institution-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .institution-header:hover::before {
+            left: 100%;
+        }
+
+        .institution-header:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .institution-logo {
+            width: 70px;
+            height: 70px;
+            margin-right: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .institution-header:hover .institution-logo {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 240, 255, 0.2);
+        }
+
+        .institution-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
+        .institution-name {
+            font-size: 1.7rem;
+            color: white;
+            margin-right: auto;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-icon {
+            font-size: 1.4rem;
+            color: var(--primary-neon);
+            transition: all 0.4s ease;
+        }
+
+        .institution-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-left: 95px;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .institution-header.active+.certifications-grid {
+            height: auto;
+            overflow: visible;
+            margin-bottom: 50px;
+        }
+
+        /* Tarjetas de certificación mejoradas */
+        .certification-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.03), transparent 30%);
+            z-index: -1;
+        }
+
+        .certification-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+
+        .certification-badge {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .certification-item:hover .certification-badge {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0, 240, 255, 0.25);
+        }
+
+        .certification-badge img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 50%;
+        }
+
+        .certification-name {
+            font-size: 1.3rem;
+            color: var(--primary-neon);
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .certification-date {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .certification-desc {
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .certification-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--primary-neon);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .certification-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--primary-neon);
+            transition: all 0.3s ease;
+        }
+
+        .certification-link:hover {
+            color: white;
+        }
+
+        .certification-link:hover::after {
+            width: 100%;
+        }
+
+        /* Botón de volver mejorado */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            margin: 50px 0;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .back-button i {
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--primary-neon);
+            color: var(--dark-bg);
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .back-button:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Efectos de partículas sutiles de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .certifications-grid {
+                margin-left: 0;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .institution-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+            }
+
+            .institution-logo {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .institution-name {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .cert-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-title {
+                font-size: 1.8rem;
+            }
+
+            .institution-name {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Efecto de partículas de fondo -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Encabezado con estilo de la página principal -->
+        <header class="cert-header">
+            <h1 class="cert-title">Certificaciones en Ciberseguridad</h1>
+            <p class="cert-subtitle">Estas son las certificaciones que he obtenido en el área de ciberseguridad,
+                organizadas por institución. Haz clic en cada institución para ver las certificaciones correspondientes.
+            </p>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <button class="filter-btn active">Todas</button>
+                <button class="filter-btn">Fundamentos</button>
+                <button class="filter-btn">Hacking Ético</button>
+                <button class="filter-btn">Forense</button>
+                <button class="filter-btn">Auditoría</button>
+            </div>
+        </header>
+
+        <!-- Sección de Instituciones -->
+        <main>
+            <!-- Institución 1 -->
+            <section class="institution-section">
+                <div class="institution-header active">
+                    <div class="institution-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/800px-Coursera-Logo_600x600.svg.png"
+                            alt="Coursera Logo">
+                    </div>
+                    <h2 class="institution-name">Coursera</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/800px-Coursera-Logo_600x600.svg.png"
+                                alt="Google IT Support Badge">
+                        </div>
+                        <h3 class="certification-name">Google IT Support Professional</h3>
+                        <p class="certification-date">Enero 2023</p>
+                        <p class="certification-desc">Certificación profesional en soporte TI con enfoque en seguridad
+                            de sistemas y redes.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/800px-Coursera-Logo_600x600.svg.png"
+                                alt="IBM Cybersecurity Badge">
+                        </div>
+                        <h3 class="certification-name">IBM Cybersecurity Analyst</h3>
+                        <p class="certification-date">Marzo 2023</p>
+                        <p class="certification-desc">Análisis de vulnerabilidades, gestión de incidentes y respuesta a
+                            ciberataques.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/800px-Coursera-Logo_600x600.svg.png"
+                                alt="Python Security Badge">
+                        </div>
+                        <h3 class="certification-name">Python for Cybersecurity</h3>
+                        <p class="certification-date">Junio 2023</p>
+                        <p class="certification-desc">Desarrollo de herramientas de seguridad y automatización de
+                            pruebas con Python.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Institución 2 -->
+            <section class="institution-section">
+                <div class="institution-header">
+                    <div class="institution-logo">
+                        <img src="https://images.credly.com/images/9d340ee6-89f6-4d64-8a40-6d2d8bfbce2c/image.png"
+                            alt="Cisco Logo">
+                    </div>
+                    <h2 class="institution-name">Cisco Networking Academy</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://images.credly.com/images/9d340ee6-89f6-4d64-8a40-6d2d8bfbce2c/image.png"
+                                alt="CCNA Badge">
+                        </div>
+                        <h3 class="certification-name">CCNA: Introduction to Networks</h3>
+                        <p class="certification-date">Febrero 2023</p>
+                        <p class="certification-desc">Fundamentos de redes, configuración y solución de problemas en
+                            infraestructura de red.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://images.credly.com/images/9d340ee6-89f6-4d64-8a40-6d2d8bfbce2c/image.png"
+                                alt="Cybersecurity Essentials Badge">
+                        </div>
+                        <h3 class="certification-name">Cybersecurity Essentials</h3>
+                        <p class="certification-date">Abril 2023</p>
+                        <p class="certification-desc">Principios de seguridad, tecnologías y procedimientos para
+                            defender sistemas.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Institución 3 -->
+            <section class="institution-section">
+                <div class="institution-header">
+                    <div class="institution-logo">
+                        <img src="https://images.credly.com/images/5f629443-3c42-4b2b-81a4-4c8abc234b40/image.png"
+                            alt="CompTIA Logo">
+                    </div>
+                    <h2 class="institution-name">CompTIA</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://images.credly.com/images/5f629443-3c42-4b2b-81a4-4c8abc234b40/image.png"
+                                alt="Security+ Badge">
+                        </div>
+                        <h3 class="certification-name">Security+</h3>
+                        <p class="certification-date">Mayo 2023</p>
+                        <p class="certification-desc">Certificación en habilidades de seguridad para administrar redes y
+                            sistemas seguros.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+
+                    <div class="certification-item">
+                        <div class="certification-badge">
+                            <img src="https://images.credly.com/images/5f629443-3c42-4b2b-81a4-4c8abc234b40/image.png"
+                                alt="CySA+ Badge">
+                        </div>
+                        <h3 class="certification-name">CySA+ (Cybersecurity Analyst)</h3>
+                        <p class="certification-date">Julio 2023</p>
+                        <p class="certification-desc">Análisis de comportamiento de redes y sistemas para detectar y
+                            combatir ciberamenazas.</p>
+                        <a href="#" class="certification-link">Ver credencial</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Botón de volver -->
+        <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Volver al Inicio</a>
+    </div>
+
+    <script>
+        // Funcionalidad para desplegar/contraer secciones
+        document.querySelectorAll('.institution-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+            });
+        });
+
+        // Funcionalidad para filtros (simulada)
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Aquí iría la lógica real de filtrado
+            });
+        });
+
+        // Crear efecto de partículas de fondo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = Math.random() * 5 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 10;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s infinite ease-in-out`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = Math.random() * 0.4 + 0.1;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Crear las partículas cuando se carga la página
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+
+</html>
