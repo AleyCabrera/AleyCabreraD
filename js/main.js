@@ -1,72 +1,132 @@
-// ===== VARIABLES GLOBALES =====
-const APP = {
-    // Configuración
-    config: {
-        animationDuration: 100, // ms para typing
-        numberIncrementSteps: 50, // pasos para contador
-        mouseRotateIntensity: 20, // intensidad de rotación
-        perspectiveValue: 1000 // valor de perspectiva 3D
+/**
+ * ===================================================
+ * PORTFOLIO APPLICATION - MAIN ENTRY POINT
+ * ===================================================
+ * @version 1.0.0
+ * @description Aplicación principal del portafolio con gestión de temas,
+ *              animaciones, audio, sistema de estado y WhatsApp
+ * ===================================================
+ */
+
+// ============================================================================
+// CONFIGURACIÓN GLOBAL
+// ============================================================================
+
+const APP_CONFIG = {
+    /** @type {Object} Configuración de animaciones */
+    animations: {
+        typingDuration: 100,        // ms por carácter
+        numberIncrementSteps: 50,    // Pasos para contadores
+        mouseRotateIntensity: 20,    // Intensidad de rotación 3D
+        perspectiveValue: 1000,      // Valor de perspectiva
+        throttleLimit: 16,           // Límite para throttle (60fps)
+        crossfadeDuration: 2000,     // Duración de crossfade de audio
+        defaultVolume: 0.5            // Volumen por defecto
     },
     
-    // Selectores
+    /** @type {Object} Selectores DOM */
     selectors: {
         body: 'body',
         themeToggle: '.theme-toggle i',
         statNumbers: '.stat-number',
         heroTitleHighlight: '.hero-content h1 span.highlight',
-        heroVisual: '.hero-visual'
+        heroVisual: '.hero-visual',
+        systemStatus: '.system-status',
+        whatsappButton: '.whatsapp-button',
+        audioControl: '#audioControl',
+        audioElement: '#bgAudio',
+        statusText: '.status-text',
+        whatsappTooltip: '.whatsapp-tooltip',
+        audioIcon: 'i'
     },
     
-    // Clases CSS
+    /** @type {Object} Clases CSS */
     classes: {
         darkTheme: 'dark-theme',
         lightTheme: 'light-theme',
         faSun: 'fa-sun',
-        faMoon: 'fa-moon'
+        faMoon: 'fa-moon',
+        offline: 'offline',
+        playing: 'playing',
+        muted: 'muted',
+        blocked: 'blocked',
+        error: 'error',
+        badge: 'badge',
+        statusTooltip: 'status-tooltip'
     },
     
-    // Estado de la aplicación
-    state: {
-        currentTheme: null,
-        animationFrame: null,
-        typingInterval: null
+    /** @type {Object} Storage keys */
+    storage: {
+        theme: 'theme',
+        audioPreference: 'audio_preference'
+    },
+    
+    /** @type {Object} Números y contactos */
+    contacts: {
+        whatsapp: '573234737757'
+    },
+    
+    /** @type {Object} Textos por defecto */
+    defaults: {
+        systemOnline: 'system_online',
+        systemOffline: 'system_offline',
+        statusTooltip: 'Uptime: 99.9% | Latencia: 23ms',
+        whatsappMessage: 'Contáctame',
+        whatsappAvailable: '¡Disponible ahora!',
+        whatsappOffline: 'Deja tu mensaje',
+        audioPlay: 'Reproducir música',
+        audioPause: 'Pausar música',
+        audioActivate: 'Activar música',
+        audioError: 'Error al cargar audio'
     }
 };
 
-// ===== UTILIDADES =====
+// ============================================================================
+// UTILIDADES
+// ============================================================================
+
 const Utils = {
     /**
-     * Limpia y detiene animaciones activas
+     * Limpia todas las animaciones activas
+     * @param {Object} state - Estado de la aplicación
      */
-    cleanupAnimations() {
-        if (APP.state.animationFrame) {
-            cancelAnimationFrame(APP.state.animationFrame);
-            APP.state.animationFrame = null;
+    cleanupAnimations(state) {
+        if (state?.animationFrame) {
+            cancelAnimationFrame(state.animationFrame);
+            state.animationFrame = null;
         }
         
-        if (APP.state.typingInterval) {
-            clearInterval(APP.state.typingInterval);
-            APP.state.typingInterval = null;
+        if (state?.typingInterval) {
+            clearInterval(state.typingInterval);
+            state.typingInterval = null;
         }
     },
-    
+
     /**
-     * Extrae número de un string (ej: "42+" -> 42)
+     * Extrae número de un string
+     * @param {string} str - String con número
+     * @returns {number}
      */
     extractNumberFromString(str) {
         return parseInt(str.replace(/[^0-9]/g, '')) || 0;
     },
-    
+
     /**
-     * Preserva el sufijo del número (ej: "+", "%", etc)
+     * Preserva el sufijo del número
+     * @param {string} originalText - Texto original
+     * @param {number} number - Número procesado
+     * @returns {string}
      */
     preserveNumberSuffix(originalText, number) {
         const suffix = originalText.replace(/[0-9]/g, '');
         return number + suffix;
     },
-    
+
     /**
      * Throttle para eventos de alto rendimiento
+     * @param {Function} func - Función a throttle
+     * @param {number} limit - Límite en ms
+     * @returns {Function}
      */
     throttle(func, limit) {
         let inThrottle;
@@ -77,135 +137,300 @@ const Utils = {
                 setTimeout(() => inThrottle = false, limit);
             }
         };
+    },
+
+    /**
+     * Debounce para eventos
+     * @param {Function} func - Función a debounce
+     * @param {number} wait - Tiempo de espera
+     * @returns {Function}
+     */
+    debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    },
+
+    /**
+     * Verifica si es dispositivo móvil
+     * @returns {boolean}
+     */
+    isMobile() {
+        return window.innerWidth <= 768;
+    },
+
+    /**
+     * Formatea número de teléfono
+     * @param {string} phone - Número de teléfono
+     * @returns {string}
+     */
+    formatPhoneNumber(phone) {
+        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+    },
+
+    /**
+     * Obtener hora actual
+     * @returns {number}
+     */
+    getCurrentHour() {
+        return new Date().getHours();
+    },
+
+    /**
+     * Dispara evento personalizado
+     * @param {string} eventName - Nombre del evento
+     * @param {Object} detail - Datos del evento
+     */
+    dispatchEvent(eventName, detail = {}) {
+        const event = new CustomEvent(eventName, { detail });
+        document.dispatchEvent(event);
+    },
+
+    /**
+     * Guarda en localStorage con manejo de errores
+     * @param {string} key - Llave
+     * @param {any} value - Valor
+     */
+    safeStorageSet(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+            console.warn(`Error guardando ${key}:`, e);
+        }
+    },
+
+    /**
+     * Lee de localStorage con manejo de errores
+     * @param {string} key - Llave
+     * @param {any} defaultValue - Valor por defecto
+     * @returns {any}
+     */
+    safeStorageGet(key, defaultValue = null) {
+        try {
+            const saved = localStorage.getItem(key);
+            return saved ? JSON.parse(saved) : defaultValue;
+        } catch (e) {
+            console.warn(`Error leyendo ${key}:`, e);
+            return defaultValue;
+        }
     }
 };
 
-// ===== MODULO DE TEMA =====
-const ThemeManager = {
+// ============================================================================
+// MÓDULO DE ESTADO GLOBAL
+// ============================================================================
+
+const AppState = {
+    /** @type {Object} Estado de la aplicación */
+    state: {
+        currentTheme: null,
+        animationFrame: null,
+        typingInterval: null,
+        modules: new Map()
+    },
+
     /**
-     * Inicializa el manejador de temas
+     * Obtiene el estado
+     * @returns {Object}
+     */
+    get() {
+        return this.state;
+    },
+
+    /**
+     * Actualiza el estado
+     * @param {Object} updates - Actualizaciones
+     */
+    set(updates) {
+        Object.assign(this.state, updates);
+    },
+
+    /**
+     * Registra un módulo
+     * @param {string} name - Nombre del módulo
+     * @param {Object} instance - Instancia del módulo
+     */
+    registerModule(name, instance) {
+        this.state.modules.set(name, instance);
+    },
+
+    /**
+     * Obtiene un módulo registrado
+     * @param {string} name - Nombre del módulo
+     * @returns {Object|undefined}
+     */
+    getModule(name) {
+        return this.state.modules.get(name);
+    },
+
+    /**
+     * Limpia el estado
+     */
+    cleanup() {
+        Utils.cleanupAnimations(this.state);
+        this.state.modules.forEach(module => module.destroy?.());
+        this.state.modules.clear();
+    }
+};
+
+// ============================================================================
+// MÓDULO DE TEMA
+// ============================================================================
+
+const ThemeManager = {
+    /** @type {Object} Referencias DOM */
+    elements: {},
+
+    /**
+     * Inicializa el módulo
      */
     init() {
+        this.cacheElements();
         this.loadSavedTheme();
-        this.setupToggleListener();
+        this.setupListeners();
+        AppState.registerModule('theme', this);
     },
-    
+
     /**
-     * Carga el tema guardado en localStorage
+     * Cachea elementos DOM
+     */
+    cacheElements() {
+        this.elements = {
+            body: document.querySelector(APP_CONFIG.selectors.body),
+            toggleIcon: document.querySelector(APP_CONFIG.selectors.themeToggle),
+            toggleButton: document.querySelector(APP_CONFIG.selectors.themeToggle)?.parentElement
+        };
+    },
+
+    /**
+     * Carga tema guardado
      */
     loadSavedTheme() {
-        const savedTheme = localStorage.getItem('theme') || APP.classes.darkTheme;
-        const body = document.querySelector(APP.selectors.body);
-        const toggle = document.querySelector(APP.selectors.themeToggle);
+        const savedTheme = Utils.safeStorageGet(APP_CONFIG.storage.theme, APP_CONFIG.classes.darkTheme);
+        const { body, toggleIcon } = this.elements;
         
-        body.classList.remove(APP.classes.darkTheme, APP.classes.lightTheme);
+        if (!body) return;
+
+        body.classList.remove(APP_CONFIG.classes.darkTheme, APP_CONFIG.classes.lightTheme);
         body.classList.add(savedTheme);
         
-        // Actualizar icono
-        if (toggle) {
-            toggle.classList.remove(APP.classes.faSun, APP.classes.faMoon);
-            toggle.classList.add(savedTheme === APP.classes.darkTheme ? 
-                APP.classes.faSun : APP.classes.faMoon);
-        }
-        
-        APP.state.currentTheme = savedTheme;
+        this.updateIcon(savedTheme);
+        AppState.set({ currentTheme: savedTheme });
     },
-    
+
     /**
-     * Cambia entre temas oscuro/claro
+     * Actualiza icono del tema
+     * @param {string} theme - Tema actual
+     */
+    updateIcon(theme) {
+        const { toggleIcon } = this.elements;
+        if (!toggleIcon) return;
+
+        const isDark = theme === APP_CONFIG.classes.darkTheme;
+        toggleIcon.classList.remove(APP_CONFIG.classes.faSun, APP_CONFIG.classes.faMoon);
+        toggleIcon.classList.add(isDark ? APP_CONFIG.classes.faSun : APP_CONFIG.classes.faMoon);
+    },
+
+    /**
+     * Cambia entre temas
      */
     toggle() {
-        const body = document.querySelector(APP.selectors.body);
-        const toggle = document.querySelector(APP.selectors.themeToggle);
+        const { body, toggleIcon } = this.elements;
+        if (!body || !toggleIcon) return;
+
+        const isDark = body.classList.contains(APP_CONFIG.classes.darkTheme);
+        const newTheme = isDark ? APP_CONFIG.classes.lightTheme : APP_CONFIG.classes.darkTheme;
         
-        if (!body || !toggle) return;
-        
-        const isDark = body.classList.contains(APP.classes.darkTheme);
-        const newTheme = isDark ? APP.classes.lightTheme : APP.classes.darkTheme;
-        const newIcon = isDark ? APP.classes.faMoon : APP.classes.faSun;
-        const oldIcon = isDark ? APP.classes.faSun : APP.classes.faMoon;
-        
-        // Actualizar clases
-        body.classList.remove(APP.classes.darkTheme, APP.classes.lightTheme);
+        body.classList.remove(APP_CONFIG.classes.darkTheme, APP_CONFIG.classes.lightTheme);
         body.classList.add(newTheme);
         
-        // Actualizar icono
-        toggle.classList.remove(oldIcon);
-        toggle.classList.add(newIcon);
+        this.updateIcon(newTheme);
+        Utils.safeStorageSet(APP_CONFIG.storage.theme, newTheme);
+        AppState.set({ currentTheme: newTheme });
         
-        // Guardar preferencia
-        localStorage.setItem('theme', newTheme);
-        APP.state.currentTheme = newTheme;
-        
-        // Disparar evento personalizado
-        this.dispatchThemeChangeEvent(newTheme);
+        Utils.dispatchEvent('themeChanged', { theme: newTheme });
     },
-    
+
     /**
-     * Configura el listener del botón de tema
+     * Configura listeners
      */
-    setupToggleListener() {
-        const toggle = document.querySelector(APP.selectors.themeToggle)?.parentElement;
-        if (toggle) {
-            toggle.addEventListener('click', () => this.toggle());
-        }
+    setupListeners() {
+        this.elements.toggleButton?.addEventListener('click', () => this.toggle());
     },
-    
+
     /**
-     * Dispara evento de cambio de tema
+     * Limpia el módulo
      */
-    dispatchThemeChangeEvent(theme) {
-        const event = new CustomEvent('themeChanged', { 
-            detail: { theme } 
-        });
-        document.dispatchEvent(event);
+    destroy() {
+        this.elements.toggleButton?.removeEventListener('click', this.toggle);
     }
 };
 
-// ===== MODULO DE ANIMACIONES =====
+// ============================================================================
+// MÓDULO DE ANIMACIONES
+// ============================================================================
+
 const AnimationManager = {
+    /** @type {Object} Observadores */
+    observers: new Map(),
+
     /**
-     * Inicializa todas las animaciones
+     * Inicializa el módulo
      */
     init() {
         this.setupStatNumbers();
         this.setupTypeWriter();
         this.setupHeroVisualEffects();
+        AppState.registerModule('animations', this);
     },
-    
+
     /**
      * Configura animación de contadores
      */
     setupStatNumbers() {
-        const stats = document.querySelectorAll(APP.selectors.statNumbers);
+        const stats = document.querySelectorAll(APP_CONFIG.selectors.statNumbers);
         
         stats.forEach(stat => {
-            // Usar Intersection Observer para animar solo cuando son visibles
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.animateNumber(stat);
-                        observer.unobserve(stat);
-                    }
-                });
-            }, { threshold: 0.5 });
+            const observer = new IntersectionObserver(
+                (entries) => this.handleStatIntersection(entries, stat),
+                { threshold: 0.5 }
+            );
             
+            this.observers.set(stat, observer);
             observer.observe(stat);
         });
     },
-    
+
     /**
-     * Anima un contador específico
+     * Maneja intersección de estadísticas
+     * @param {Array} entries - Entradas del observer
+     * @param {Element} stat - Elemento de estadística
+     */
+    handleStatIntersection(entries, stat) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                this.animateNumber(stat);
+                this.observers.get(stat)?.unobserve(stat);
+                this.observers.delete(stat);
+            }
+        });
+    },
+
+    /**
+     * Anima un contador
+     * @param {Element} statElement - Elemento a animar
      */
     animateNumber(statElement) {
         const originalText = statElement.textContent;
         const targetValue = Utils.extractNumberFromString(originalText);
         
         if (targetValue === 0) return;
-        
+
         let currentValue = 0;
-        const increment = targetValue / APP.config.numberIncrementSteps;
-        
+        const increment = targetValue / APP_CONFIG.animations.numberIncrementSteps;
+
         const updateNumber = () => {
             if (currentValue < targetValue) {
                 currentValue += increment;
@@ -214,38 +439,47 @@ const AnimationManager = {
                 const displayNumber = Math.floor(currentValue);
                 statElement.textContent = Utils.preserveNumberSuffix(originalText, displayNumber);
                 
-                APP.state.animationFrame = requestAnimationFrame(updateNumber);
+                AppState.set({ animationFrame: requestAnimationFrame(updateNumber) });
             } else {
                 statElement.textContent = originalText;
-                APP.state.animationFrame = null;
+                AppState.set({ animationFrame: null });
             }
         };
-        
-        APP.state.animationFrame = requestAnimationFrame(updateNumber);
+
+        AppState.set({ animationFrame: requestAnimationFrame(updateNumber) });
     },
-    
+
     /**
      * Configura efecto de máquina de escribir
      */
     setupTypeWriter() {
-        const titleHighlight = document.querySelector(APP.selectors.heroTitleHighlight);
+        const titleHighlight = document.querySelector(APP_CONFIG.selectors.heroTitleHighlight);
         if (!titleHighlight) return;
-        
-        // Usar observer para iniciar solo cuando es visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.typeWriterEffect(titleHighlight);
-                    observer.unobserve(titleHighlight);
-                }
-            });
-        }, { threshold: 0.5 });
+
+        const observer = new IntersectionObserver(
+            (entries) => this.handleTitleIntersection(entries, titleHighlight),
+            { threshold: 0.5 }
+        );
         
         observer.observe(titleHighlight);
     },
-    
+
+    /**
+     * Maneja intersección del título
+     * @param {Array} entries - Entradas del observer
+     * @param {Element} element - Elemento del título
+     */
+    handleTitleIntersection(entries, element) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                this.typeWriterEffect(element);
+            }
+        });
+    },
+
     /**
      * Efecto de máquina de escribir
+     * @param {Element} element - Elemento a animar
      */
     typeWriterEffect(element) {
         const originalText = element.textContent;
@@ -253,65 +487,53 @@ const AnimationManager = {
         
         element.textContent = '';
         let index = 0;
-        
-        // Limpiar intervalo anterior si existe
-        if (APP.state.typingInterval) {
-            clearInterval(APP.state.typingInterval);
+
+        if (AppState.get().typingInterval) {
+            clearInterval(AppState.get().typingInterval);
         }
-        
-        APP.state.typingInterval = setInterval(() => {
+
+        const interval = setInterval(() => {
             if (index < textArray.length) {
                 element.textContent += textArray[index];
                 index++;
             } else {
-                clearInterval(APP.state.typingInterval);
-                APP.state.typingInterval = null;
-                
-                // Disparar evento cuando termina
-                this.dispatchTypingCompleteEvent();
+                clearInterval(interval);
+                AppState.set({ typingInterval: null });
+                Utils.dispatchEvent('typingComplete');
             }
-        }, APP.config.animationDuration);
+        }, APP_CONFIG.animations.typingDuration);
+
+        AppState.set({ typingInterval: interval });
     },
-    
-    /**
-     * Dispara evento de typing completado
-     */
-    dispatchTypingCompleteEvent() {
-        const event = new CustomEvent('typingComplete');
-        document.dispatchEvent(event);
-    },
-    
+
     /**
      * Configura efectos de movimiento en hero visual
      */
     setupHeroVisualEffects() {
-        const heroVisual = document.querySelector(APP.selectors.heroVisual);
+        const heroVisual = document.querySelector(APP_CONFIG.selectors.heroVisual);
         if (!heroVisual) return;
-        
-        // Usar throttle para mejor rendimiento
-        const handleMouseMove = Utils.throttle((e) => {
-            this.handleHeroMouseMove(e, heroVisual);
-        }, 16); // ~60fps
-        
+
+        const handleMouseMove = Utils.throttle(
+            (e) => this.handleHeroMouseMove(e, heroVisual),
+            APP_CONFIG.animations.throttleLimit
+        );
+
         heroVisual.addEventListener('mousemove', handleMouseMove);
+        heroVisual.addEventListener('mouseleave', () => this.resetHeroTransform(heroVisual));
         
-        heroVisual.addEventListener('mouseleave', () => {
-            this.resetHeroTransform(heroVisual);
-        });
-        
-        // Soporte para dispositivos táctiles
+        // Soporte táctil
         heroVisual.addEventListener('touchmove', (e) => {
             e.preventDefault();
             handleMouseMove(e.touches[0]);
         });
         
-        heroVisual.addEventListener('touchend', () => {
-            this.resetHeroTransform(heroVisual);
-        });
+        heroVisual.addEventListener('touchend', () => this.resetHeroTransform(heroVisual));
     },
-    
+
     /**
-     * Maneja movimiento del mouse en hero visual
+     * Maneja movimiento del mouse
+     * @param {Event} event - Evento del mouse
+     * @param {Element} element - Elemento hero
      */
     handleHeroMouseMove(event, element) {
         const rect = element.getBoundingClientRect();
@@ -321,272 +543,180 @@ const AnimationManager = {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const angleX = (y - centerY) / APP.config.mouseRotateIntensity;
-        const angleY = (centerX - x) / APP.config.mouseRotateIntensity;
+        const angleX = (y - centerY) / APP_CONFIG.animations.mouseRotateIntensity;
+        const angleY = (centerX - x) / APP_CONFIG.animations.mouseRotateIntensity;
         
-        // Limitar ángulos para evitar rotaciones extremas
         const limitedAngleX = Math.max(-15, Math.min(15, angleX));
         const limitedAngleY = Math.max(-15, Math.min(15, angleY));
         
-        element.style.transform = `perspective(${APP.config.perspectiveValue}px) rotateX(${limitedAngleX}deg) rotateY(${limitedAngleY}deg)`;
+        element.style.transform = `perspective(${APP_CONFIG.animations.perspectiveValue}px) rotateX(${limitedAngleX}deg) rotateY(${limitedAngleY}deg)`;
         element.style.transition = 'transform 0.1s ease';
     },
-    
+
     /**
-     * Resetea la transformación del hero visual
+     * Resetea transformación
+     * @param {Element} element - Elemento a resetear
      */
     resetHeroTransform(element) {
-        element.style.transform = `perspective(${APP.config.perspectiveValue}px) rotateX(0) rotateY(0)`;
+        element.style.transform = `perspective(${APP_CONFIG.animations.perspectiveValue}px) rotateX(0) rotateY(0)`;
         element.style.transition = 'transform 0.5s ease';
+    },
+
+    /**
+     * Limpia el módulo
+     */
+    destroy() {
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
     }
 };
 
-// ===== MODULO DE ANALÍTICAS =====
-const Analytics = {
-    /**
-     * Inicializa tracking de eventos
-     */
-    init() {
-        this.trackThemeChanges();
-        this.trackAnimations();
-    },
-    
-    /**
-     * Trackea cambios de tema
-     */
-    trackThemeChanges() {
-        document.addEventListener('themeChanged', (e) => {
-            console.log(`Theme changed to: ${e.detail.theme}`);
-            // Aquí puedes enviar a Google Analytics, etc
-            if (window.gtag) {
-                gtag('event', 'theme_change', {
-                    'theme': e.detail.theme
-                });
-            }
-        });
-    },
-    
-    /**
-     * Trackea animaciones completadas
-     */
-    trackAnimations() {
-        document.addEventListener('typingComplete', () => {
-            console.log('Typing animation completed');
-        });
-    }
-};
+// ============================================================================
+// MÓDULO DE SYSTEM STATUS
+// ============================================================================
 
-// ===== MODULO DE RENDIMIENTO =====
-const PerformanceOptimizer = {
-    /**
-     * Optimiza para reducción de movimiento
-     */
-    init() {
-        this.checkReducedMotion();
-        this.optimizeAnimations();
-    },
-    
-    /**
-     * Verifica preferencia de reducción de movimiento
-     */
-    checkReducedMotion() {
-        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        
-        if (mediaQuery.matches) {
-            this.disableAnimations();
-        }
-        
-        mediaQuery.addEventListener('change', (e) => {
-            if (e.matches) {
-                this.disableAnimations();
-            } else {
-                this.enableAnimations();
-            }
-        });
-    },
-    
-    /**
-     * Desactiva animaciones
-     */
-    disableAnimations() {
-        document.documentElement.style.setProperty('--transition-base', '0s');
-        document.documentElement.style.setProperty('--transition-smooth', '0s');
-        Utils.cleanupAnimations();
-    },
-    
-    /**
-     * Activa animaciones
-     */
-    enableAnimations() {
-        document.documentElement.style.setProperty('--transition-base', '0.2s ease');
-        document.documentElement.style.setProperty('--transition-smooth', '0.3s ease');
-    },
-    
-    /**
-     * Optimizaciones generales de animaciones
-     */
-    optimizeAnimations() {
-        // Usar will-change para elementos animados
-        const heroVisual = document.querySelector(APP.selectors.heroVisual);
-        if (heroVisual) {
-            heroVisual.style.willChange = 'transform';
-        }
-        
-        // Limpiar will-change después de la animación
-        setTimeout(() => {
-            if (heroVisual) {
-                heroVisual.style.willChange = 'auto';
-            }
-        }, 1000);
-    }
-};
-
-// ===== INICIALIZACIÓN PRINCIPAL =====
-document.addEventListener('DOMContentLoaded', () => {
-    // Limpiar animaciones previas
-    Utils.cleanupAnimations();
-    
-    // Inicializar módulos
-    ThemeManager.init();
-    AnimationManager.init();
-    Analytics.init();
-    PerformanceOptimizer.init();
-    
-    console.log('Aplicación inicializada correctamente');
-});
-
-// ===== CLEANUP EN DESCARGA =====
-window.addEventListener('beforeunload', () => {
-    Utils.cleanupAnimations();
-});
-
-// ===== SOPORTE PARA NAVEGACIÓN CON HISTORY =====
-window.addEventListener('popstate', () => {
-    Utils.cleanupAnimations();
-    AnimationManager.init();
-});
-
-// Exportar para uso en otros módulos (si es necesario)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { APP, ThemeManager, AnimationManager, Analytics, PerformanceOptimizer };
-}
-
-// ===== SYSTEM STATUS MODULE =====
 const SystemStatus = {
-    element: null,
-    statusInterval: null,
+    /** @type {Object} Referencias DOM */
+    elements: {},
     
+    /** @type {number|null} Intervalo de actualización */
+    statusInterval: null,
+
+    /**
+     * Inicializa el módulo
+     */
     init() {
-        this.element = document.querySelector('.system-status');
-        if (!this.element) return;
+        this.cacheElements();
+        if (!this.elements.container) return;
         
         this.setupStatusUpdates();
         this.setupEventListeners();
+        AppState.registerModule('systemStatus', this);
     },
-    
+
+    /**
+     * Cachea elementos DOM
+     */
+    cacheElements() {
+        this.elements = {
+            container: document.querySelector(APP_CONFIG.selectors.systemStatus),
+            statusText: document.querySelector(`${APP_CONFIG.selectors.systemStatus} ${APP_CONFIG.selectors.statusText}`)
+        };
+    },
+
+    /**
+     * Configura actualizaciones periódicas
+     */
     setupStatusUpdates() {
-        // Simular cambios de estado cada 30 segundos
-        this.statusInterval = setInterval(() => {
-            this.toggleStatus();
-        }, 30000);
+        this.statusInterval = setInterval(() => this.toggleStatus(), 30000);
     },
-    
+
+    /**
+     * Configura event listeners
+     */
     setupEventListeners() {
-        if (!this.element) return;
+        if (!this.elements.container) return;
         
-        // Click para cambiar estado manualmente
-        this.element.addEventListener('click', () => {
-            this.toggleStatus();
-        });
-        
-        // Mostrar información adicional al hover
-        this.element.addEventListener('mouseenter', () => {
-            this.showTooltip();
-        });
-        
-        this.element.addEventListener('mouseleave', () => {
-            this.hideTooltip();
-        });
+        this.elements.container.addEventListener('click', () => this.toggleStatus());
+        this.elements.container.addEventListener('mouseenter', () => this.showTooltip());
+        this.elements.container.addEventListener('mouseleave', () => this.hideTooltip());
     },
-    
+
+    /**
+     * Cambia estado online/offline
+     */
     toggleStatus() {
-        if (!this.element) return;
-        
-        const isOnline = this.element.classList.contains('offline');
-        const statusText = this.element.querySelector('.status-text');
+        if (!this.elements.container || !this.elements.statusText) return;
+
+        const isOnline = this.elements.container.classList.contains(APP_CONFIG.classes.offline);
         
         if (isOnline) {
-            this.element.classList.remove('offline');
-            statusText.textContent = 'system_online';
+            this.elements.container.classList.remove(APP_CONFIG.classes.offline);
+            this.elements.statusText.textContent = APP_CONFIG.defaults.systemOnline;
         } else {
-            this.element.classList.add('offline');
-            statusText.textContent = 'system_offline';
+            this.elements.container.classList.add(APP_CONFIG.classes.offline);
+            this.elements.statusText.textContent = APP_CONFIG.defaults.systemOffline;
         }
+
+        this.animateClick();
+    },
+
+    /**
+     * Anima el click
+     */
+    animateClick() {
+        if (!this.elements.container) return;
         
-        // Animar cambio
-        this.element.style.transform = 'scale(1.05)';
+        this.elements.container.style.transform = 'scale(1.05)';
         setTimeout(() => {
-            if (this.element) {
-                this.element.style.transform = '';
+            if (this.elements.container) {
+                this.elements.container.style.transform = '';
             }
         }, 200);
     },
-    
+
+    /**
+     * Muestra tooltip
+     */
     showTooltip() {
-        // Crear tooltip si no existe
-        if (!document.querySelector('.status-tooltip')) {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'status-tooltip';
-            tooltip.textContent = 'Uptime: 99.9% | Latencia: 23ms';
-            
-            // Estilos del tooltip
-            tooltip.style.cssText = `
-                position: fixed;
-                bottom: 60px;
-                right: 20px;
-                background: var(--bg-elevated);
-                color: var(--text-primary);
-                font-family: var(--font-mono);
-                font-size: 0.7rem;
-                padding: 0.5rem 1rem;
-                border-radius: var(--border-radius-sm);
-                border: 1px solid var(--border-color);
-                z-index: calc(var(--z-fixed) - 1);
-                backdrop-filter: blur(4px);
-                opacity: 0;
-                transform: translateY(10px);
-                transition: var(--transition-base);
-                pointer-events: none;
-            `;
-            
-            document.body.appendChild(tooltip);
-            
-            // Forzar reflow para animación
-            tooltip.offsetHeight;
-            tooltip.style.opacity = '1';
-            tooltip.style.transform = 'translateY(0)';
-        }
+        if (document.querySelector(`.${APP_CONFIG.classes.statusTooltip}`)) return;
+
+        const tooltip = document.createElement('div');
+        tooltip.className = APP_CONFIG.classes.statusTooltip;
+        tooltip.textContent = APP_CONFIG.defaults.statusTooltip;
+        
+        Object.assign(tooltip.style, {
+            position: 'fixed',
+            bottom: '60px',
+            right: '20px',
+            background: 'var(--bg-elevated)',
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            padding: '0.5rem 1rem',
+            borderRadius: 'var(--border-radius-sm)',
+            border: '1px solid var(--border-color)',
+            zIndex: 'calc(var(--z-fixed) - 1)',
+            backdropFilter: 'blur(4px)',
+            opacity: '0',
+            transform: 'translateY(10px)',
+            transition: 'var(--transition-base)',
+            pointerEvents: 'none'
+        });
+
+        document.body.appendChild(tooltip);
+        
+        // Forzar reflow y animar
+        tooltip.offsetHeight;
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateY(0)';
     },
-    
+
+    /**
+     * Oculta tooltip
+     */
     hideTooltip() {
-        const tooltip = document.querySelector('.status-tooltip');
+        const tooltip = document.querySelector(`.${APP_CONFIG.classes.statusTooltip}`);
         if (tooltip) {
             tooltip.style.opacity = '0';
             tooltip.style.transform = 'translateY(10px)';
             setTimeout(() => tooltip.remove(), 300);
         }
     },
-    
-    // Actualizar texto dinámicamente
+
+    /**
+     * Actualiza texto del estado
+     * @param {string} text - Nuevo texto
+     */
     setStatus(text) {
-        if (!this.element) return;
-        const statusText = this.element.querySelector('.status-text');
-        if (statusText) {
-            statusText.textContent = text;
+        if (this.elements.statusText) {
+            this.elements.statusText.textContent = text;
         }
     },
-    
-    // Limpiar intervalo
+
+    /**
+     * Limpia el módulo
+     */
     destroy() {
         if (this.statusInterval) {
             clearInterval(this.statusInterval);
@@ -595,360 +725,601 @@ const SystemStatus = {
     }
 };
 
-// ===== WHATSAPP BUTTON MODULE =====
-const WhatsAppButton = {
+// ============================================================================
+// MÓDULO DE WHATSAPP
+// ============================================================================
+
+const WhatsAppManager = {
+    /** @type {Object} Referencias DOM */
+    elements: {},
+
+    /**
+     * Inicializa el módulo
+     */
     init() {
-        this.button = document.querySelector('.whatsapp-button');
-        if (!this.button) return;
+        this.cacheElements();
+        if (!this.elements.button) return;
         
         this.setupEventListeners();
         this.checkMobile();
+        AppState.registerModule('whatsapp', this);
     },
-    
+
+    /**
+     * Cachea elementos DOM
+     */
+    cacheElements() {
+        this.elements = {
+            button: document.querySelector(APP_CONFIG.selectors.whatsappButton),
+            tooltip: document.querySelector(`${APP_CONFIG.selectors.whatsappButton} ${APP_CONFIG.selectors.whatsappTooltip}`)
+        };
+    },
+
+    /**
+     * Configura event listeners
+     */
     setupEventListeners() {
-        // Tracking de clics
-        this.button.addEventListener('click', (e) => {
-            this.trackClick();
-        });
-        
-        // Mostrar mensaje personalizado en hover (opcional)
-        this.button.addEventListener('mouseenter', () => {
-            this.updateTooltipMessage();
-        });
+        this.elements.button.addEventListener('click', () => this.trackClick());
+        this.elements.button.addEventListener('mouseenter', () => this.updateTooltipMessage());
     },
-    
+
+    /**
+     * Verifica si es móvil
+     */
     checkMobile() {
-        // Detectar si es móvil para ajustar comportamiento
-        if (window.innerWidth <= 768) {
-            this.button.removeAttribute('data-tooltip');
+        if (Utils.isMobile()) {
+            this.elements.button.removeAttribute('data-tooltip');
         }
     },
-    
+
+    /**
+     * Trackea clicks
+     */
     trackClick() {
-        // Aquí puedes agregar tracking con Google Analytics
-        console.log('WhatsApp button clicked - Número: 3234737757');
+        console.log(`WhatsApp button clicked - Número: ${APP_CONFIG.contacts.whatsapp}`);
         
-        // Si quieres animación al hacer click
-        this.button.style.transform = 'scale(0.9)';
+        this.elements.button.style.transform = 'scale(0.9)';
         setTimeout(() => {
-            if (this.button) {
-                this.button.style.transform = '';
+            if (this.elements.button) {
+                this.elements.button.style.transform = '';
             }
         }, 200);
     },
-    
+
+    /**
+     * Actualiza mensaje del tooltip según hora
+     */
     updateTooltipMessage() {
-        const tooltip = this.button.querySelector('.whatsapp-tooltip');
-        if (tooltip) {
-            // Puedes cambiar el mensaje según el contexto
-            const hours = new Date().getHours();
-            let message = 'Contáctame';
-            
-            if (hours >= 9 && hours <= 18) {
-                message = '¡Disponible ahora!';
-            } else {
-                message = 'Deja tu mensaje';
-            }
-            
-            tooltip.textContent = message;
+        if (!this.elements.tooltip) return;
+
+        const hour = Utils.getCurrentHour();
+        let message = APP_CONFIG.defaults.whatsappMessage;
+        
+        if (hour >= 9 && hour <= 18) {
+            message = APP_CONFIG.defaults.whatsappAvailable;
+        } else {
+            message = APP_CONFIG.defaults.whatsappOffline;
         }
+        
+        this.elements.tooltip.textContent = message;
     },
-    
-    // Mostrar badge de no leídos (opcional)
+
+    /**
+     * Muestra badge de no leídos
+     * @param {number} count - Número de mensajes
+     */
     setUnreadCount(count) {
-        let badge = this.button.querySelector('.badge');
+        let badge = this.elements.button.querySelector(`.${APP_CONFIG.classes.badge}`);
         
         if (count > 0) {
             if (!badge) {
                 badge = document.createElement('span');
-                badge.className = 'badge';
-                this.button.appendChild(badge);
+                badge.className = APP_CONFIG.classes.badge;
+                this.elements.button.appendChild(badge);
             }
             badge.textContent = count > 9 ? '9+' : count;
         } else if (badge) {
             badge.remove();
         }
+    },
+
+    /**
+     * Limpia el módulo
+     */
+    destroy() {
+        this.elements.button?.removeEventListener('click', this.trackClick);
+        this.elements.button?.removeEventListener('mouseenter', this.updateTooltipMessage);
     }
 };
 
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    WhatsAppButton.init();
-    
-    // Ejemplo: simular mensajes no leídos después de 5 segundos
-    setTimeout(() => {
-        WhatsAppButton.setUnreadCount(2);
-    }, 5000);
-});
+// ============================================================================
+// MÓDULO DE AUDIO
+// ============================================================================
 
-// ===== AUDIO CONTROL MODULE =====
 const AudioManager = {
-    audio: null,
-    button: null,
-    icon: null,
-    isPlaying: false,
-    isMuted: false,
+    /** @type {Object} Referencias DOM */
+    elements: {},
     
-    // Configuración
-    config: {
-        storageKey: 'audio_preference',
-        defaultVolume: 0.5,
-        fadeDuration: 2000,
-        crossfadeEnabled: true
+    /** @type {Object} Estado del audio */
+    state: {
+        isPlaying: false,
+        isMuted: false,
+        currentVolume: APP_CONFIG.animations.defaultVolume
     },
-    
+
+    /**
+     * Inicializa el módulo
+     */
     init() {
-        this.audio = document.getElementById('bgAudio');
-        this.button = document.getElementById('audioControl');
+        this.cacheElements();
+        if (!this.elements.audio || !this.elements.button) return;
         
-        if (!this.audio || !this.button) return;
-        
-        this.icon = this.button.querySelector('i');
         this.loadPreference();
         this.setupEventListeners();
         this.setupAudioEvents();
+        AppState.registerModule('audio', this);
     },
-    
+
+    /**
+     * Cachea elementos DOM
+     */
+    cacheElements() {
+        this.elements = {
+            audio: document.getElementById('bgAudio'),
+            button: document.getElementById('audioControl'),
+            icon: document.querySelector(`${APP_CONFIG.selectors.audioControl} ${APP_CONFIG.selectors.audioIcon}`)
+        };
+    },
+
+    /**
+     * Configura event listeners
+     */
     setupEventListeners() {
-        // Click en el botón
-        this.button.addEventListener('click', () => this.toggleAudio());
-        
-        // Guardar preferencia al cerrar
+        this.elements.button.addEventListener('click', () => this.toggle());
         window.addEventListener('beforeunload', () => this.savePreference());
-        
-        // Manejar visibilidad de página
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
     },
-    
+
+    /**
+     * Configura eventos de audio
+     */
     setupAudioEvents() {
-        // Error al cargar audio
-        this.audio.addEventListener('error', (e) => {
-            console.error('Error cargando audio:', e);
-            this.button.classList.add('error');
-            this.button.setAttribute('aria-label', 'Error al cargar audio');
-        });
-        
-        // Audio listo para reproducir
-        this.audio.addEventListener('canplay', () => {
-            console.log('Audio listo para reproducir');
-        });
-        
-        // Reproducción automática bloqueada
-        this.audio.addEventListener('play', () => {
-            console.log('Audio reproduciendo');
-        });
-        
-        this.audio.addEventListener('pause', () => {
-            console.log('Audio pausado');
-        });
+        this.elements.audio.addEventListener('error', (e) => this.handleError(e));
+        this.elements.audio.addEventListener('canplay', () => this.handleCanPlay());
+        this.elements.audio.addEventListener('play', () => this.handlePlay());
+        this.elements.audio.addEventListener('pause', () => this.handlePause());
     },
-    
-    toggleAudio() {
-        if (this.isMuted) {
-            this.unmuteAudio();
-        } else if (this.isPlaying) {
-            this.pauseAudio();
+
+    /**
+     * Maneja toggle de audio
+     */
+    toggle() {
+        if (this.state.isMuted) {
+            this.unmute();
+        } else if (this.state.isPlaying) {
+            this.pause();
         } else {
-            this.playAudio();
+            this.play();
         }
         
         this.updateButtonState();
     },
-    
-    async playAudio() {
+
+    /**
+     * Reproduce audio
+     */
+    async play() {
         try {
-            // Configurar volumen
-            this.audio.volume = this.config.defaultVolume;
+            this.elements.audio.volume = this.state.currentVolume;
+            await this.elements.audio.play();
             
-            // Intentar reproducir
-            await this.audio.play();
+            this.state.isPlaying = true;
+            this.state.isMuted = false;
             
-            this.isPlaying = true;
-            this.isMuted = false;
-            
-            // Disparar evento personalizado
-            this.dispatchEvent('audioStarted');
-            
+            Utils.dispatchEvent('audioStateChange', { 
+                state: 'audioStarted',
+                ...this.state 
+            });
         } catch (error) {
             console.warn('Reproducción automática bloqueada:', error);
             this.handlePlaybackError();
         }
     },
-    
-    pauseAudio() {
-        this.audio.pause();
-        this.isPlaying = false;
-        this.isMuted = false;
-        this.dispatchEvent('audioPaused');
+
+    /**
+     * Pausa audio
+     */
+    pause() {
+        this.elements.audio.pause();
+        this.state.isPlaying = false;
+        this.state.isMuted = false;
+        Utils.dispatchEvent('audioStateChange', { state: 'audioPaused', ...this.state });
     },
-    
-    muteAudio() {
-        this.audio.pause();
-        this.isPlaying = false;
-        this.isMuted = true;
-        this.dispatchEvent('audioMuted');
+
+    /**
+     * Silencia audio
+     */
+    mute() {
+        this.elements.audio.pause();
+        this.state.isPlaying = false;
+        this.state.isMuted = true;
+        Utils.dispatchEvent('audioStateChange', { state: 'audioMuted', ...this.state });
     },
-    
-    unmuteAudio() {
-        this.playAudio();
+
+    /**
+     * Activa audio
+     */
+    unmute() {
+        this.play();
     },
-    
+
+    /**
+     * Maneja error de reproducción
+     */
     handlePlaybackError() {
-        // Mostrar indicador de reproducción bloqueada
-        this.button.classList.add('blocked');
+        this.elements.button.classList.add(APP_CONFIG.classes.blocked);
         
-        // Opción para activar con interacción del usuario
         const enableAudio = () => {
-            this.playAudio();
-            this.button.classList.remove('blocked');
+            this.play();
+            this.elements.button.classList.remove(APP_CONFIG.classes.blocked);
             document.removeEventListener('click', enableAudio);
         };
         
         document.addEventListener('click', enableAudio, { once: true });
     },
-    
+
+    /**
+     * Maneja error de audio
+     * @param {Event} e - Evento de error
+     */
+    handleError(e) {
+        console.error('Error cargando audio:', e);
+        this.elements.button.classList.add(APP_CONFIG.classes.error);
+        this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioError);
+    },
+
+    /**
+     * Maneja evento canplay
+     */
+    handleCanPlay() {
+        console.log('Audio listo para reproducir');
+    },
+
+    /**
+     * Maneja evento play
+     */
+    handlePlay() {
+        console.log('Audio reproduciendo');
+    },
+
+    /**
+     * Maneja evento pause
+     */
+    handlePause() {
+        console.log('Audio pausado');
+    },
+
+    /**
+     * Actualiza estado del botón
+     */
     updateButtonState() {
-        // Remover clases existentes
-        this.button.classList.remove('playing', 'muted', 'blocked');
+        this.elements.button.classList.remove(
+            APP_CONFIG.classes.playing,
+            APP_CONFIG.classes.muted,
+            APP_CONFIG.classes.blocked
+        );
         
-        if (this.isMuted) {
-            this.button.classList.add('muted');
-            this.button.setAttribute('aria-label', 'Activar música');
-        } else if (this.isPlaying) {
-            this.button.classList.add('playing');
-            this.button.setAttribute('aria-label', 'Pausar música');
+        if (this.state.isMuted) {
+            this.elements.button.classList.add(APP_CONFIG.classes.muted);
+            this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioActivate);
+        } else if (this.state.isPlaying) {
+            this.elements.button.classList.add(APP_CONFIG.classes.playing);
+            this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioPause);
         } else {
-            this.button.setAttribute('aria-label', 'Reproducir música');
+            this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioPlay);
         }
     },
-    
+
+    /**
+     * Carga preferencia guardada
+     */
     loadPreference() {
-        try {
-            const saved = localStorage.getItem(this.config.storageKey);
-            if (saved) {
-                const pref = JSON.parse(saved);
-                
-                // Restaurar preferencia (pero no reproducir automáticamente)
-                if (pref.wasPlaying) {
-                    // Marcamos para intentar reproducir después de interacción
-                    document.addEventListener('click', () => {
-                        this.playAudio();
-                    }, { once: true });
-                }
-            }
-        } catch (e) {
-            console.warn('Error cargando preferencia:', e);
+        const saved = Utils.safeStorageGet(APP_CONFIG.storage.audioPreference);
+        
+        if (saved?.wasPlaying) {
+            document.addEventListener('click', () => this.play(), { once: true });
         }
     },
-    
+
+    /**
+     * Guarda preferencia
+     */
     savePreference() {
-        try {
-            const preference = {
-                wasPlaying: this.isPlaying,
-                timestamp: Date.now()
-            };
-            localStorage.setItem(this.config.storageKey, JSON.stringify(preference));
-        } catch (e) {
-            console.warn('Error guardando preferencia:', e);
-        }
-    },
-    
-    handleVisibilityChange() {
-        if (document.hidden && this.isPlaying) {
-            // Pausar cuando la pestaña no está visible
-            this.audio.volume = 0.1; // Bajar volumen en lugar de pausar
-        } else if (!document.hidden && this.isPlaying) {
-            // Restaurar volumen cuando vuelve
-            this.audio.volume = this.config.defaultVolume;
-        }
-    },
-    
-    dispatchEvent(eventName) {
-        const event = new CustomEvent('audioStateChange', { 
-            detail: { 
-                state: eventName,
-                isPlaying: this.isPlaying,
-                isMuted: this.isMuted
-            } 
+        Utils.safeStorageSet(APP_CONFIG.storage.audioPreference, {
+            wasPlaying: this.state.isPlaying,
+            timestamp: Date.now()
         });
-        document.dispatchEvent(event);
     },
-    
-    // Método para cambiar la pista de audio
+
+    /**
+     * Maneja cambio de visibilidad
+     */
+    handleVisibilityChange() {
+        if (document.hidden && this.state.isPlaying) {
+            this.elements.audio.volume = 0.1;
+        } else if (!document.hidden && this.state.isPlaying) {
+            this.elements.audio.volume = this.state.currentVolume;
+        }
+    },
+
+    /**
+     * Cambia pista de audio
+     * @param {string} src - Nueva fuente de audio
+     */
     changeTrack(src) {
         if (!src) return;
         
-        const wasPlaying = this.isPlaying;
+        const wasPlaying = this.state.isPlaying;
         
-        if (this.config.crossfadeEnabled) {
+        if (APP_CONFIG.animations.crossfadeEnabled) {
             this.crossfadeTo(src);
         } else {
-            this.audio.src = src;
-            this.audio.load();
-            if (wasPlaying) {
-                this.playAudio();
-            }
+            this.elements.audio.src = src;
+            this.elements.audio.load();
+            if (wasPlaying) this.play();
         }
     },
-    
+
+    /**
+     * Crossfade entre pistas
+     * @param {string} src - Nueva fuente
+     */
     crossfadeTo(src) {
-        const currentVolume = this.audio.volume;
+        const currentVolume = this.elements.audio.volume;
+        
         const fadeOut = setInterval(() => {
-            if (this.audio.volume > 0.05) {
-                this.audio.volume -= 0.05;
+            if (this.elements.audio.volume > 0.05) {
+                this.elements.audio.volume -= 0.05;
             } else {
                 clearInterval(fadeOut);
-                this.audio.src = src;
-                this.audio.load();
-                this.audio.volume = 0;
-                this.playAudio();
+                this.elements.audio.src = src;
+                this.elements.audio.load();
+                this.elements.audio.volume = 0;
+                this.play();
                 
-                // Fade in
                 const fadeIn = setInterval(() => {
-                    if (this.audio.volume < currentVolume) {
-                        this.audio.volume += 0.05;
+                    if (this.elements.audio.volume < currentVolume) {
+                        this.elements.audio.volume += 0.05;
                     } else {
                         clearInterval(fadeIn);
                     }
                 }, 100);
             }
         }, 100);
+    },
+
+    /**
+     * Limpia el módulo
+     */
+    destroy() {
+        this.savePreference();
+        this.elements.button?.removeEventListener('click', this.toggle);
+        window.removeEventListener('beforeunload', this.savePreference);
+        document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     }
 };
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    AudioManager.init();
-});
+// ============================================================================
+// MÓDULO DE ANALÍTICAS
+// ============================================================================
 
-// ===== INTEGRACIÓN CON EL TEMA =====
-document.addEventListener('themeChanged', (e) => {
-    // Actualizar colores si es necesario
-    const audioControl = document.getElementById('audioControl');
-    if (audioControl) {
-        audioControl.style.transition = 'all 0.3s ease';
+const AnalyticsManager = {
+    /**
+     * Inicializa el módulo
+     */
+    init() {
+        this.setupListeners();
+        AppState.registerModule('analytics', this);
+    },
+
+    /**
+     * Configura listeners
+     */
+    setupListeners() {
+        document.addEventListener('themeChanged', (e) => this.trackThemeChange(e));
+        document.addEventListener('typingComplete', () => this.trackTypingComplete());
+        document.addEventListener('audioStateChange', (e) => this.trackAudioState(e));
+    },
+
+    /**
+     * Trackea cambio de tema
+     * @param {CustomEvent} e - Evento
+     */
+    trackThemeChange(e) {
+        console.log(`Theme changed to: ${e.detail.theme}`);
+        
+        if (window.gtag) {
+            window.gtag('event', 'theme_change', { theme: e.detail.theme });
+        }
+    },
+
+    /**
+     * Trackea typing completado
+     */
+    trackTypingComplete() {
+        console.log('Typing animation completed');
+    },
+
+    /**
+     * Trackea estado de audio
+     * @param {CustomEvent} e - Evento
+     */
+    trackAudioState(e) {
+        if (window.gtag) {
+            window.gtag('event', 'audio_control', {
+                action: e.detail.state,
+                playing: e.detail.isPlaying
+            });
+        }
+    },
+
+    /**
+     * Limpia el módulo
+     */
+    destroy() {
+        document.removeEventListener('themeChanged', this.trackThemeChange);
+        document.removeEventListener('typingComplete', this.trackTypingComplete);
+        document.removeEventListener('audioStateChange', this.trackAudioState);
     }
-});
+};
 
-// ===== INTEGRACIÓN CON ANALÍTICAS =====
-document.addEventListener('audioStateChange', (e) => {
-    // Aquí puedes enviar eventos a Google Analytics
-    if (window.gtag) {
-        gtag('event', 'audio_control', {
-            'action': e.detail.state,
-            'playing': e.detail.isPlaying
+// ============================================================================
+// MÓDULO DE OPTIMIZACIÓN DE RENDIMIENTO
+// ============================================================================
+
+const PerformanceOptimizer = {
+    /** @type {MediaQueryList} Media query para reduced motion */
+    motionQuery: null,
+
+    /**
+     * Inicializa el módulo
+     */
+    init() {
+        this.checkReducedMotion();
+        this.optimizeAnimations();
+        AppState.registerModule('performance', this);
+    },
+
+    /**
+     * Verifica preferencia de reducción de movimiento
+     */
+    checkReducedMotion() {
+        this.motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        if (this.motionQuery.matches) {
+            this.disableAnimations();
+        }
+        
+        this.motionQuery.addEventListener('change', (e) => {
+            if (e.matches) {
+                this.disableAnimations();
+            } else {
+                this.enableAnimations();
+            }
         });
+    },
+
+    /**
+     * Desactiva animaciones
+     */
+    disableAnimations() {
+        document.documentElement.style.setProperty('--transition-base', '0s');
+        document.documentElement.style.setProperty('--transition-smooth', '0s');
+        Utils.cleanupAnimations(AppState.get());
+    },
+
+    /**
+     * Activa animaciones
+     */
+    enableAnimations() {
+        document.documentElement.style.setProperty('--transition-base', '0.2s ease');
+        document.documentElement.style.setProperty('--transition-smooth', '0.3s ease');
+    },
+
+    /**
+     * Optimiza animaciones
+     */
+    optimizeAnimations() {
+        const heroVisual = document.querySelector(APP_CONFIG.selectors.heroVisual);
+        if (heroVisual) {
+            heroVisual.style.willChange = 'transform';
+            
+            setTimeout(() => {
+                heroVisual.style.willChange = 'auto';
+            }, 1000);
+        }
+    },
+
+    /**
+     * Limpia el módulo
+     */
+    destroy() {
+        this.motionQuery?.removeEventListener('change', this.checkReducedMotion);
     }
+};
+
+// ============================================================================
+// INICIALIZADOR PRINCIPAL
+// ============================================================================
+
+const App = {
+    /**
+     * Inicializa la aplicación
+     */
+    init() {
+        console.log('🚀 Inicializando aplicación...');
+        
+        // Limpiar estado previo
+        AppState.cleanup();
+        
+        // Inicializar módulos
+        ThemeManager.init();
+        AnimationManager.init();
+        SystemStatus.init();
+        WhatsAppManager.init();
+        AudioManager.init();
+        AnalyticsManager.init();
+        PerformanceOptimizer.init();
+        
+        console.log('✅ Aplicación inicializada correctamente');
+    },
+
+    /**
+     * Reinicia la aplicación
+     */
+    restart() {
+        this.destroy();
+        this.init();
+    },
+
+    /**
+     * Limpia la aplicación
+     */
+    destroy() {
+        console.log('🧹 Limpiando aplicación...');
+        AppState.cleanup();
+        console.log('✅ Aplicación limpiada');
+    }
+};
+
+// ============================================================================
+// INICIALIZACIÓN
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', () => App.init());
+
+window.addEventListener('beforeunload', () => App.destroy());
+
+window.addEventListener('popstate', () => {
+    App.destroy();
+    App.init();
 });
 
-// ===== SYSTEM STATUS MODULE ===== //
+// ============================================================================
+// EXPORTS (para uso en módulos)
+// ============================================================================
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    SystemStatus.init();
-});
-
-// Limpiar al descargar la página
-window.addEventListener('beforeunload', () => {
-    SystemStatus.destroy();
-});
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        App,
+        AppState,
+        APP_CONFIG,
+        ThemeManager,
+        AnimationManager,
+        SystemStatus,
+        WhatsAppManager,
+        AudioManager,
+        AnalyticsManager,
+        PerformanceOptimizer
+    };
+}
