@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="Aley Cabrera D" content="Aley Cabrera D - Engineering Cybersecurity IT/OT System Digital">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aley Cabrera · IT/OT Engineer</title>
+    <meta name="description" content="Ingeniero mecatronico IT/OT convergencia de sistemas digitales e industriales, ciberseguridad, redes, automatización y desarrollo de soluciones tecnológicas.">
+    <meta name="author" content="Inesam ArkCyber & Aley Cabrera D">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Aley Cabrera, IT/OT Engineer, Ciberseguridad, Redes Industriales, Automatización, Desarrollo de Soluciones, Desarrollo de software seguro, Ingeniería Mecatrónica, Convergencia IT/OT">
+    <meta property="og:title" content="Aley Cabrera · IT/OT Engineer">
+    <meta property="og:description" content="Ingeniero mecatronico IT/OT convergencia de sistemas digitales e industriales, ciberseguridad, redes, automatización y desarrollo de soluciones tecnológicas.">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:image" content="./assets/images/profile.jpg">
+    <meta property="og:url" content="https://www.alejcabrera.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aley Cabrera">
+    <meta property="og:title" content="Aley Cabrera · IT/OT Engineer">
+    <meta property="og:description"
+        content="Ingeniero mecatronico IT/OT convergencia de sistemas digitales e industriales, ciberseguridad, redes, automatización y desarrollo de soluciones tecnológicas.">
+    <meta property="og:updated_time" content="2025-01-01T12:00:00Z">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="pt_BR">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta property="og:locale:alternate" content="it_IT">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="ar_SA">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.alejcabrera.com">
+    <meta property="twitter:title" content="Aley Cabrera · IT/OT Engineer">
+    <meta property="twitter:description"
+        content="Ingeniero mecatronico IT/OT convergencia de sistemas digitales e industriales, ciberseguridad, redes, automatización y desarrollo de soluciones tecnológicas.">
+    <meta property="twitter:image" content="https://www.alejcabrera.com/images/og-image.jpg">
+    <meta property="twitter:site" content="@AleyCabrera">
+    <meta property="twitter:creator" content="@AleyCabrera">
+    
+    <link rel="canonical" href="https://www.alejcabrera.com">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/src/assets/iconos/aleycabrera.ico" type="image/x-icon">
+
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,26 +56,66 @@
         rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Source+Code+Pro:wght@400;600&display=swap"
-            rel="stylesheet">
+        rel="stylesheet">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Estilos -->
     <link rel="stylesheet" href="./styles/main.css">
+
+    <style>
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+
+    <title>Aley Cabrera · IT/OT Engineer</title>
+
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+                {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "Aley Cabrera IT/OT Software",
+                "description": "Ingeniero mecatronico IT/OT convergencia de sistemas digitales e industriales, ciberseguridad, redes, automatización y desarrollo de soluciones tecnológicas.",
+                "url": "https://www.alejcabrera.com",
+                "image": "https://www.alejcabrera.com/images/og-image.jpg",
+                "operatingSystem": "Web",
+                "applicationCategory": "BusinessApplication",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+                }
+        </script>
+    
     <!---Scripts-->
     <script src="./js/main.js" type="module" defer></script>
+    <script src="./js/logo.js" type="module" defer></script>
+
 </head>
 
 <body class="dark-theme">
-    <!-- Audio Control Component -->
+    <!-- ===== COMPONENTES FLOTANTES ===== -->
+
+    <!-- Audio Control -->
     <audio id="bgAudio" loop preload="metadata" crossorigin="anonymous">
         <source src="./assets/audio/musica_ambiental.mp3" type="audio/mpeg">
         <source src="./assets/audio/musica_ambiental.ogg" type="audio/ogg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    
+
     <button id="audioControl" class="audio-control" aria-label="Control de música">
-        <i class="fas fa-music"></i>
-        <span class="audio-wave">
+        <i class="fas fa-music" aria-hidden="true"></i>
+        <span class="audio-wave" aria-hidden="true">
             <span></span>
             <span></span>
             <span></span>
@@ -41,14 +124,29 @@
     </button>
 
     <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-sun"></i>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+    </button>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/573234737757" target="_blank" rel="noopener noreferrer" class="whatsapp-button"
+        aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="whatsapp-tooltip">Contáctame</span>
+    </a>
+
+    <!-- System Status -->
+    <div class="system-status" role="status" aria-label="Estado del sistema">
+        <i class="fas fa-terminal" aria-hidden="true"></i>
+        <span class="status-text">system_online</span>
+        <span class="status-dot" aria-hidden="true"></span>
     </div>
 
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <div class="container">
         <!-- Terminal Bar -->
-        <div class="terminal-bar">
-            <div class="terminal-dots">
+        <div class="terminal-bar" role="status" aria-label="Inicialización del sistema">
+            <div class="terminal-dots" aria-hidden="true">
                 <span class="terminal-dot"></span>
                 <span class="terminal-dot"></span>
                 <span class="terminal-dot"></span>
@@ -56,52 +154,64 @@
             <span>Inicializando sistema IT/OT...</span>
         </div>
 
-        <!-- Navbar -->
-        <div class="navbar">
-            <div class="logo">
-                <span class="logo-dot"></span>
-                ALEY CABRERA
+        <!-- Header / Navegación Principal -->
+        <header class="navbar">
+
+            <!-- LOGO (cuadrados + texto) -->
+            <div class="logo-container">
+                <div class="cuadrados-flotantes" id="triadaLogo">
+                    <div class="cuad c1" id="cuad1"></div>
+                    <div class="cuad c2" id="cuad2"></div>
+                    <div class="cuad c3" id="cuad3"></div>
+                </div>
+                <!-- <div class="aley-texto">
+                    <span class="aley">ALEY</span>
+                    <span class="cabrera">CABRERA</span>
+                </div> -->
             </div>
-            <div class="nav-links">
+
+            <nav class="nav-links" aria-label="Navegación principal">
                 <a href="#inicio">INICIO</a>
                 <a href="#sobre-mi">SOBRE MÍ</a>
                 <a href="#proyectos">PROYECTOS</a>
                 <a href="#blog">BLOG</a>
                 <a href="#contacto">CONTACTO</a>
-            </div>
-        </div>
+            </nav>
+        </header>
 
-        <!-- Hero -->
-        <div class="hero" id="inicio">
+        <!-- Hero Section -->
+        <section id="inicio" class="hero" aria-labelledby="hero-title">
             <div class="hero-content">
-                <h1>Aley Cabrera<br><span class="highlight">Engineering | Cybersecurity</span><br>IT/OT Systems<span class="type-writer">|</span></h1>
-                <div class="hero-subtitle">
-                    Ingeniería aplicada a la seguridad de sistemas digitales e industriales
-                </div>
+                <h1 id="hero-title">Aley Cabrera<br><span class="highlight">Desarrollador de Software</span><br>Redes y Sistemas IT<span class="type-writer" aria-hidden="true">|</span></h1>
+
+                <p class="hero-subtitle">Desarrollo de software, redes y Linux aplicado a soluciones tecnológicas, con enfoque en ciberseguridad y cloud.</p>
+
                 <div class="hero-buttons">
                     <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-                    <a href="#" class="btn btn-outline">Descargar CV</a>
+                    <a href="./assets/doc/CV-Aley Cabrera Desarrollador Jr.pdf" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Descargar CV</a>
                 </div>
+
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <span class="stat-number">12+</span>
+                        <span class="stat-number">3+</span>
                         <span class="stat-label">PROYECTOS</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">5</span>
+                        <span class="stat-number">3</span>
                         <span class="stat-label">CERTIFICACIONES</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">4</span>
+                        <span class="stat-number">2</span>
                         <span class="stat-label">CLIENTES</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-number">2</span>
-                        <span class="stat-label">AÑOS EXP</span>
+                        <span class="stat-number">1</span>
+                        <span class="stat-label">AÑOS EXP TEC</span>
                     </div>
                 </div>
             </div>
-            <div class="hero-visual">
+
+            <div class="hero-visual" aria-hidden="true">
                 <div class="circuit-bg">
                     <div class="tech-icon">
                         <i class="fas fa-shield-alt"></i>
@@ -112,126 +222,360 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Sobre Mí -->
-        <div class="about-section" id="sobre-mi">
-            <div class="about-card">
-                <h3><i class="fas fa-graduation-cap"></i> Formación</h3>
+        <section id="sobre-mi" class="about-section" aria-labelledby="about-title">
+            <h2 id="about-title" class="visually-hidden">Sobre Mí</h2>
+
+            <article class="about-card">
+                <h2><i class="fas fa-graduation-cap" aria-hidden="true"></i> Formación</h2>
                 <div class="formation-item">
                     <div class="title">Ingeniería Mecatrónica</div>
-                    <div class="detail">Universidad · En curso</div>
+                    <div class="detail">Institucion Universitaria de Barranquilla (IUB) · En curso</div>
                 </div>
                 <div class="formation-item">
                     <div class="title">Tecnología en Desarrollo de Software</div>
-                    <div class="detail">Próximo a graduarse</div>
+                    <div class="detail">SENA</div>
+                </div>
+            </article>
+
+            <article class="about-card">
+                <h2><i class="fas fa-bullseye" aria-hidden="true"></i> Enfoque Profesional</h2>
+                <p>Integración segura de sistemas IT mediante el desarrollo de software, ciberseguridad, redes, automatización y
+                    generar soluciones tecnológicas robustas.</p>
+            </article>
+
+            <article class="about-card">
+                <h2><i class="fas fa-cogs" aria-hidden="true"></i> Filosofía Técnica</h2>
+                <p>Arquitectura estructurada, análisis sistemico, evaluacion de riesgos y mejoras continuas. Cada solución debe ser segura,
+                    escalable y documentada.</p>
+            </article>
+        </section>
+
+        <!-- Sección: En Números -->
+        <section class="stats-section" aria-labelledby="stats-title">
+            <header class="section-header">
+                <h2 id="stats-title" class="section-title">En Números</h2>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-target="6">0</span>
+                    <span class="stat-label">Reacciones Positivas</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="25">0</span>
+                    <span class="stat-label">Proyectos completados</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="800">0</span>
+                    <span class="stat-label">Horas de entrenamiento</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="300">0</span>
+                    <span class="stat-label">Tazas de café</span>
                 </div>
             </div>
-            <div class="about-card">
-                <h3><i class="fas fa-bullseye"></i> Enfoque Profesional</h3>
-                <p>Integración segura de sistemas IT y OT mediante ciberseguridad, redes industriales, automatización y
-                    desarrollo de soluciones tecnológicas robustas.</p>
-            </div>
-            <div class="about-card">
-                <h3><i class="fas fa-cogs"></i> Filosofía Técnica</h3>
-                <p>Arquitectura estructurada, análisis de riesgos y mejora continua. Cada solución debe ser segura,
-                    escalable y documentada.</p>
-            </div>
-        </div>
+        </section>
 
         <!-- Áreas de Especialización -->
-        <div class="section-header">
-            <h2 class="section-title">Áreas de Especialización</h2>
-        </div>
+        <section class="specialization-section" aria-labelledby="specialization-title">
+            <header class="section-header">
+                <h2 id="specialization-title" class="section-title">Áreas de Especialización</h2>
+            </header>
 
-        <div class="pillars-grid">
-            <div class="pillar-card">
-                <div class="pillar-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Redes y Telecomunicaciones</h3>
-                <ul class="pillar-list">
-                    <li><i class="fas fa-circle"></i> Diseño de topologías</li>
-                    <li><i class="fas fa-circle"></i> Segmentación VLAN</li>
-                    <li><i class="fas fa-circle"></i> Análisis de tráfico</li>
-                    <li><i class="fas fa-circle"></i> Simulación de infraestructuras</li>
-                </ul>
+            <div class="pillars-grid">
+                <article class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+                    <h3>Redes y Telecomunicaciones</h3>
+                    <ul class="pillar-list">
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Diseño de topologías</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Segmentación VLAN</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Análisis de tráfico</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Simulación de infraestructuras</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-cloud" aria-hidden="true"></i></div>
+                    <h3>Sistemas y Cloud</h3>
+                    <ul class="pillar-list">
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Administración Linux</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Virtualización</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Hardening</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Conceptos cloud</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+                    <h3>Ciberseguridad</h3>
+                    <ul class="pillar-list">
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Pentesting básico</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Gestión de vulnerabilidades</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Seguridad en aplicaciones</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Principios ISO 27001</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                    <h3>Electrónica y Automatización</h3>
+                    <ul class="pillar-list">
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Sistemas embebidos</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Sensores y microcontroladores</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Automatización básica</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Integración IoT</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <h3>Programación y Desarrollo</h3>
+                    <ul class="pillar-list">
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Aplicaciones full stack</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> APIs seguras</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Automatización con scripts</li>
+                        <li><i class="fas fa-circle" aria-hidden="true"></i> Python, JavaScript, C</li>
+                    </ul>
+                </article>
             </div>
-            <div class="pillar-card">
-                <div class="pillar-icon"><i class="fas fa-cloud"></i></div>
-                <h3>Sistemas y Cloud</h3>
-                <ul class="pillar-list">
-                    <li><i class="fas fa-circle"></i> Administración Linux</li>
-                    <li><i class="fas fa-circle"></i> Virtualización</li>
-                    <li><i class="fas fa-circle"></i> Hardening</li>
-                    <li><i class="fas fa-circle"></i> Conceptos cloud</li>
-                </ul>
+        </section>
+
+        <!-- Sección: Aptitudes -->
+        <section class="aptitudes-section" aria-labelledby="aptitudes-title">
+            <header class="section-header">
+                <h2 id="aptitudes-title" class="section-title">Aptitudes</h2>
+                <p class="section-subtitle">Técnicas & Profesionales</p>
+            </header>
+
+            <div class="aptitudes-grid">
+                <!-- Columna Izquierda -->
+                <div class="aptitudes-column">
+                    <article class="aptitudes-category">
+                        <header class="category-header">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            <h3>Desarrollo de Software</h3>
+                            <span class="category-badge">80%</span>
+                        </header>
+
+                        <ul class="aptitudes-list">
+                            <li><span class="apt-name">Python (automatización, scripting, backend)</span> <span
+                                    class="apt-percent">80%</span></li>
+                            <li><span class="apt-name">JavaScript / React</span> <span class="apt-percent">70%</span>
+                            </li>
+                            <li><span class="apt-name">Desarrollo de APIs REST</span> <span
+                                    class="apt-percent">75%</span></li>
+                            <li><span class="apt-name">Bases de datos (SQL / MongoDB)</span> <span
+                                    class="apt-percent">70%</span></li>
+                            <li><span class="apt-name">Control de versiones (Git / GitHub)</span> <span
+                                    class="apt-percent">70%</span></li>
+                        </ul>
+
+                        <footer class="category-footer">
+                            <span class="footer-tag">desarrollo web</span>
+                            <span class="footer-tag">backend</span>
+                            <span class="footer-tag">ISP portal</span>
+                        </footer>
+                    </article>
+
+                    <article class="aptitudes-category">
+                        <header class="category-header">
+                            <i class="fas fa-network-wired" aria-hidden="true"></i>
+                            <h3>Infraestructura y Redes</h3>
+                            <span class="category-badge">75%</span>
+                        </header>
+
+                        <ul class="aptitudes-list">
+                            <li><span class="apt-name">Administración de Linux</span> <span
+                                    class="apt-percent">75%</span></li>
+                            <li><span class="apt-name">Networking (Routing & Switching)</span> <span
+                                    class="apt-percent">70%</span></li>
+                            <li><span class="apt-name">Virtualización</span> <span class="apt-percent">65%</span></li>
+                            <li><span class="apt-name">Docker / Contenedores</span> <span class="apt-percent">60%</span>
+                            </li>
+                        </ul>
+
+                        <footer class="category-footer">
+                            <span class="footer-tag">redes</span>
+                            <span class="footer-tag">infraestructura</span>
+                            <span class="footer-tag">CCNA</span>
+                        </footer>
+                    </article>
+
+                    <article class="aptitudes-category">
+                        <header class="category-header">
+                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                            <h3>Ciberseguridad</h3>
+                            <span class="category-badge">70%</span>
+                        </header>
+
+                        <ul class="aptitudes-list">
+                            <li><span class="apt-name">Seguridad en redes</span> <span class="apt-percent">70%</span>
+                            </li>
+                            <li><span class="apt-name">Análisis de vulnerabilidades</span> <span
+                                    class="apt-percent">65%</span></li>
+                            <li><span class="apt-name">Pentesting básico</span> <span class="apt-percent">60%</span>
+                            </li>
+                            <li><span class="apt-name">Hardening de sistemas Linux</span> <span
+                                    class="apt-percent">65%</span></li>
+                            <li><span class="apt-name">Seguridad en aplicaciones web</span> <span
+                                    class="apt-percent">60%</span></li>
+                        </ul>
+
+                        <footer class="category-footer">
+                            <span class="footer-tag">Security+</span>
+                            <span class="footer-tag">ISO 27001</span>
+                            <span class="footer-tag">pentesting</span>
+                        </footer>
+                    </article>
+                </div>
+
+                <!-- Columna Derecha -->
+                <div class="aptitudes-column">
+                    <article class="aptitudes-category">
+                        <header class="category-header">
+                            <i class="fas fa-microchip" aria-hidden="true"></i>
+                            <h3>Electrónica y Sistemas Embebidos</h3>
+                            <span class="category-badge">65%</span>
+                        </header>
+
+                        <ul class="aptitudes-list">
+                            <li><span class="apt-name">Electrónica digital</span> <span class="apt-percent">65%</span>
+                            </li>
+                            <li><span class="apt-name">Microcontroladores (Arduino/ESP32)</span> <span
+                                    class="apt-percent">65%</span></li>
+                            <li><span class="apt-name">Raspberry Pi / SBC</span> <span class="apt-percent">60%</span>
+                            </li>
+                            <li><span class="apt-name">Sensores y actuadores</span> <span class="apt-percent">65%</span>
+                            </li>
+                            <li><span class="apt-name">Protocolos IoT (MQTT, I2C, SPI)</span> <span
+                                    class="apt-percent">60%</span></li>
+                        </ul>
+
+                        <footer class="category-footer">
+                            <span class="footer-tag">IoT</span>
+                            <span class="footer-tag">IIoT</span>
+                            <span class="footer-tag">automatización</span>
+                            <span class="footer-tag">seguridad OT</span>
+                        </footer>
+                    </article>
+
+                    <article class="aptitudes-category">
+                        <header class="category-header">
+                            <i class="fas fa-tools" aria-hidden="true"></i>
+                            <h3>Herramientas de Ingeniería</h3>
+                            <span class="category-badge">70%</span>
+                        </header>
+
+                        <ul class="aptitudes-list">
+                            <li><span class="apt-name">AutoCAD</span> <span class="apt-percent">50%</span></li>
+                            <li><span class="apt-name">Modelado 3D (Inventor/SolidWorks)</span> <span
+                                    class="apt-percent">50%</span></li>
+                            <li><span class="apt-name">Microsoft Office / Documentación técnica</span> <span
+                                    class="apt-percent">70%</span></li>
+                        </ul>
+                    </article>
+
+                    <!-- Aptitudes Profesionales -->
+                    <article class="aptitudes-category professional">
+                        <header class="category-header">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                            <h3>Aptitudes Profesionales</h3>
+                            <span class="category-badge">90%</span>
+                        </header>
+
+                        <div class="professional-grid">
+                            <div class="professional-item">
+                                <span class="prof-name">Resolución de problemas</span>
+                                <div class="prof-bar">
+                                    <div class="prof-progress" style="width: 90%" role="progressbar" aria-valuenow="90"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="prof-percent">90%</span>
+                            </div>
+                            <div class="professional-item">
+                                <span class="prof-name">Pensamiento analítico</span>
+                                <div class="prof-bar">
+                                    <div class="prof-progress" style="width: 85%" role="progressbar" aria-valuenow="85"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="prof-percent">85%</span>
+                            </div>
+                            <div class="professional-item">
+                                <span class="prof-name">Planificación (GTD)</span>
+                                <div class="prof-bar">
+                                    <div class="prof-progress" style="width: 80%" role="progressbar" aria-valuenow="80"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="prof-percent">80%</span>
+                            </div>
+                            <div class="professional-item">
+                                <span class="prof-name">Trabajo en equipo</span>
+                                <div class="prof-bar">
+                                    <div class="prof-progress" style="width: 80%" role="progressbar" aria-valuenow="80"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="prof-percent">80%</span>
+                            </div>
+                            <div class="professional-item">
+                                <span class="prof-name">Adaptabilidad tecnológica</span>
+                                <div class="prof-bar">
+                                    <div class="prof-progress" style="width: 90%" role="progressbar" aria-valuenow="90"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <span class="prof-percent">90%</span>
+                            </div>
+                        </div>
+
+                        <footer class="category-footer">
+                            <span class="footer-tag">soft skills</span>
+                            <span class="footer-tag">liderazgo</span>
+                            <span class="footer-tag">análisis</span>
+                        </footer>
+                    </article>
+                </div>
             </div>
-            <div class="pillar-card">
-                <div class="pillar-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Ciberseguridad</h3>
-                <ul class="pillar-list">
-                    <li><i class="fas fa-circle"></i> Pentesting básico</li>
-                    <li><i class="fas fa-circle"></i> Gestión de vulnerabilidades</li>
-                    <li><i class="fas fa-circle"></i> Seguridad en aplicaciones</li>
-                    <li><i class="fas fa-circle"></i> Principios ISO 27001</li>
-                </ul>
-            </div>
-            <div class="pillar-card">
-                <div class="pillar-icon"><i class="fas fa-microchip"></i></div>
-                <h3>Electrónica y Automatización</h3>
-                <ul class="pillar-list">
-                    <li><i class="fas fa-circle"></i> Sistemas embebidos</li>
-                    <li><i class="fas fa-circle"></i> Sensores y microcontroladores</li>
-                    <li><i class="fas fa-circle"></i> Automatización básica</li>
-                    <li><i class="fas fa-circle"></i> Integración IoT</li>
-                </ul>
-            </div>
-            <div class="pillar-card">
-                <div class="pillar-icon"><i class="fas fa-code"></i></div>
-                <h3>Programación y Desarrollo</h3>
-                <ul class="pillar-list">
-                    <li><i class="fas fa-circle"></i> Aplicaciones full stack</li>
-                    <li><i class="fas fa-circle"></i> APIs seguras</li>
-                    <li><i class="fas fa-circle"></i> Automatización con scripts</li>
-                    <li><i class="fas fa-circle"></i> Python, JavaScript, C</li>
-                </ul>
-            </div>
-        </div>
+        </section>
 
         <!-- Certificaciones -->
-        <div class="certifications-section">
-            <div class="section-header" style="padding-left: 2rem;">
-                <h2 class="section-title">Certificaciones</h2>
-            </div>
-            <div class="cert-grid">
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-certificate"></i></div>
-                    <h4>CCNA</h4>
-                    <p>Redes y Comunicaciones</p>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-shield"></i></div>
-                    <h4>Security+</h4>
-                    <p>Ciberseguridad</p>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-cloud"></i></div>
-                    <h4>AWS Practitioner</h4>
-                    <p>Cloud Computing</p>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-robot"></i></div>
-                    <h4>Industrial IoT</h4>
-                    <p>Automatización</p>
-                </div>
-            </div>
-        </div>
+        <section class="certifications-section" aria-labelledby="certifications-title">
+            <header class="section-header">
+                <h2 id="certifications-title" class="section-title">Certificaciones</h2>
+            </header>
 
-        <!-- Laboratorios -->
-        <div class="labs-section" id="proyectos">
-            <h2 class="section-title">Laboratorios y Proyectos</h2>
+            <div class="cert-grid">
+                <article class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-certificate" aria-hidden="true"></i></div>
+                    <h3>CCNA</h3>
+                    <p>Redes y Comunicaciones</p>
+                </article>
+                <article class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-shield" aria-hidden="true"></i></div>
+                    <h3>Security+</h3>
+                    <p>Ciberseguridad</p>
+                </article>
+                <article class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-cloud" aria-hidden="true"></i></div>
+                    <h3>AWS Practitioner</h3>
+                    <p>Cloud Computing</p>
+                </article>
+                <article class="cert-card">
+                    <div class="cert-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                    <h3>Industrial IoT</h3>
+                    <p>Automatización</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Laboratorios y Proyectos -->
+        <section id="proyectos" class="labs-section" aria-labelledby="labs-title">
+            <h2 id="labs-title" class="section-title">Laboratorios y Proyectos</h2>
+
             <div class="labs-grid">
-                <div class="lab-card" onclick="window.open('https://github.com', '_blank')">
-                    <h4>🔬 Red segmentada con IDS</h4>
+                <article class="lab-card" onclick="window.open('https://github.com', '_blank')">
+                    <h3>🔬 Red segmentada con IDS</h3>
                     <div class="lab-tags">
                         <span class="lab-tag">VLAN</span>
                         <span class="lab-tag">Snort</span>
@@ -239,9 +583,10 @@
                     </div>
                     <p class="lab-desc">Diseño de red corporativa segmentada con sistema de detección de intrusiones y
                         monitoreo de tráfico en tiempo real.</p>
-                </div>
-                <div class="lab-card" onclick="window.open('https://github.com', '_blank')">
-                    <h4>⚙️ Simulación de ataque IT/OT</h4>
+                </article>
+
+                <article class="lab-card" onclick="window.open('https://github.com', '_blank')">
+                    <h3>⚙️ Simulación de ataque IT/OT</h3>
                     <div class="lab-tags">
                         <span class="lab-tag">Modbus</span>
                         <span class="lab-tag">SCADA</span>
@@ -249,146 +594,147 @@
                     </div>
                     <p class="lab-desc">Entorno controlado para simular ataques a protocolos industriales y aplicar
                         contramedidas de seguridad.</p>
-                </div>
-                <div class="lab-card" onclick="window.open('https://github.com', '_blank')">
-                    <h4>🔐 IoT seguro con autenticación</h4>
+                </article>
+
+                <article class="lab-card" onclick="window.open('https://github.com', '_blank')">
+                    <h3>🔐 IoT seguro con autenticación</h3>
                     <div class="lab-tags">
                         <span class="lab-tag">ESP32</span>
                         <span class="lab-tag">MQTT</span>
                         <span class="lab-tag">TLS</span>
                     </div>
                     <p class="lab-desc">Dispositivo IoT con comunicación cifrada y autenticación de doble factor.</p>
-                </div>
-                <div class="lab-card" onclick="window.open('https://github.com', '_blank')">
-                    <h4>💻 App full stack con autenticación</h4>
+                </article>
+
+                <article class="lab-card" onclick="window.open('https://github.com', '_blank')">
+                    <h3>💻 App full stack con autenticación</h3>
                     <div class="lab-tags">
                         <span class="lab-tag">React</span>
                         <span class="lab-tag">Node.js</span>
                         <span class="lab-tag">JWT</span>
                     </div>
                     <p class="lab-desc">Aplicación web segura con control de acceso y cifrado de datos.</p>
-                </div>
+                </article>
             </div>
-        </div>
+        </section>
 
         <!-- Blog -->
-        <div class="blog-section" id="blog">
-            <div class="section-header">
-                <h2 class="section-title">Últimos Artículos</h2>
-            </div>
+        <section id="blog" class="blog-section" aria-labelledby="blog-title">
+            <header class="section-header">
+                <h2 id="blog-title" class="section-title">Últimos Artículos</h2>
+            </header>
+
             <div class="blog-grid">
-                <div class="blog-card">
+                <article class="blog-card">
                     <span class="blog-badge">DESTACADO</span>
                     <h3>El Futuro de la IA en la Ciberseguridad Industrial</h3>
                     <p>Exploramos cómo la inteligencia artificial está transformando la detección de amenazas en
                         entornos OT.</p>
-                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="blog-card">
+                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></a>
+                </article>
+
+                <article class="blog-card">
                     <span class="blog-badge">TUTORIAL</span>
                     <h3>Implementación de VLANs para segmentación segura</h3>
                     <p>Guía práctica para diseñar redes corporativas con aislamiento de tráfico crítico.</p>
-                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="blog-card">
+                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></a>
+                </article>
+
+                <article class="blog-card">
                     <span class="blog-badge">INVESTIGACIÓN</span>
                     <h3>Protocolos industriales: Modbus vs OPC UA</h3>
                     <p>Análisis comparativo de seguridad y rendimiento en automatización.</p>
-                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"></i></a>
-                </div>
+                    <a href="#" class="blog-link">Leer Artículo <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></a>
+                </article>
             </div>
-        </div>
+        </section>
 
         <!-- Contacto -->
-        <div class="contact-section" id="contacto">
+        <section id="contacto" class="contact-section" aria-labelledby="contact-title">
             <div class="contact-info">
-                <h2>Envíame un mensaje</h2>
+                <h2 id="contact-title">Envíame un mensaje</h2>
                 <p>¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a hacerlo realidad.</p>
 
-                <div class="contact-details">
+                <address class="contact-details">
                     <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                         <div>
                             <span class="label">EMAIL</span>
                             <a href="mailto:aley.cabrera@ejemplo.com" class="value">aley.cabrera@ejemplo.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <span class="label">TELÉFONO</span>
                             <span class="value">+57 323 473 7757</span>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <span class="label">UBICACIÓN</span>
                             <span class="value">Barranquilla, Colombia</span>
                         </div>
                     </div>
-                </div>
+                </address>
 
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fas fa-file-alt"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="CV"><i class="fas fa-file-alt" aria-hidden="true"></i></a>
                 </div>
             </div>
 
             <div class="contact-form">
-                <form>
+                <form action="#" method="post">
                     <div class="form-group">
-                        <input type="text" placeholder="Nombre completo">
+                        <label for="name" class="visually-hidden">Nombre completo</label>
+                        <input type="text" id="name" name="name" placeholder="Nombre completo" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Correo electrónico">
+                        <label for="email" class="visually-hidden">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Asunto">
+                        <label for="subject" class="visually-hidden">Asunto</label>
+                        <input type="text" id="subject" name="subject" placeholder="Asunto" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Mensaje"></textarea>
+                        <label for="message" class="visually-hidden">Mensaje</label>
+                        <textarea id="message" name="message" placeholder="Mensaje" required></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Enviar mensaje</button>
                 </form>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
-        <div class="footer">
+        <footer class="footer">
             <div>© 2025 Aley Cabrera · Ingeniería IT/OT</div>
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Enlaces del footer">
                 <a href="#">LinkedIn</a>
                 <a href="#">GitHub</a>
                 <a href="#">CV</a>
                 <a href="#">Blog</a>
-            </div>
-        </div>
+            </nav>
+        </footer>
     </div>
 
     <!-- Microinteracción -->
-    
-    <!-- WhatsApp Contact Button -->
-    <div>
-    <a href="https://wa.me/573234737757" target="_blank" rel="noopener noreferrer" class="whatsapp-button"
-        aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip">Contáctame</span>
-    </a>
+    <div class="interaction" aria-label="Versión del sistema">
+        <i class="fas fa-bolt light" aria-hidden="true"></i> SISTEMA IT/OT · v.1.0
     </div>
 
-    <!-- System Status Indicator -->
-    <div class="system-status">
-        <i class="fas fa-terminal"></i>
-        <span class="status-text">system_online</span>
-        <span class="status-dot"></span>
-    </div>
-    <div class="interaction">
-        <i class="fas fa-bolt light"></i> SISTEMA IT/OT · v.1.0
-    </div>
-
+    <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="back-to-top-tooltip">Volver arriba</span>
+    </button>
 </body>
 
 </html>
