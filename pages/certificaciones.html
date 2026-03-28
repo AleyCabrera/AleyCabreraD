@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aley Cabrera · Certificaciones IT/OT</title>
+
+    <!-- Metadatos SEO -->
+    <meta name="description"
+        content="Certificaciones profesionales en ciberseguridad, redes, programación y soporte técnico de Aley Cabrera">
+    <meta name="keywords" content="certificaciones, CISCO, Google, SENA, Platzi, ciberseguridad, redes, programación">
+    <meta name="author" content="Aley Cabrera">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Source+Code+Pro:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/certificaciones.css">
+
+    <!-- Scripts -->
+    <script src="/js/main.js" type="module" defer></script>
+    <script src="/js/certificaciones.js" type="module" defer></script>
+    <script src="/js/año.js" type="module" defer></script>
+</head>
+
+<body class="dark-theme">
+    <!-- ===== COMPONENTES FLOTANTES ===== -->
+
+    <!-- Audio Control -->
+    <audio id="bgAudio" loop preload="metadata" crossorigin="anonymous">
+        <source src="./assets/audio/musica_ambiental.mp3" type="audio/mpeg">
+        <source src="./assets/audio/musica_ambiental.ogg" type="audio/ogg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <button id="audioControl" class="audio-control" aria-label="Control de música">
+        <i class="fas fa-music" aria-hidden="true"></i>
+        <span class="audio-wave" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </button>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+    </button>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/573234737757" target="_blank" rel="noopener noreferrer" class="whatsapp-button"
+        aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="whatsapp-tooltip">Contáctame</span>
+    </a>
+
+    <!-- System Status -->
+    <div class="system-status" role="status" aria-label="Estado del sistema">
+        <i class="fas fa-terminal" aria-hidden="true"></i>
+        <span class="status-text">system_online</span>
+        <span class="status-dot" aria-hidden="true"></span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <span class="back-to-top-tooltip">Volver arriba</span>
+    </button>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <div class="container">
+        <!-- Terminal Bar -->
+        <div class="terminal-bar" role="status" aria-label="Inicialización del sistema">
+            <div class="terminal-dots" aria-hidden="true">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+            </div>
+            <span>Certificaciones IT/OT · <span id="certCount"></span> credenciales activas</span>
+        </div>
+
+        <!-- Header / Navegación Principal -->
+        <header class="navbar">
+            <div class="logo">
+                <span class="logo-dot" aria-hidden="true"></span>
+                <a href="index.html" style="text-decoration: none; color: inherit;">ALEY CABRERA</a>
+            </div>
+            <nav class="nav-links" aria-label="Navegación principal">
+                <a href="/index.html">INICIO</a>
+                <a href="/index.html#sobre-mi">SOBRE MÍ</a>
+                <a href="/index.html#proyectos">PROYECTOS</a>
+                <a href="/certificaciones.html" class="active">CERTIFICACIONES</a>
+                <a href="/index.html#blog">BLOG</a>
+                <a href="/index.html#contacto">CONTACTO</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section - Certificaciones -->
+        <section class="cert-hero" aria-labelledby="cert-hero-title">
+            <div class="cert-hero-content">
+                <h1 id="cert-hero-title">Certificaciones <span class="highlight">Profesionales</span></h1>
+                <p class="cert-hero-subtitle">
+                    Formación continua en ciberseguridad, redes, programación y soporte técnico
+                </p>
+                <div class="cert-stats">
+                    <div class="cert-stat-item">
+                        <span class="cert-stat-number" id="totalCerts">0</span>
+                        <span class="cert-stat-label">CERTIFICACIONES</span>
+                    </div>
+                    <div class="cert-stat-item">
+                        <span class="cert-stat-number">6</span>
+                        <span class="cert-stat-label">INSTITUCIONES</span>
+                    </div>
+                    <div class="cert-stat-item">
+                        <span class="cert-stat-number">5</span>
+                        <span class="cert-stat-label">ÁREAS DE CONOCIMIENTO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros por Categoría -->
+        <div class="cert-filters">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="cisco">CISCO</button>
+            <button class="filter-btn" data-filter="google">Google</button>
+            <button class="filter-btn" data-filter="sena">SENA</button>
+            <button class="filter-btn" data-filter="platzi">Platzi</button>
+            <button class="filter-btn" data-filter="coursera">Coursera</button>
+            <button class="filter-btn" data-filter="otros">Otros</button>
+        </div>
+
+        <!-- Grid de Certificaciones -->
+        <section class="certifications-grid-section" aria-labelledby="certs-title">
+            <div class="certs-grid" id="certsGrid">
+                <!-- Las certificaciones se cargarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Ruta de Aprendizaje -->
+        <section class="learning-path-section" aria-labelledby="path-title">
+            <div class="section-header">
+                <h2 id="path-title" class="section-title">Ruta de Aprendizaje</h2>
+                <p class="section-subtitle">Evolución profesional hacia Redes, Ciberseguridad y Cloud</p>
+            </div>
+        
+            <div class="path-timeline">
+        
+                <!-- ETAPA 1 -->
+                <div class="path-item">
+                    <div class="path-marker completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Fundamentos de Programación y Software</h3>
+                        <p>
+                            Inicio del camino en desarrollo de software y lógica computacional.
+                            Formación en C++, Python, metodologías de programación, Scrum y calidad de software.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Base sólida de desarrollo</span>
+                            <span class="path-date">2023 - 2024</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- ETAPA 2 -->
+                <div class="path-item">
+                    <div class="path-marker completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Soporte IT, Electrónica y Sistemas</h3>
+                        <p>
+                            Formación técnica en soporte IT, mantenimiento de equipos, electrónica,
+                            electrotecnia y fundamentos de redes. Construcción de la base técnica
+                            para infraestructura tecnológica.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Infraestructura y hardware</span>
+                            <span class="path-date">2024 - 2025</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- ETAPA 3 -->
+                <div class="path-item">
+                    <div class="path-marker completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Redes Empresariales</h3>
+                        <p>
+                            Ruta Cisco Networking Academy: direccionamiento IP, dispositivos de red,
+                            troubleshooting, soporte y diseño de redes empresariales.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Ruta Pre-CCNA completada</span>
+                            <span class="path-date">2025</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- ETAPA 4 -->
+                <div class="path-item">
+                    <div class="path-marker completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Especialización en Ciberseguridad</h3>
+                        <p>
+                            Formación integral en ciberseguridad: Google Cybersecurity,
+                            Cisco Junior Cybersecurity Analyst, Ethical Hacking Essentials,
+                            Universidad de los Andes, UNAD y MinTIC.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Perfil Junior Cybersecurity</span>
+                            <span class="path-date">2024 - 2025</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- ETAPA 5 -->
+                <div class="path-item">
+                    <div class="path-marker active">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Enfoque Profesional: Redes, Cloud y Ciberseguridad</h3>
+                        <p>
+                            Etapa actual de consolidación del perfil profesional,
+                            orientado a infraestructura IT, cloud computing y seguridad.
+                            Preparación activa para certificaciones oficiales y primeros proyectos profesionales.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Formación y especialización en progreso</span>
+                            <span class="path-date">2025 - Actualidad</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- ETAPA 6 OBJETIVOS -->
+                <div class="path-item">
+                    <div class="path-marker pending">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="path-content">
+                        <h3>Objetivos 2026</h3>
+                        <p>
+                            CCNA (certificación oficial) · CompTIA Security+ · AWS Cloud Practitioner ·
+                            Introducción a OT/ICS Security · Bases de CISSP.
+                        </p>
+                        <div class="path-details">
+                            <span class="path-badge">Próximas certificaciones clave</span>
+                            <span class="path-date">2026</span>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <!-- Resumen -->
+            <div class="path-summary">
+                <div class="summary-stats">
+                    <div class="summary-item">
+                        <span class="summary-number">30+</span>
+                        <span class="summary-label">Certificaciones obtenidas</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-number">8</span>
+                        <span class="summary-label">Instituciones</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-number">4</span>
+                        <span class="summary-label">Áreas clave</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Botón Volver al Inicio -->
+        <div class="cert-footer-actions">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>© <span class="current-year">2025</span> Aley Cabrera · Ingeniería IT/OT</div>
+            <nav class="footer-links" aria-label="Enlaces del footer">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">CV</a>
+                <a href="#">Blog</a>
+            </nav>
+        </footer>
+    </div>
+
+    <!-- Microinteracción -->
+    <div class="interaction" aria-label="Versión del sistema">
+        <i class="fas fa-bolt light" aria-hidden="true"></i> SISTEMA IT/OT · v.2.0
+    </div>
+</body>
+
+</html>
