@@ -306,9 +306,9 @@ body::before {
 }
 
 /* TAMAÑOS DE CUADRADOS */
-.c1 { width: 26px; height: 26px; animation-delay: 0s; }
-.c2 { width: 42px; height: 42px; animation-delay: 0.8s; }
-.c3 { width: 58px; height: 58px; animation-delay: 1.5s; }
+.c1 { width: 20px; height: 20px; animation-delay: 0s; }
+.c2 { width: 35px; height: 35px; animation-delay: 0.8s; }
+.c3 { width: 50px; height: 50px; animation-delay: 1.5s; }
 
 @keyframes flotar {
     0% { transform: translateY(0px); }
@@ -473,6 +473,20 @@ body::before {
 
 .btn-outline:hover {
     background-color: var(--accent-glow-subtle);
+}
+
+.btn-primary.cert {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    color: white;
+    padding: var(--space-sm) var(--space-lg);
+    margin-top: var(--space-xl);
+
+    /* Centrado con Flexbox */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 /* ============================================================================
@@ -1166,6 +1180,17 @@ body::before {
 .cert-card p {
     font-size: 0.85rem;
     color: var(--text-tertiary);
+}
+
+.link-cert {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-content: center;
 }
 
 /* ============================================================================
