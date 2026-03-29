@@ -3,7 +3,7 @@
 const certifications = [
     // SENA - 2025 (más recientes)
     { name: "Procesos de soporte tecnico para el mantenimiento de equipos de computo", institution: "SENA", category: "sena", icon: "fas fa-tools", date: "2025", tags: ["Soporte Técnico", "Mantenimiento"], link: "https://github.com/AleyCabrera/AleyCabreraD/blob/main/assets/doc/CertProceMante.pdf", credentialId: "SENA-2025-001" },
-    { name: "Redes y Seguridad", institution: "SENA", category: "sena", icon: "fas fa-network-wired", date: "2025", tags: ["Redes", "Seguridad"], link: "#", credentialId: "SENA-2025-002" },
+    { name: "Redes y Seguridad", institution: "SENA", category: "sena", icon: "fas fa-network-wired", date: "2025", tags: ["Redes", "Seguridad"], link: "/assets/doc/CertRedSeg.jpg", credentialId: "SENA-2025-002" },
     { name: "Electronica: Electrotecnia Y Medidas", institution: "SENA", category: "sena", icon: "fas fa-microchip", date: "2025", tags: ["Electrónica", "Electrotecnia"], link: "#", credentialId: "SENA-2025-003" },
     // SENA - 2024
     { name: "Modelos de calidad de software", institution: "SENA", category: "sena", icon: "fas fa-check-double", date: "2024", tags: ["Calidad", "Software"], link: "#", credentialId: "SENA-2024-001" },
