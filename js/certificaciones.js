@@ -1,7 +1,7 @@
 // ===== DATOS DE CERTIFICACIONES =====
 const certifications = [
     // SENA - 2025 (más recientes)
-    { name: "Procesos de soporte tecnico para el mantenimiento de equipos de computo", institution: "SENA", category: "sena", icon: "fas fa-tools", date: "2025", tags: ["Soporte Técnico", "Mantenimiento"], link: "/assets/doc/certificaciones/SENA-2025-001.jpg", credentialId: "SENA-2025-001" },
+    { name: "Procesos de soporte tecnico para el mantenimiento de equipos de computo", institution: "SENA", category: "sena", icon: "fas fa-tools", date: "2025", tags: ["Soporte Técnico", "Mantenimiento"], link: "./assets/doc/certificaciones/SENA-2025-001.jpg", credentialId: "SENA-2025-001" },
     { name: "Redes y Seguridad", institution: "SENA", category: "sena", icon: "fas fa-network-wired", date: "2025", tags: ["Redes", "Seguridad"], link: "#", credentialId: "SENA-2025-002" },
     { name: "Electronica: Electrotecnia Y Medidas", institution: "SENA", category: "sena", icon: "fas fa-microchip", date: "2025", tags: ["Electrónica", "Electrotecnia"], link: "#", credentialId: "SENA-2025-003" },
     // SENA - 2024
