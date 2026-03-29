@@ -1,3 +1,21 @@
+/**
+ * Obtiene la URL correcta según el entorno
+ * @param {string} path - Ruta relativa
+ * @returns {string} URL completa
+ */
+function getAssetUrl(path) {
+    // Detectar si estamos en GitHub Pages
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    if (isGitHubPages) {
+        // En GitHub Pages, usar ruta desde la raíz del repositorio
+        return path.startsWith('/') ? path : `/${path}`;
+    } else {
+        // En desarrollo local
+        return path;
+    }
+}
+
 // ===== DATOS DE CERTIFICACIONES =====
 const certifications = [
     // SENA - 2025 (más recientes)
