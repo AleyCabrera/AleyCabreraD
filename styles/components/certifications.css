@@ -178,19 +178,13 @@
     }
     
     .cert-card {
-        display: flex;
-        align-items: center;
-        text-align: left;
-        gap: var(--space-md);
-        padding: var(--space-md);
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
     }
     
     .cert-icon {
-        margin-bottom: 0;
-        font-size: 1.5rem;
-        flex-shrink: 0;
-        width: 45px;
-        text-align: center;
+        margin-bottom: var(--space-sm);
     }
     
     .cert-card h3 {
@@ -207,8 +201,8 @@
     }
 }
 
-/* Móvil Pequeño (hasta 390px) */
-@media (max-width: 390px) {
+/* Móvil Pequeño (hasta 393px) */
+@media (max-width: 393px) {
     .cert-card {
         flex-direction: column;
         text-align: center;

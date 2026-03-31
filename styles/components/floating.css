@@ -347,34 +347,54 @@
 
 /* Ajustes de posición para dispositivos móviles */
 @media (max-width: 768px) {
-    .whatsapp-button { bottom: 130px; right: 15px; width: 45px; height: 45px; animation: none; }
-    .whatsapp-button i { font-size: 1.6rem; }
-    .whatsapp-tooltip { display: none; }
+    .back-to-top { bottom: 190px; right: 8px; width: 40px; height: 40px; }
+    .back-to-top i { font-size: 0.9rem; }
+
+    .whatsapp-button { bottom: 140px; right: 8px; width: 40px; height: 40px; }
+    .whatsapp-button i { font-size: 1rem; }
     
-    .audio-control { bottom: 15px; right: 70px; width: 45px; height: 45px; animation: none; }
-    .audio-control i { font-size: 1.3rem; }
-    .audio-control::after { display: none; }
+    .audio-control { bottom: 90px; right: 8px; width: 40px; height: 40px; }
+    .audio-control i { font-size: 0.9rem; }
+    .audio-wave span { width: 1px; height: 6px; }
     
-    .system-status { bottom: 15px; right: 15px; padding: 0.4rem 0.8rem; font-size: 0.7rem; animation: none; }
-    .system-status .status-dot { width: 6px; height: 6px; }
+    .theme-toggle { bottom: 40px; right: 8px; width: 40px; height: 40px; }
+    .theme-toggle i { font-size: 1rem; }
+
+    .system-status { bottom: 8px; right: 5px; padding: 0.3rem 0.5rem; font-size: 0.55rem; }
+}
+
+@media (max-width: 640px) {
+    .back-to-top { bottom: 190px; right: 8px; width: 40px; height: 40px; }
+    .back-to-top i { font-size: 0.9rem; }
+
+    .whatsapp-button { bottom: 140px; right: 8px; width: 40px; height: 40px; }
+    .whatsapp-button i { font-size: 1rem; }
     
-    .back-to-top { bottom: 190px; right: 15px; width: 45px; height: 45px; }
-    .back-to-top i { font-size: 1.3rem; }
-    .back-to-top-tooltip { display: none; }
+    .audio-control { bottom: 90px; right: 8px; width: 40px; height: 40px; }
+    .audio-control i { font-size: 0.9rem; }
+    .audio-wave span { width: 1px; height: 6px; }
+    
+    .theme-toggle { bottom: 40px; right: 8px; width: 40px; height: 40px; }
+    .theme-toggle i { font-size: 1rem; }
+
+    .system-status { bottom: 8px; right: 5px; padding: 0.3rem 0.5rem; font-size: 0.55rem; }
 }
 
 @media (max-width: 480px) {
-    .whatsapp-button { bottom: 120px; right: 10px; width: 40px; height: 40px; }
-    .whatsapp-button i { font-size: 1.4rem; }
+    .back-to-top { bottom: 190px; right: 8px; width: 40px; height: 40px; }
+    .back-to-top i { font-size: 0.9rem; }
+
+    .whatsapp-button { bottom: 140px; right: 8px; width: 40px; height: 40px; }
+    .whatsapp-button i { font-size: 1rem; }
     
-    .audio-control { bottom: 10px; right: 60px; width: 40px; height: 40px; }
-    .audio-control i { font-size: 1.1rem; }
-    .audio-wave span { width: 2px; height: 10px; }
+    .audio-control { bottom: 90px; right: 8px; width: 40px; height: 40px; }
+    .audio-control i { font-size: 0.9rem; }
+    .audio-wave span { width: 1px; height: 6px; }
     
-    .system-status { bottom: 10px; right: 10px; padding: 0.3rem 0.6rem; font-size: 0.65rem; }
-    
-    .back-to-top { bottom: 170px; right: 10px; width: 40px; height: 40px; }
-    .back-to-top i { font-size: 1.1rem; }
+    .theme-toggle { bottom: 40px; right: 8px; width: 40px; height: 40px; }
+    .theme-toggle i { font-size: 1rem; }
+
+    .system-status { bottom: 8px; right: 5px; padding: 0.3rem 0.5rem; font-size: 0.55rem; }
 }
 
 @media (max-width: 393px) {

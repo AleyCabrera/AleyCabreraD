@@ -314,113 +314,138 @@
 
 /* Móvil Grande (hasta 480px) */
 @media (max-width: 480px) {
-    .contact-section {
-        gap: var(--space-lg);
-        padding: var(--space-lg) 0;
-    }
-    
+    /* Títulos */
     .contact-info h2 {
         font-size: 1.5rem;
     }
     
     .contact-info p {
-        font-size: 0.9rem;
-        margin-bottom: var(--space-md);
+        font-size: 0.85rem;
     }
-    
+
+    /* Contenedor de los items */
     .contact-details {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: var(--space-sm);
+        margin: var(--space-md) 0;
     }
     
-    .contact-item {
-        padding: var(--space-xs) var(--space-sm);
-    }
-    
-    .contact-item i {
-        width: 35px;
-        height: 35px;
-        font-size: 0.85rem;
-    }
-    
-    .contact-item .label {
-        font-size: 0.65rem;
-        letter-spacing: 1px;
-    }
-    
-    .contact-item .value {
-        font-size: 0.85rem;
-    }
-    
+    /* Formulario */
     .contact-form {
-        padding: var(--space-md);
+        padding: var(--space-sm);
+        margin-top: var(--space-md);
     }
     
-    .form-group {
-        margin-bottom: var(--space-md);
+    /* Cada item de contacto */
+    .contact-item {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        text-align: left !important;
+        padding: 8px 0 !important;
     }
     
+    /* Ícono */
+    .contact-item i {
+        flex-shrink: 0 !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: var(--bg-tertiary) !important;
+        border-radius: 50% !important;
+        font-size: 0.9rem !important;
+        color: var(--accent-primary) !important;
+        border: 1px solid var(--border-color) !important;
+        margin: 0 !important;
+    }
+    
+    /* Contenedor del texto */
+    .contact-item div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        flex: 1 !important;
+    }
+    
+    /* Etiqueta (EMAIL, TELÉFONO, UBICACIÓN) */
+    .contact-item .label {
+        font-size: 0.6rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        color: var(--text-muted) !important;
+        font-family: var(--font-mono) !important;
+        display: block !important;
+    }
+    
+    /* Valor */
+    .contact-item .value {
+        font-size: 0.75rem !important;
+        font-weight: 500 !important;
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+        word-break: break-word !important;
+        display: block !important;
+    }
+    
+    /* Enlaces dentro de value */
+    .contact-item a.value {
+        text-decoration: none !important;
+    }
+    
+    .contact-item a.value:hover {
+        color: var(--accent-primary) !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Campos del formulario */
     .form-group input,
     .form-group textarea {
-        padding: var(--space-sm);
-        font-size: 0.85rem;
+        padding: 6px 10px !important;
+        font-size: 0.8rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     
-    .form-group textarea {
-        height: 100px;
-    }
-    
+    /* Botón */
     .submit-btn {
-        padding: var(--space-sm) var(--space-lg);
-        font-size: 0.85rem;
+        font-size: 0.8rem !important;
+        padding: 8px 16px !important;
+        width: 100% !important;
     }
     
+    /* Iconos sociales */
     .social-icons {
-        gap: var(--space-md);
-        margin-top: var(--space-lg);
-        padding-top: var(--space-md);
+        display: flex !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        margin-top: var(--space-md) !important;
     }
     
     .social-icons a {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.85rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .social-icons a:hover {
+        transform: translateY(-2px) !important;
+        color: var(--accent-primary) !important;
     }
 }
 
 /* Móvil Pequeño (hasta 390px) */
-@media (max-width: 390px) {
-    .contact-item {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--space-xs);
-        padding: var(--space-sm);
-    }
-    
-    .contact-item i {
-        margin-bottom: var(--space-xs);
-    }
-    
-    .contact-item div {
-        align-items: center;
-    }
-    
-    .contact-item .label {
-        font-size: 0.6rem;
-    }
-    
-    .contact-item .value {
-        font-size: 0.8rem;
-    }
-    
-    .social-icons {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-/* Móvil Muy Pequeño (hasta 320px) */
-@media (max-width: 320px) {
+@media (max-width: 393px) {
+    /* Títulos */
     .contact-info h2 {
         font-size: 1.3rem;
     }
@@ -428,25 +453,254 @@
     .contact-info p {
         font-size: 0.85rem;
     }
+
+    /* Contenedor de los items */
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        margin: var(--space-md) 0;
+    }
     
+    /* Formulario */
     .contact-form {
         padding: var(--space-sm);
+        margin-top: var(--space-md);
     }
     
+    /* Cada item de contacto */
+    .contact-item {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        text-align: left !important;
+        padding: 8px 0 !important;
+    }
+    
+    /* Ícono */
+    .contact-item i {
+        flex-shrink: 0 !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: var(--bg-tertiary) !important;
+        border-radius: 50% !important;
+        font-size: 0.9rem !important;
+        color: var(--accent-primary) !important;
+        border: 1px solid var(--border-color) !important;
+        margin: 0 !important;
+    }
+    
+    /* Contenedor del texto */
+    .contact-item div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        flex: 1 !important;
+    }
+    
+    /* Etiqueta (EMAIL, TELÉFONO, UBICACIÓN) */
+    .contact-item .label {
+        font-size: 0.6rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        color: var(--text-muted) !important;
+        font-family: var(--font-mono) !important;
+        display: block !important;
+    }
+    
+    /* Valor */
+    .contact-item .value {
+        font-size: 0.75rem !important;
+        font-weight: 500 !important;
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+        word-break: break-word !important;
+        display: block !important;
+    }
+    
+    /* Enlaces dentro de value */
+    .contact-item a.value {
+        text-decoration: none !important;
+    }
+    
+    .contact-item a.value:hover {
+        color: var(--accent-primary) !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Campos del formulario */
     .form-group input,
     .form-group textarea {
-        padding: var(--space-xs) var(--space-sm);
-        font-size: 0.8rem;
+        padding: 6px 10px !important;
+        font-size: 0.8rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     
+    /* Botón */
     .submit-btn {
-        font-size: 0.8rem;
-        padding: var(--space-xs) var(--space-md);
+        font-size: 0.8rem !important;
+        padding: 8px 16px !important;
+        width: 100% !important;
+    }
+    
+    /* Iconos sociales */
+    .social-icons {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        margin-top: var(--space-md) !important;
     }
     
     .social-icons a {
-        width: 32px;
-        height: 32px;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.85rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .social-icons a:hover {
+        transform: translateY(-2px) !important;
+        color: var(--accent-primary) !important;
+    }
+}
+
+/* Móvil Muy Pequeño (hasta 320px) */
+@media (max-width: 320px) {
+    /* Títulos */
+    .contact-info h2 {
+        font-size: 1.3rem;
+    }
+    
+    .contact-info p {
         font-size: 0.85rem;
+    }
+
+    /* Contenedor de los items */
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        margin: var(--space-md) 0;
+    }
+    
+    /* Formulario */
+    .contact-form {
+        padding: var(--space-sm);
+        margin-top: var(--space-md);
+    }
+    
+    /* Cada item de contacto */
+    .contact-item {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        text-align: left !important;
+        padding: 8px 0 !important;
+    }
+    
+    /* Ícono */
+    .contact-item i {
+        flex-shrink: 0 !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: var(--bg-tertiary) !important;
+        border-radius: 50% !important;
+        font-size: 0.9rem !important;
+        color: var(--accent-primary) !important;
+        border: 1px solid var(--border-color) !important;
+        margin: 0 !important;
+    }
+    
+    /* Contenedor del texto */
+    .contact-item div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        flex: 1 !important;
+    }
+    
+    /* Etiqueta (EMAIL, TELÉFONO, UBICACIÓN) */
+    .contact-item .label {
+        font-size: 0.6rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        color: var(--text-muted) !important;
+        font-family: var(--font-mono) !important;
+        display: block !important;
+    }
+    
+    /* Valor */
+    .contact-item .value {
+        font-size: 0.75rem !important;
+        font-weight: 500 !important;
+        color: var(--text-primary) !important;
+        text-decoration: none !important;
+        word-break: break-word !important;
+        display: block !important;
+    }
+    
+    /* Enlaces dentro de value */
+    .contact-item a.value {
+        text-decoration: none !important;
+    }
+    
+    .contact-item a.value:hover {
+        color: var(--accent-primary) !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Campos del formulario */
+    .form-group input,
+    .form-group textarea {
+        padding: 6px 10px !important;
+        font-size: 0.8rem !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Botón */
+    .submit-btn {
+        font-size: 0.8rem !important;
+        padding: 8px 16px !important;
+        width: 100% !important;
+    }
+    
+    /* Iconos sociales */
+    .social-icons {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        margin-top: var(--space-md) !important;
+    }
+    
+    .social-icons a {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.85rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .social-icons a:hover {
+        transform: translateY(-2px) !important;
+        color: var(--accent-primary) !important;
     }
 }

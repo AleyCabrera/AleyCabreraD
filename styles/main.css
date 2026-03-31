@@ -77,7 +77,7 @@
     .navbar {
         flex-direction: column;
         gap: var(--space-md);
-        align-items: flex-start;
+        align-items: center;
     }
     
     .nav-links {
@@ -131,6 +131,72 @@
     
     .aptitudes-section::before {
         display: none;
+    }
+
+    .interaction {
+        margin-left: 1rem;
+    }
+}
+
+/* Movil Mediano (hasta 640px) */
+@media (max-width: 640px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 280px;
+        height: 100vh;
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: start; /* Centrado vertical */
+        align-items: center;
+        gap: var(--space-lg);
+        padding: calc(var(--space-2xl) + 40px) var(--space-lg) var(--space-3xl);
+        transition: right var(--transition-smooth);
+        z-index: 100;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+        border-left: 1px solid var(--border-color);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+        padding: var(--space-sm) var(--space-md);
+        width: 100%;
+        text-align: center;
+        border-bottom: none;
+        border-radius: var(--border-radius-md);
+    }
+    
+    .nav-links a:hover {
+        background: var(--accent-glow-subtle);
+        color: var(--accent-primary);
+    }
+    
+    .nav-links a::before,
+    .nav-links a::after {
+        display: none;
+    }
+
+    .navbar {
+        justify-content: space-between;
+        padding: var(--space-md);
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .interaction {
+        margin-left: 1rem;
+        font-size: 0.7rem;
     }
 }
 
@@ -224,6 +290,11 @@
     
     .apt-percent {
         align-self: flex-start;
+    }
+
+    .interaction {
+        margin-left: 1rem;
+        font-size: 0.6rem;
     }
 }
 
@@ -326,6 +397,11 @@
         height: 6px;
     }
 
+    .interaction {
+        margin-left: 1rem;
+        font-size: 0.6rem;
+    }
+
 }
 
 /* Móvil Muy Pequeño (hasta 320px) */
@@ -361,10 +437,6 @@
         padding: var(--space-lg);
     }
     
-    .contact-form {
-        padding: var(--space-lg);
-    }
-    
     .footer {
         flex-direction: column;
         text-align: center;
@@ -372,6 +444,11 @@
     
     .footer-links {
         justify-content: center;
+    }
+
+    .interaction {
+        margin-left: 1rem;
+        font-size: 0.5rem;
     }
 }
 
