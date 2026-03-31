@@ -1,0 +1,715 @@
+/* ============================================================================
+   TARJETAS (ABOUT, LABS, BLOG, CERTIFICACIONES)
+   ============================================================================ */
+
+/* ===== ABOUT CARDS ===== */
+.about-card {
+    padding: var(--space-xl);
+    border-radius: var(--border-radius-md);
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.about-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent-glow-subtle), transparent);
+    transition: var(--transition-smooth);
+}
+
+.about-card:hover::before {
+    left: 100%;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.about-card h2,
+.about-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.about-card h2 i,
+.about-card h3 i {
+    color: var(--accent-primary);
+    font-size: 1.25rem;
+}
+
+.about-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-tertiary);
+}
+
+.formation-item {
+    margin-bottom: 1.25rem;
+}
+
+.formation-item .title {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.formation-item .detail {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+}
+
+/* ===== LABS CARDS ===== */
+.labs-section {
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    margin: var(--space-2xl) 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.labs-section::before {
+    content: "LAB_ACCESS";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.lab-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xl);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-card::after {
+    content: ">";
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.lab-card:hover::after {
+    opacity: 1;
+    right: 20px;
+}
+
+.lab-card:hover {
+    border-color: var(--accent-primary);
+    transform: scale(1.02);
+    box-shadow: 0 0 30px var(--accent-glow-subtle);
+}
+
+.lab-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.lab-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+}
+
+.lab-tag {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--accent-glow-subtle);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+}
+
+.lab-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-tertiary);
+}
+
+/* ===== BLOG CARDS ===== */
+.blog-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xl);
+    transition: var(--transition-base);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.blog-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.blog-badge {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 20px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.blog-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+.blog-card p {
+    font-size: 0.9rem;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+    color: var(--text-tertiary);
+}
+
+.blog-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.blog-link:hover {
+    gap: var(--space-md);
+}
+
+/* ===== CERTIFICATION CARDS ===== */
+.certifications-section {
+    padding: var(--space-xl) 3rem;
+    border-radius: var(--border-radius-lg);
+    margin: var(--space-md) 0;
+    background: var(--bg-secondary);
+}
+
+.cert-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: var(--transition-base);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.cert-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.cert-icon {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+}
+
+.cert-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.cert-card p {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+.link-cert {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-content: center;
+}
+
+/* ============================================================================
+   LABORATORIOS Y PROYECTOS - DISEÑO ORIGINAL
+   ============================================================================ */
+
+.labs-section {
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    margin: var(--space-2xl) 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.labs-section::before {
+    content: "LAB_ACCESS";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+.lab-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xl);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-card::after {
+    content: ">";
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.lab-card:hover::after {
+    opacity: 1;
+    right: 20px;
+}
+
+.lab-card:hover {
+    border-color: var(--accent-primary);
+    transform: scale(1.02);
+    box-shadow: 0 0 30px var(--accent-glow-subtle);
+}
+
+.lab-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.lab-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+}
+
+.lab-tag {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--accent-glow-subtle);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-base);
+}
+
+.lab-tag:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.lab-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-tertiary);
+}
+
+/* ============================================================================
+   RESPONSIVE - LABORATORIOS
+   ============================================================================ */
+
+/* Tablet Landscape (hasta 1024px) */
+@media (max-width: 1024px) {
+    .labs-grid {
+        gap: var(--space-lg);
+    }
+    
+    .lab-card {
+        padding: var(--space-lg);
+    }
+}
+
+/* Tablet Portrait (hasta 768px) */
+@media (max-width: 768px) {
+    .labs-section {
+        padding: var(--space-xl);
+    }
+    
+    .labs-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .lab-card {
+        padding: var(--space-lg);
+    }
+    
+    .lab-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .lab-tag {
+        font-size: 0.75rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .lab-desc {
+        font-size: 0.9rem;
+    }
+}
+
+/* Móvil Grande (hasta 480px) */
+@media (max-width: 480px) {
+    .labs-section {
+        padding: var(--space-lg);
+    }
+    
+    .labs-section::before {
+        font-size: 0.7rem;
+        top: 8px;
+        right: 12px;
+    }
+    
+    .lab-card {
+        padding: var(--space-md);
+    }
+    
+    .lab-card h3 {
+        font-size: 1rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .lab-tags {
+        margin: var(--space-md) 0;
+        gap: var(--space-xs);
+    }
+    
+    .lab-tag {
+        font-size: 0.7rem;
+        padding: 2px var(--space-sm);
+    }
+    
+    .lab-desc {
+        font-size: 0.85rem;
+    }
+}
+
+/* Móvil Pequeño (hasta 390px) */
+@media (max-width: 390px) {
+    .labs-section {
+        padding: var(--space-md);
+    }
+    
+    .lab-card {
+        padding: var(--space-sm);
+    }
+    
+    .lab-card h3 {
+        font-size: 0.95rem;
+    }
+    
+    .lab-tag {
+        font-size: 0.65rem;
+    }
+    
+    .lab-desc {
+        font-size: 0.8rem;
+    }
+}
+
+/* Móvil Muy Pequeño (hasta 320px) */
+@media (max-width: 320px) {
+    .labs-section {
+        padding: var(--space-sm);
+    }
+    
+    .lab-tags {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================================
+   BLOG SECTION - DISEÑO ORIGINAL
+   ============================================================================ */
+
+.blog-section {
+    padding: var(--space-2xl) 0;
+    margin: var(--space-2xl) 0;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+}
+
+.blog-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-xl);
+    transition: var(--transition-base);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent-glow-subtle), transparent);
+    transition: var(--transition-smooth);
+}
+
+.blog-card:hover::before {
+    left: 100%;
+}
+
+.blog-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.blog-badge {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 20px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.blog-card:hover .blog-badge {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.blog-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    line-height: 1.4;
+    color: var(--text-primary);
+    transition: var(--transition-base);
+}
+
+.blog-card:hover h3 {
+    color: var(--accent-primary);
+}
+
+.blog-card p {
+    font-size: 0.9rem;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+    color: var(--text-tertiary);
+}
+
+.blog-link {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: var(--transition-base);
+    position: relative;
+}
+
+.blog-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-primary);
+    transition: var(--transition-base);
+}
+
+.blog-link:hover {
+    gap: var(--space-md);
+}
+
+.blog-link:hover::after {
+    width: 100%;
+}
+
+.blog-link i {
+    transition: var(--transition-base);
+}
+
+.blog-link:hover i {
+    transform: translateX(5px);
+}
+
+/* ============================================================================
+   RESPONSIVE - BLOG SECTION
+   ============================================================================ */
+
+/* Tablet Landscape (hasta 1024px) */
+@media (max-width: 1024px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+    }
+}
+
+/* Tablet Portrait (hasta 768px) */
+@media (max-width: 768px) {
+    .blog-section {
+        padding: var(--space-xl) 0;
+        margin: var(--space-xl) 0;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .blog-card {
+        padding: var(--space-lg);
+    }
+    
+    .blog-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .blog-card p {
+        font-size: 0.85rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .blog-badge {
+        font-size: 0.65rem;
+        padding: 2px var(--space-sm);
+        margin-bottom: var(--space-sm);
+    }
+}
+
+/* Móvil Grande (hasta 480px) */
+@media (max-width: 480px) {
+    .blog-section {
+        padding: var(--space-lg) 0;
+    }
+    
+    .blog-card {
+        padding: var(--space-md);
+    }
+    
+    .blog-card h3 {
+        font-size: 1rem;
+    }
+    
+    .blog-card p {
+        font-size: 0.8rem;
+    }
+    
+    .blog-link {
+        font-size: 0.85rem;
+    }
+}
+
+/* Móvil Pequeño (hasta 390px) */
+@media (max-width: 390px) {
+    .blog-card {
+        padding: var(--space-md);
+    }
+    
+    .blog-badge {
+        font-size: 0.6rem;
+    }
+    
+    .blog-card h3 {
+        font-size: 0.95rem;
+    }
+    
+    .blog-card p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Móvil Muy Pequeño (hasta 320px) */
+@media (max-width: 320px) {
+    .blog-card {
+        padding: var(--space-sm);
+    }
+    
+    .blog-badge {
+        font-size: 0.55rem;
+    }
+    
+    .blog-card h3 {
+        font-size: 0.9rem;
+    }
+}
+    
+    .blog-card p {
+        font-size: 0.7rem;
+    }
+    
+    .blog-link {
+        font-size: 0.8rem;
+    }

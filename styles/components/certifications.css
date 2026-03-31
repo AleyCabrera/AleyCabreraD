@@ -1,0 +1,257 @@
+/* ============================================================================
+   CERTIFICACIONES SECTION - DISEÑO ORIGINAL
+   ============================================================================ */
+
+.certifications-section {
+    padding: var(--space-xl) 3rem;
+    border-radius: var(--border-radius-lg);
+    margin: var(--space-md) 0;
+    background: var(--bg-secondary);
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    padding: 0 var(--space-xl);
+}
+
+.cert-card {
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: var(--transition-base);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    cursor: default;
+}
+
+.cert-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.cert-icon {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+    transition: var(--transition-base);
+}
+
+.cert-card:hover .cert-icon {
+    transform: scale(1.05);
+    color: var(--accent-hover);
+}
+
+.cert-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.cert-card p {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+}
+
+/* Botón de certificaciones */
+.certifications-section .btn-primary.cert {
+    color: white;
+    padding: var(--space-sm) var(--space-lg);
+    margin-top: var(--space-xl);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: fit-content;
+    transition: var(--transition-base);
+}
+
+.certifications-section .btn-primary.cert:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Contenedor del botón centrado */
+.cert-button-container {
+    text-align: center;
+    margin-top: var(--space-xl);
+}
+
+/* Asegurar que el botón tenga el estilo correcto */
+.btn-primary.cert {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--accent-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-base);
+}
+
+.btn-primary.cert:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.link-cert {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-content: center;
+}
+
+.link-cert i {
+    transition: var(--transition-base);
+}
+
+.link-cert:hover i {
+    transform: translateX(5px);
+}
+
+/* ============================================================================
+   RESPONSIVE - DISEÑO ORIGINAL
+   ============================================================================ */
+
+/* Tablet Landscape (hasta 1024px) */
+@media (max-width: 1024px) {
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+        padding: 0 var(--space-lg);
+    }
+    
+    .certifications-section {
+        padding: var(--space-xl) 2rem;
+    }
+}
+
+/* Tablet Portrait (hasta 768px) */
+@media (max-width: 768px) {
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+        padding: 0 var(--space-md);
+    }
+    
+    .certifications-section {
+        padding: var(--space-lg) 1.5rem;
+    }
+    
+    .cert-card {
+        padding: var(--space-md);
+    }
+    
+    .cert-icon {
+        font-size: 1.75rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .cert-card h3 {
+        font-size: 0.95rem;
+    }
+    
+    .cert-card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Móvil Grande (hasta 480px) */
+@media (max-width: 480px) {
+    .cert-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0 var(--space-sm);
+    }
+    
+    .certifications-section {
+        padding: var(--space-lg) 1rem;
+    }
+    
+    .cert-card {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: var(--space-md);
+        padding: var(--space-md);
+    }
+    
+    .cert-icon {
+        margin-bottom: 0;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        width: 45px;
+        text-align: center;
+    }
+    
+    .cert-card h3 {
+        margin-bottom: 4px;
+    }
+    
+    .cert-card div {
+        flex: 1;
+    }
+    
+    .certifications-section .btn-primary.cert {
+        padding: var(--space-sm) var(--space-lg);
+        width: 90%;
+    }
+}
+
+/* Móvil Pequeño (hasta 390px) */
+@media (max-width: 390px) {
+    .cert-card {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-sm);
+    }
+    
+    .cert-icon {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .cert-card div {
+        width: 100%;
+    }
+    
+    .certifications-section .btn-primary.cert {
+        width: 100%;
+    }
+}
+
+/* Móvil Muy Pequeño (hasta 320px) */
+@media (max-width: 320px) {
+    .certifications-section {
+        padding: var(--space-md) 0.75rem;
+    }
+    
+    .cert-card {
+        padding: var(--space-sm);
+    }
+    
+    .cert-icon {
+        font-size: 1.25rem;
+    }
+    
+    .cert-card h3 {
+        font-size: 0.85rem;
+    }
+    
+    .cert-card p {
+        font-size: 0.7rem;
+    }
+    
+    .certifications-section .btn-primary.cert {
+        font-size: 0.85rem;
+        padding: var(--space-xs) var(--space-md);
+    }
+}

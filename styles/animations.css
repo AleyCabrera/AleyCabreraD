@@ -1,0 +1,212 @@
+/* ============================================================================
+   ANIMACIONES GLOBALES
+   ============================================================================ */
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes moveGrid {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 30px; }
+}
+
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 30px var(--accent-primary); }
+    50% { box-shadow: 0 0 60px var(--accent-primary); }
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+}
+
+@keyframes whatsappPulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px var(--accent-glow-subtle);
+        border-color: var(--accent-primary);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 8px 25px var(--accent-glow);
+        border-color: var(--accent-hover);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes audioPulse {
+    0%, 100% { box-shadow: 0 4px 15px var(--accent-glow-subtle); }
+    50% { box-shadow: 0 8px 25px var(--accent-glow); }
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px var(--accent-glow-subtle);
+        border-color: var(--accent-primary);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--accent-glow);
+        border-color: var(--accent-hover);
+    }
+}
+
+@keyframes statusDotPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+        background-color: var(--accent-primary);
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        background-color: var(--accent-hover);
+        box-shadow: 0 0 10px var(--accent-primary);
+    }
+}
+
+@keyframes statusPulseOffline {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        border-color: #ef4444;
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+        border-color: #dc2626;
+    }
+}
+
+@keyframes statusDotPulseOffline {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+        background-color: #ef4444;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+        background-color: #dc2626;
+        box-shadow: 0 0 10px #ef4444;
+    }
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Animación de flotar para los cuadrados del logo */
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    45%, 55% { transform: translateY(-10px) scale(1.01); }
+    100% { transform: translateY(0px); }
+}
+
+/* styles/components/animations.css - Nuevas animaciones */
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Para usuarios que prefieren movimiento reducido */
+.reduce-motion,
+.reduce-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* Estado de carga para imágenes */
+img.loading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* Badge de WhatsApp */
+.whatsapp-button .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--accent-error);
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-primary);
+    animation: badgePulse 1.5s infinite;
+}
+
+/* Mensaje de error de la aplicación */
+.app-error-message {
+    animation: slideIn 0.3s ease;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.app-error-message:hover {
+    transform: scale(1.02);
+}
+
+/* Mejoras para dispositivos móviles */
+@media (max-width: 768px) {
+    .whatsapp-button .badge {
+        width: 16px;
+        height: 16px;
+        font-size: 0.6rem;
+        top: -3px;
+        right: -3px;
+    }
+}
+
+/* Mejoras de accesibilidad para focus */
+.whatsapp-button:focus-visible,
+.audio-control:focus-visible,
+.back-to-top:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    transform: scale(1.05);
+}

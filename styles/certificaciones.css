@@ -118,7 +118,7 @@
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
-    padding: var(--space-xl);
+    padding: var(--space-sm);
     transition: var(--transition-smooth);
     backdrop-filter: blur(10px);
     position: relative;

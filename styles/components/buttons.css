@@ -1,0 +1,66 @@
+/* ============================================================================
+   BOTONES
+   ============================================================================ */
+
+.btn {
+    padding: var(--space-sm) var(--space-xl);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-base);
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.btn-outline {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-glow-subtle);
+}
+
+/* Botón de certificaciones */
+.btn-primary.cert {
+    color: white;
+    padding: var(--space-sm) var(--space-lg);
+    margin-top: var(--space-xl);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Botón de submit del formulario */
+.submit-btn {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: var(--space-sm) var(--space-xl);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 0 20px var(--accent-glow);
+}

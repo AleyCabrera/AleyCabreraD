@@ -1,0 +1,166 @@
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.hero-content .highlight {
+    color: var(--accent-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-content .highlight::after {
+    content: "_";
+    position: absolute;
+    animation: blink 1s infinite;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-xl);
+    font-weight: 400;
+    font-family: var(--font-terminal);
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+    padding: var(--space-md) var(--space-lg);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+    color: var(--text-tertiary);
+    background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
+    background-size: 100% 2px;
+}
+
+.hero-subtitle::after {
+    content: "█";
+    color: var(--accent-primary);
+    animation: cursor-blink 1s infinite;
+    margin-left: 4px;
+    opacity: 0.7;
+}
+
+.dark-theme .hero-subtitle {
+    text-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+}
+
+.light-theme .hero-subtitle {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+}
+
+.hero-stats {
+    display: flex;
+    gap: var(--space-2xl);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    transition: var(--transition-base);
+}
+
+.stat-item:hover .stat-number {
+    color: var(--accent-primary);
+    transform: scale(1.1);
+    text-shadow: 0 0 10px var(--accent-primary);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* Hero Visual */
+.hero-visual {
+    height: 360px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.circuit-bg {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--accent-glow-subtle) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--accent-glow-subtle) 1px, transparent 1px);
+    background-size: 30px 30px;
+    position: relative;
+    animation: moveGrid 10s linear infinite;
+}
+
+.tech-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    background: var(--bg-elevated);
+    border: 2px solid var(--accent-primary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 30px var(--accent-primary);
+    animation: glowPulse 3s infinite;
+}
+
+.tech-icon i {
+    font-size: 2.5rem;
+    color: #60a5fa;
+    margin: var(--space-sm);
+}
+
+.tech-icon span {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    font-weight: 300;
+    font-family: var(--font-mono);
+}
+
+.type-writer {
+    display: inline-block;
+    animation: blink 1s infinite;
+}

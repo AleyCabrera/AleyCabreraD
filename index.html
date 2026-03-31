@@ -99,7 +99,7 @@
     
     <!---Scripts-->
     <script src="./js/main.js" type="module" defer></script>
-    <script src="./js/logo.js" type="module" defer></script>
+    <!-- <script src="./js/logo.js" type="module" defer></script>-->
     <script src="./js/año.js" type="module" defer></script>
 
 </head>
@@ -171,7 +171,16 @@
                 </div> -->
             </div>
 
-            <nav class="nav-links" aria-label="Navegación principal">
+            <!-- Botón hamburguesa -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú" aria-expanded="false">
+                <span class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+
+            <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
                 <a href="#inicio">INICIO</a>
                 <a href="#sobre-mi">SOBRE MÍ</a>
                 <a href="#proyectos">PROYECTOS</a>
@@ -556,34 +565,51 @@
         <section class="certifications-section" aria-labelledby="certifications-title">
             <header class="section-header">
                 <h2 id="certifications-title" class="section-title">Certificaciones</h2>
+                <p class="section-subtitle">Formación continua y especialización técnica</p>
             </header>
-
+        
             <div class="cert-grid">
+                <!-- Tarjeta 1 -->
                 <article class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-user" aria-hidden="true"></i></div>
+                    <div class="cert-icon">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
                     <h3>Soporte Tecnico</h3>
                     <p>Automatización</p>
                 </article>
+        
+                <!-- Tarjeta 2 -->
                 <article class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+                    <div class="cert-icon">
+                        <i class="fas fa-network-wired" aria-hidden="true"></i>
+                    </div>
                     <h3>Redes</h3>
                     <p>Redes y Comunicaciones</p>
                 </article>
+        
+                <!-- Tarjeta 3 -->
                 <article class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <div class="cert-icon">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                    </div>
                     <h3>Programacion</h3>
                     <p>Desarrollo de software</p>
                 </article>
+        
+                <!-- Tarjeta 4 -->
                 <article class="cert-card">
-                    <div class="cert-icon"><i class="fas fa-shield" aria-hidden="true"></i></div>
+                    <div class="cert-icon">
+                        <i class="fas fa-shield" aria-hidden="true"></i>
+                    </div>
                     <h3>Ciberseguridad</h3>
                     <p>analisis de vulnerabilidades</p>
                 </article>
             </div>
-
-            <div>
-                <button class="btn btn-primary cert">
-                    <a href="certificaciones.html" class="link-cert" target="_blank">Ver todas las certificaciones</a></button>
+        
+            <div class="cert-button-container">
+                <a href="certificaciones.html" class="btn btn-primary cert" target="_blank" rel="noopener noreferrer">
+                    Ver todas las certificaciones
+                </a>
             </div>
         </section>
 

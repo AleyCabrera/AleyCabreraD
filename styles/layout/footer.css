@@ -1,0 +1,49 @@
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xl) 0 var(--space-3xl);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-xl);
+    color: var(--text-muted);
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-base);
+    padding: var(--space-xs) 0;
+}
+
+.footer-links a:hover {
+    color: var(--accent-primary);
+}
+
+/* Utilidad de interacción */
+.interaction {
+    text-align: left;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    margin-left: 9rem;
+}
+
+.light {
+    color: var(--accent-primary);
+    animation: flash 1.5s infinite;
+}

@@ -9,442 +9,254 @@
  * ========================================================================
  */
 
+// js/main.js - VERSIÓN FUNCIONAL
+
 (function() {
     'use strict';
-
-    // ========================================================================
-    // CONFIGURACIÓN GLOBAL
-    // ========================================================================
-
-    const APP_CONFIG = {
-        /** @type {Object} Configuración de animaciones */
-        animations: {
-            typingDuration: 100,
-            numberIncrementSteps: 50,
-            mouseRotateIntensity: 20,
-            perspectiveValue: 1000,
-            throttleLimit: 16,
-            crossfadeDuration: 2000,
-            defaultVolume: 0.5,
-            observerThreshold: 0.3,
-            statsThreshold: 0.5
-        },
-        
-        /** @type {Object} Selectores DOM */
-        selectors: {
-            body: 'body',
-            themeToggle: '.theme-toggle i',
-            statNumbers: '.stat-number',  // ← Solo una vez
-            heroTitleHighlight: '.hero-content h1 span.highlight',
-            heroVisual: '.hero-visual',
-            statsSection: '.stats-section',
-            systemStatus: '.system-status',
-            whatsappButton: '.whatsapp-button',
-            audioControl: '#audioControl',
-            audioElement: '#bgAudio',
-            statusText: '.status-text',
-            whatsappTooltip: '.whatsapp-tooltip',
-            audioIcon: 'i',
-            profProgress: '.prof-progress',
-            aptitudesCategory: '.aptitudes-category'
-        },
-        
-        /** @type {Object} Clases CSS */
-        classes: {
-            darkTheme: 'dark-theme',
-            lightTheme: 'light-theme',
-            faSun: 'fa-sun',
-            faMoon: 'fa-moon',
-            offline: 'offline',
-            playing: 'playing',
-            muted: 'muted',
-            blocked: 'blocked',
-            error: 'error',
-            badge: 'badge',
-            statusTooltip: 'status-tooltip'
-        },
-        
-        /** @type {Object} Storage keys */
-        storage: {
-            theme: 'theme',
-            audioPreference: 'audio_preference'
-        },
-        
-        /** @type {Object} Números y contactos */
-        contacts: {
-            whatsapp: '573234737757'
-        },
-        
-        /** @type {Object} Textos por defecto */
-        defaults: {
-            systemOnline: 'system_online',
-            systemOffline: 'system_offline',
-            statusTooltip: 'Uptime: 99.9% | Latencia: 23ms',
-            whatsappMessage: 'Contáctame',
-            whatsappAvailable: '¡Disponible ahora!',
-            whatsappOffline: 'Deja tu mensaje',
-            audioPlay: 'Reproducir música',
-            audioPause: 'Pausar música',
-            audioActivate: 'Activar música',
-            audioError: 'Error al cargar audio'
-        },
-        
-        /** @type {Object} Logs de depuración */
-        debug: {
-            enabled: true,
-            prefix: '🔧'
-        }
+    
+    console.log('🚀 Inicializando aplicación...');
+    
+    // ============================================
+    // CONFIGURACIÓN
+    // ============================================
+    
+    const CONFIG = {
+        debug: true,
+        typingDuration: 100,
+        throttleLimit: 16,
+        defaultVolume: 0.5
     };
-
-    // ========================================================================
-    // UTILIDADES
-    // ========================================================================
-
-    const Logger = {
-        log: (...args) => APP_CONFIG.debug.enabled && console.log(APP_CONFIG.debug.prefix, ...args),
-        warn: (...args) => APP_CONFIG.debug.enabled && console.warn('⚠️', ...args),
-        error: (...args) => console.error('❌', ...args),
-        group: (label) => APP_CONFIG.debug.enabled && console.group(label),
-        groupEnd: () => APP_CONFIG.debug.enabled && console.groupEnd()
-    };
-
-    const Utils = {
-        /**
-         * Limpia todas las animaciones activas
-         * @param {Object} state - Estado de la aplicación
-         */
-        cleanupAnimations(state) {
-            if (state?.animationFrame) {
-                cancelAnimationFrame(state.animationFrame);
-                state.animationFrame = null;
-            }
+    
+    // ============================================
+    // FUNCIÓN PRINCIPAL - DOM CONTENT LOADED
+    // ============================================
+    
+    function init() {
+        console.log('📦 DOM cargado, iniciando componentes...');
+        
+        // 1. Toggle Theme
+        initThemeToggle();
+        
+        // 2. Menú Hamburguesa
+        initHamburgerMenu();
+        
+        // 3. Animación de números (Hero stats: 3+, 3, 2, 1)
+        initHeroStats();
+        
+        // 4. Animación de números (Sección En Números)
+        initNumbersStats();
+        
+        // 5. Animación de barras de habilidades
+        initSkillBars();
+        
+        // 6. Animación de categorías de aptitudes
+        initAptitudesCategories();
+        
+        // 7. Efecto de escritura en título
+        initTypeWriter();
+        
+        // 8. Efecto 3D en Hero Visual
+        initHeroVisual3D();
+        
+        // 9. Botón volver arriba
+        initBackToTop();
+        
+        // 10. Cuadrados flotantes (logo)
+        initCuadradosFlotantes();
+        
+        // 11. WhatsApp Button con tooltip dinámico
+        initWhatsAppButton();
+        
+        // 12. Audio Control
+        initAudioControl();
+        
+        // 13. System Status dinámico
+        initSystemStatus();
+        
+        console.log('✅ Todos los componentes inicializados');
+    }
+    
+    // ============================================
+    // 1. TOGGLE THEME (CORREGIDO)
+    // ============================================
+    
+    function initThemeToggle() {
+        // Crear función global para que funcione el onclick del HTML
+        window.toggleTheme = function() {
+            const body = document.body;
+            const themeIcon = document.querySelector('.theme-toggle i');
             
-            if (state?.typingInterval) {
-                clearInterval(state.typingInterval);
-                state.typingInterval = null;
-            }
-        },
-
-        /**
-         * Extrae número de un string
-         * @param {string} str - String con número
-         * @returns {number}
-         */
-        extractNumberFromString: (str) => parseInt(str.replace(/[^0-9]/g, '')) || 0,
-
-        /**
-         * Preserva el sufijo del número
-         * @param {string} originalText - Texto original
-         * @param {number} number - Número procesado
-         * @returns {string}
-         */
-        preserveNumberSuffix: (originalText, number) => {
-            const suffix = originalText.replace(/[0-9]/g, '');
-            return number + suffix;
-        },
-
-        /**
-         * Throttle para eventos de alto rendimiento
-         * @param {Function} func - Función a throttle
-         * @param {number} limit - Límite en ms
-         * @returns {Function}
-         */
-        throttle: (func, limit) => {
-            let inThrottle;
-            return function(...args) {
-                if (!inThrottle) {
-                    func.apply(this, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                if (themeIcon) {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
                 }
-            };
-        },
-
-        /**
-         * Debounce para eventos
-         * @param {Function} func - Función a debounce
-         * @param {number} wait - Tiempo de espera
-         * @returns {Function}
-         */
-        debounce: (func, wait) => {
-            let timeout;
-            return function(...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        },
-
-        /**
-         * Verifica si es dispositivo móvil
-         * @returns {boolean}
-         */
-        isMobile: () => window.innerWidth <= 768,
-
-        /**
-         * Formatea número de teléfono
-         * @param {string} phone - Número de teléfono
-         * @returns {string}
-         */
-        formatPhoneNumber: (phone) => phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'),
-
-        /**
-         * Obtener hora actual
-         * @returns {number}
-         */
-        getCurrentHour: () => new Date().getHours(),
-
-        /**
-         * Dispara evento personalizado
-         * @param {string} eventName - Nombre del evento
-         * @param {Object} detail - Datos del evento
-         */
-        dispatchEvent: (eventName, detail = {}) => {
-            const event = new CustomEvent(eventName, { detail });
-            document.dispatchEvent(event);
-        },
-
-        /**
-         * Guarda en localStorage con manejo de errores
-         * @param {string} key - Llave
-         * @param {any} value - Valor
-         */
-        safeStorageSet: (key, value) => {
-            try {
-                localStorage.setItem(key, JSON.stringify(value));
-            } catch (e) {
-                Logger.warn(`Error guardando ${key}:`, e);
-            }
-        },
-
-        /**
-         * Lee de localStorage con manejo de errores
-         * @param {string} key - Llave
-         * @param {any} defaultValue - Valor por defecto
-         * @returns {any}
-         */
-        safeStorageGet: (key, defaultValue = null) => {
-            try {
-                const saved = localStorage.getItem(key);
-                return saved ? JSON.parse(saved) : defaultValue;
-            } catch (e) {
-                Logger.warn(`Error leyendo ${key}:`, e);
-                return defaultValue;
-            }
-        },
-
-        /**
-         * Crea un Intersection Observer con configuración estándar
-         * @param {Function} callback - Función a ejecutar
-         * @param {number} threshold - Umbral de visibilidad
-         * @returns {IntersectionObserver}
-         */
-        createObserver: (callback, threshold = 0.3) => {
-            return new IntersectionObserver(callback, { threshold });
-        }
-    };
-
-    // ========================================================================
-    // MÓDULO DE ESTADO GLOBAL
-    // ========================================================================
-
-    const AppState = (() => {
-        const state = {
-            currentTheme: null,
-            animationFrame: null,
-            typingInterval: null,
-            modules: new Map()
-        };
-
-        return {
-            get: () => state,
-            set: (updates) => Object.assign(state, updates),
-            registerModule: (name, instance) => state.modules.set(name, instance),
-            getModule: (name) => state.modules.get(name),
-            cleanup: () => {
-                Utils.cleanupAnimations(state);
-                state.modules.forEach(module => module.destroy?.());
-                state.modules.clear();
+                localStorage.setItem('theme', 'light-theme');
+                console.log('🌞 Cambiado a tema claro');
+            } else {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                if (themeIcon) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+                localStorage.setItem('theme', 'dark-theme');
+                console.log('🌙 Cambiado a tema oscuro');
             }
         };
-    })();
-
-    // ========================================================================
-    // MÓDULO BASE (Abstracto)
-    // ========================================================================
-
-    class BaseModule {
-        constructor(name) {
-            this.name = name;
-            this.elements = {};
-            this.observers = new Map();
-        }
-
-        init() {
-            this.cacheElements();
-            this.setupEventListeners();
-            AppState.registerModule(this.name, this);
-            Logger.log(`✅ Módulo ${this.name} inicializado`);
-        }
-
-        cacheElements() {
-            // Implementar en subclases
-        }
-
-        setupEventListeners() {
-            // Implementar en subclases
-        }
-
-        destroy() {
-            this.observers.forEach(observer => observer.disconnect());
-            this.observers.clear();
-        }
-    }
-
-    // ========================================================================
-    // MÓDULO DE TEMA
-    // ========================================================================
-
-    class ThemeManager extends BaseModule {
-        constructor() {
-            super('theme');
-        }
-
-        cacheElements() {
-            this.elements = {
-                body: document.querySelector(APP_CONFIG.selectors.body),
-                toggleIcon: document.querySelector(APP_CONFIG.selectors.themeToggle),
-                toggleButton: document.querySelector(APP_CONFIG.selectors.themeToggle)?.parentElement
-            };
-        }
-
-        loadSavedTheme() {
-            const savedTheme = Utils.safeStorageGet(APP_CONFIG.storage.theme, APP_CONFIG.classes.darkTheme);
-            const { body, toggleIcon } = this.elements;
-            
-            if (!body) return;
-
-            body.classList.remove(APP_CONFIG.classes.darkTheme, APP_CONFIG.classes.lightTheme);
-            body.classList.add(savedTheme);
-            
-            this.updateIcon(savedTheme);
-            AppState.set({ currentTheme: savedTheme });
-        }
-
-        updateIcon(theme) {
-            const { toggleIcon } = this.elements;
-            if (!toggleIcon) return;
-
-            const isDark = theme === APP_CONFIG.classes.darkTheme;
-            toggleIcon.classList.remove(APP_CONFIG.classes.faSun, APP_CONFIG.classes.faMoon);
-            toggleIcon.classList.add(isDark ? APP_CONFIG.classes.faSun : APP_CONFIG.classes.faMoon);
-        }
-
-        toggle() {
-            const { body, toggleIcon } = this.elements;
-            if (!body || !toggleIcon) return;
-
-            const isDark = body.classList.contains(APP_CONFIG.classes.darkTheme);
-            const newTheme = isDark ? APP_CONFIG.classes.lightTheme : APP_CONFIG.classes.darkTheme;
-            
-            body.classList.remove(APP_CONFIG.classes.darkTheme, APP_CONFIG.classes.lightTheme);
-            body.classList.add(newTheme);
-            
-            this.updateIcon(newTheme);
-            Utils.safeStorageSet(APP_CONFIG.storage.theme, newTheme);
-            AppState.set({ currentTheme: newTheme });
-            
-            Utils.dispatchEvent('themeChanged', { theme: newTheme });
-        }
-
-        setupEventListeners() {
-            this.elements.toggleButton?.addEventListener('click', () => this.toggle());
-        }
-
-        destroy() {
-            this.elements.toggleButton?.removeEventListener('click', this.toggle);
-            super.destroy();
-        }
-
-        init() {
-            this.cacheElements();
-            this.loadSavedTheme();
-            this.setupEventListeners();
-            AppState.registerModule(this.name, this);
-        }
-    }
-
-    // ========================================================================
-    // MÓDULO DE ANIMACIONES
-    // ========================================================================
-
-    /**
- * ========================================================================
- * MÓDULO DE ANIMACIONES - CORREGIDO CON SECCIONES SEPARADAS
- * ========================================================================
- */
-
-/**
- * ========================================================================
- * MÓDULO DE ANIMACIONES - VERSIÓN CORREGIDA
- * ========================================================================
- */
-
-class AnimationManager extends BaseModule {
-    constructor() {
-        super('animations');
-        // Control estricto de qué elementos ya fueron animados
-        this.animatedElements = new WeakSet();
-    }
-
-    init() {
-        Logger.group('🎬 Inicializando AnimationManager');
         
-        // Configurar cada sección por separado
-        this.setupHeroStats();      // Sección hero-stats (3+, 3, 2, 1)
-        this.setupNumbersSection(); // Sección En Números (6, 25, 800, 300)
-        this.setupSkillBars();
-        this.setupAptitudesAnimations();
-        this.setupTypeWriter();
-        this.setupHeroVisualEffects();
-        this.setupBackToTop();
+        // Cargar tema guardado
+        const savedTheme = localStorage.getItem('theme');
+        const body = document.body;
+        const themeIcon = document.querySelector('.theme-toggle i');
         
-        super.init();
-        Logger.groupEnd();
+        if (savedTheme === 'light-theme') {
+            body.classList.remove('dark-theme');
+            body.classList.add('light-theme');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        } else {
+            body.classList.remove('light-theme');
+            body.classList.add('dark-theme');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
         
-        // Diagnóstico automático
-        setTimeout(() => this.diagnoseStats(), 1000);
+        console.log('✅ Theme toggle inicializado');
     }
-
-    /**
-     * Configura SOLO las estadísticas del hero (parte superior)
-     */
-    setupHeroStats() {
-        const heroStats = document.querySelectorAll('.hero-stats .stat-number');
-        Logger.log('🎯 Hero stats encontradas:', heroStats.length);
+    
+    // ============================================
+    // 2. MENÚ HAMBURGUESA
+    // ============================================
+    
+    function initHamburgerMenu() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
         
-        heroStats.forEach(stat => {
-            // Si ya fue animado, lo ignoramos
-            if (this.animatedElements.has(stat)) return;
-            
-            // Guardar el texto original (ej: "3+", "3", "2", "1")
+        if (!menuToggle || !navLinks) {
+            console.warn('Menú hamburguesa: elementos no encontrados');
+            return;
+        }
+        
+        // Crear overlay
+        let overlay = document.querySelector('.menu-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'menu-overlay';
+            document.body.appendChild(overlay);
+        }
+        
+        function openMenu() {
+            navLinks.classList.add('active');
+            menuToggle.classList.add('active');
+            overlay.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+        
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navLinks.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        
+        overlay.addEventListener('click', closeMenu);
+        
+        // CORRECCIÓN IMPORTANTE: Para los enlaces, NO cerramos el menú inmediatamente
+        // Damos tiempo para que el navegador procese el clic y navegue
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Guardamos el href antes de cerrar
+                const href = link.getAttribute('href');
+                
+                // Cerramos el menú
+                closeMenu();
+                
+                // Si es un enlace interno (empieza con #), nos aseguramos que navegue
+                if (href && href.startsWith('#')) {
+                    // Dejamos que el navegador maneje la navegación
+                    // No hacemos preventDefault() para que funcione
+                    console.log(`Navegando a: ${href}`);
+                    
+                    // Buscamos el elemento destino
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Si hay un header fijo, ajustamos el scroll
+                        const header = document.querySelector('.navbar');
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        
+                        setTimeout(() => {
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }, 100);
+                    }
+                }
+            });
+        });
+        
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+        
+        console.log('✅ Menú hamburguesa inicializado');
+    }
+    
+    // ============================================
+    // 3. HERO STATS (3+, 3, 2, 1)
+    // ============================================
+    
+    function initHeroStats() {
+        const stats = document.querySelectorAll('.hero-stats .stat-number');
+        console.log(`🎯 Hero stats encontradas: ${stats.length}`);
+        
+        if (stats.length === 0) return;
+        
+        const animated = new WeakSet();
+        
+        stats.forEach(stat => {
             const originalText = stat.textContent;
-            const targetValue = this.extractNumberFromString(originalText);
-            const suffix = originalText.replace(/\d+/g, '');
+            const match = originalText.match(/(\d+)(\+?)/);
+            const targetValue = match ? parseInt(match[1]) : 0;
+            const hasPlus = match ? match[2] === '+' : false;
+            const suffix = originalText.replace(/[\d+]/g, '');
             
-            // IMPORTANTE: No cambiar el texto aquí, solo guardar datos
-            stat.dataset.heroOriginal = originalText;
-            stat.dataset.heroTarget = targetValue;
-            stat.dataset.heroSuffix = suffix;
+            stat.dataset.original = originalText;
+            stat.dataset.target = targetValue;
+            stat.dataset.suffix = suffix;
+            stat.dataset.hasPlus = hasPlus;
             
-            Logger.log(`Hero stat preparado: ${originalText} → target: ${targetValue}`);
-            
-            // Observer para cuando sea visible
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && !this.animatedElements.has(stat)) {
-                        Logger.log(`🎬 Animando hero stat: ${originalText}`);
-                        this.animateHeroNumber(stat);
-                        this.animatedElements.add(stat);
+                    if (entry.isIntersecting && !animated.has(stat)) {
+                        animateHeroNumber(stat);
+                        animated.add(stat);
                         observer.unobserve(stat);
                     }
                 });
@@ -452,41 +264,72 @@ class AnimationManager extends BaseModule {
             
             observer.observe(stat);
         });
-    }
-
-    /**
-     * Configura SOLO la sección "En Números"
-     */
-    setupNumbersSection() {
-        const numbersStats = document.querySelectorAll('.stats-grid .stat-number');
-        Logger.log('🔢 Numbers stats encontradas:', numbersStats.length);
         
-        numbersStats.forEach(stat => {
-            // Si ya fue animado, lo ignoramos
-            if (this.animatedElements.has(stat)) return;
+        function animateHeroNumber(stat) {
+            const target = parseInt(stat.dataset.target) || 0;
+            const original = stat.dataset.original;
+            const suffix = stat.dataset.suffix || '';
+            const hasPlus = stat.dataset.hasPlus === 'true';
             
-            // Obtener datos del atributo data-target
-            const targetValue = stat.getAttribute('data-target');
-            const currentText = stat.textContent;
-            
-            if (!targetValue) {
-                Logger.warn('Stat sin data-target:', stat);
+            if (target === 0) {
+                stat.textContent = original;
                 return;
             }
             
-            // Guardar datos
-            stat.dataset.numbersTarget = targetValue;
-            stat.dataset.numbersOriginal = currentText;
+            let current = 0;
+            const steps = 25;
+            const increment = target / steps;
             
-            Logger.log(`Number stat preparado: ${currentText} → target: ${targetValue}`);
+            function update() {
+                if (current < target) {
+                    current += increment;
+                    if (current > target) current = target;
+                    
+                    let display = Math.floor(current);
+                    let text = display + suffix;
+                    
+                    if (hasPlus && display === target) {
+                        text = display + '+';
+                    }
+                    
+                    stat.textContent = text;
+                    requestAnimationFrame(update);
+                } else {
+                    stat.textContent = original;
+                    console.log(`✅ Hero stat animado: ${original}`);
+                }
+            }
             
-            // Observer para cuando sea visible
+            requestAnimationFrame(update);
+        }
+        
+        console.log('✅ Hero stats inicializadas');
+    }
+    
+    // ============================================
+    // 4. NUMBERS STATS (Sección En Números)
+    // ============================================
+    
+    function initNumbersStats() {
+        const stats = document.querySelectorAll('.stats-grid .stat-number');
+        console.log(`🔢 Numbers stats encontradas: ${stats.length}`);
+        
+        if (stats.length === 0) return;
+        
+        const animated = new WeakSet();
+        
+        stats.forEach(stat => {
+            const targetValue = stat.getAttribute('data-target');
+            if (!targetValue) return;
+            
+            stat.dataset.target = targetValue;
+            stat.dataset.original = stat.textContent;
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && !this.animatedElements.has(stat)) {
-                        Logger.log(`🎬 Animando number stat: ${targetValue}`);
-                        this.animateNumbersStat(stat);
-                        this.animatedElements.add(stat);
+                    if (entry.isIntersecting && !animated.has(stat)) {
+                        animateNumberStat(stat);
+                        animated.add(stat);
                         observer.unobserve(stat);
                     }
                 });
@@ -494,1022 +337,424 @@ class AnimationManager extends BaseModule {
             
             observer.observe(stat);
         });
-    }
-
-    /**
-     * Anima las estadísticas del hero
-     */
-    animateHeroNumber(statElement) {
-        const targetValue = parseInt(statElement.dataset.heroTarget) || 0;
-        const originalText = statElement.dataset.heroOriginal;
-        const suffix = statElement.dataset.heroSuffix || '';
         
-        if (targetValue === 0) {
-            statElement.textContent = originalText;
-            return;
-        }
-
-        let currentValue = 0;
-        // Hero stats: animación más rápida y directa
-        const steps = 20;
-        const increment = targetValue / steps;
-        
-        const animate = () => {
-            if (currentValue < targetValue) {
-                currentValue += increment;
-                if (currentValue > targetValue) currentValue = targetValue;
-                
-                const displayNumber = Math.floor(currentValue);
-                statElement.textContent = displayNumber + suffix;
-                
-                requestAnimationFrame(animate);
-            } else {
-                // Al final, mostrar el texto original completo
-                statElement.textContent = originalText;
-                Logger.log(`✅ Hero stat animado: ${originalText}`);
-            }
-        };
-
-        requestAnimationFrame(animate);
-    }
-
-    /**
-     * Anima las estadísticas de la sección "En Números"
-     */
-    animateNumbersStat(statElement) {
-        const targetValue = parseInt(statElement.dataset.numbersTarget) || 0;
-        const originalText = statElement.dataset.numbersOriginal;
-        
-        if (targetValue === 0) {
-            statElement.textContent = originalText;
-            return;
-        }
-
-        let currentValue = 0;
-        // Numbers stats: animación más suave y controlada
-        const steps = 50;
-        const increment = targetValue / steps;
-        
-        // Flag para evitar animaciones múltiples
-        let isAnimating = true;
-        
-        const animate = () => {
-            if (!isAnimating) return;
+        function animateNumberStat(stat) {
+            const target = parseInt(stat.dataset.target) || 0;
+            if (target === 0) return;
             
-            if (currentValue < targetValue) {
-                currentValue += increment;
-                if (currentValue > targetValue) currentValue = targetValue;
+            let current = 0;
+            const steps = 60;
+            const increment = target / steps;
+            let animating = true;
+            
+            function update() {
+                if (!animating) return;
                 
-                const displayNumber = Math.floor(currentValue);
-                statElement.textContent = displayNumber;
-                
-                requestAnimationFrame(animate);
-            } else {
-                // Asegurar que muestra el valor exacto al final
-                statElement.textContent = targetValue;
-                Logger.log(`✅ Number stat animado: ${targetValue}`);
-                isAnimating = false;
+                if (current < target) {
+                    current += increment;
+                    if (current > target) current = target;
+                    stat.textContent = Math.floor(current);
+                    requestAnimationFrame(update);
+                } else {
+                    stat.textContent = target;
+                    animating = false;
+                }
             }
-        };
-
-        requestAnimationFrame(animate);
-    }
-
-    /**
-     * Extrae número de un string (para hero stats)
-     */
-    extractNumberFromString(str) {
-        if (!str) return 0;
-        const match = str.match(/\d+/);
-        return match ? parseInt(match[0]) : 0;
-    }
-
-    /**
-     * DIAGNÓSTICO - Para verificar qué está pasando
-     */
-    diagnoseStats() {
-        console.group('🔍 DIAGNÓSTICO DE ESTADÍSTICAS');
+            
+            requestAnimationFrame(update);
+        }
         
-        // Hero stats
-        const heroStats = document.querySelectorAll('.hero-stats .stat-number');
-        console.log('Hero stats:', heroStats.length);
-        heroStats.forEach((stat, i) => {
-            console.log(`Hero[${i}]:`, {
-                texto: stat.textContent,
-                original: stat.dataset.heroOriginal,
-                target: stat.dataset.heroTarget,
-                animada: this.animatedElements.has(stat)
-            });
-        });
-        
-        // Numbers stats
-        const numbersStats = document.querySelectorAll('.stats-grid .stat-number');
-        console.log('Numbers stats:', numbersStats.length);
-        numbersStats.forEach((stat, i) => {
-            console.log(`Numbers[${i}]:`, {
-                texto: stat.textContent,
-                target: stat.dataset.numbersTarget,
-                original: stat.dataset.numbersOriginal,
-                animada: this.animatedElements.has(stat)
-            });
-        });
-        
-        console.groupEnd();
+        console.log('✅ Numbers stats inicializadas');
     }
-
-    // Limpiar al destruir
-    destroy() {
-        this.animatedElements = new WeakSet();
-        this.observers.forEach(observer => observer.disconnect());
-        this.observers.clear();
-        super.destroy();
-    }
-
-    // ========================================================================
-    // MÉTODOS EXISTENTES (sin cambios)
-    // ========================================================================
     
-    setupSkillBars() {
-        const skillBars = document.querySelectorAll(APP_CONFIG.selectors.profProgress);
+    // ============================================
+    // 5. SKILL BARS (Barras de habilidades)
+    // ============================================
+    
+    function initSkillBars() {
+        const bars = document.querySelectorAll('.prof-progress');
+        console.log(`📊 Skill bars encontradas: ${bars.length}`);
         
-        skillBars.forEach(bar => {
-            const observer = Utils.createObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        bar.style.transition = 'width 1s ease-in-out';
-                        observer.unobserve(bar);
-                    }
-                });
-            });
-            
-            this.observers.set(bar, observer);
-            observer.observe(bar);
-        });
-    }
-
-    setupBackToTop() {
-        this.backToTopButton = document.getElementById('backToTop');
-        if (!this.backToTopButton) return;
+        if (bars.length === 0) return;
         
-        window.addEventListener('scroll', Utils.throttle(() => {
-            if (window.scrollY > 500) {
-                this.backToTopButton.classList.add('visible');
-            } else {
-                this.backToTopButton.classList.remove('visible');
-            }
-        }, 100));
-        
-        this.backToTopButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.smoothScrollToTop();
-        });
-        
-        Logger.log('🔝 Botón volver arriba configurado');
-    }
-
-    smoothScrollToTop() {
-        this.backToTopButton.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-            this.backToTopButton.style.transform = '';
-        }, 200);
-        
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    setupTypeWriter() {
-        const titleHighlight = document.querySelector(APP_CONFIG.selectors.heroTitleHighlight);
-        if (!titleHighlight) return;
-
-        const observer = Utils.createObserver(
-            (entries) => this.handleTitleIntersection(entries, titleHighlight),
-            APP_CONFIG.animations.statsThreshold
-        );
-        
-        this.observers.set(titleHighlight, observer);
-        observer.observe(titleHighlight);
-    }
-
-    handleTitleIntersection(entries, element) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                this.typeWriterEffect(element);
-                this.observers.get(element)?.unobserve(element);
-                this.observers.delete(element);
-            }
-        });
-    }
-
-    typeWriterEffect(element) {
-        const originalText = element.textContent;
-        const textArray = originalText.split('');
-        
-        element.textContent = '';
-        let index = 0;
-
-        if (AppState.get().typingInterval) {
-            clearInterval(AppState.get().typingInterval);
-        }
-
-        const interval = setInterval(() => {
-            if (index < textArray.length) {
-                element.textContent += textArray[index];
-                index++;
-            } else {
-                clearInterval(interval);
-                AppState.set({ typingInterval: null });
-                Utils.dispatchEvent('typingComplete');
-            }
-        }, APP_CONFIG.animations.typingDuration);
-
-        AppState.set({ typingInterval: interval });
-    }
-
-    setupHeroVisualEffects() {
-        const heroVisual = document.querySelector(APP_CONFIG.selectors.heroVisual);
-        if (!heroVisual) return;
-
-        const handleMouseMove = Utils.throttle(
-            (e) => this.handleHeroMouseMove(e, heroVisual),
-            APP_CONFIG.animations.throttleLimit
-        );
-
-        heroVisual.addEventListener('mousemove', handleMouseMove);
-        heroVisual.addEventListener('mouseleave', () => this.resetHeroTransform(heroVisual));
-        
-        heroVisual.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            handleMouseMove(e.touches[0]);
-        });
-        
-        heroVisual.addEventListener('touchend', () => this.resetHeroTransform(heroVisual));
-    }
-
-    handleHeroMouseMove(event, element) {
-        const rect = element.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const angleX = (y - centerY) / APP_CONFIG.animations.mouseRotateIntensity;
-        const angleY = (centerX - x) / APP_CONFIG.animations.mouseRotateIntensity;
-        
-        const limitedAngleX = Math.max(-15, Math.min(15, angleX));
-        const limitedAngleY = Math.max(-15, Math.min(15, angleY));
-        
-        element.style.transform = `perspective(${APP_CONFIG.animations.perspectiveValue}px) rotateX(${limitedAngleX}deg) rotateY(${limitedAngleY}deg)`;
-        element.style.transition = 'transform 0.1s ease';
-    }
-
-    resetHeroTransform(element) {
-        element.style.transform = `perspective(${APP_CONFIG.animations.perspectiveValue}px) rotateX(0) rotateY(0)`;
-        element.style.transition = 'transform 0.5s ease';
-    }
-
-    setupAptitudesAnimations() {
-        Logger.log('🎨 Configurando animaciones de aptitudes');
-        
-        const profBars = document.querySelectorAll(APP_CONFIG.selectors.profProgress);
-        
-        profBars.forEach(bar => {
+        bars.forEach(bar => {
             const targetWidth = bar.style.width;
+            if (!targetWidth) return;
             
             bar.style.width = '0';
             bar.style.transition = 'none';
             
-            const observer = Utils.createObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        bar.style.transition = 'width 1s ease-in-out';
+                        bar.style.transition = 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
                         bar.style.width = targetWidth;
                         observer.unobserve(bar);
                     }
                 });
-            });
+            }, { threshold: 0.3 });
             
-            this.observers.set(bar, observer);
             observer.observe(bar);
         });
         
-        const categories = document.querySelectorAll(APP_CONFIG.selectors.aptitudesCategory);
+        console.log('✅ Skill bars inicializadas');
+    }
+    
+    // ============================================
+    // 6. APTITUDES CATEGORIES
+    // ============================================
+    
+    function initAptitudesCategories() {
+        const categories = document.querySelectorAll('.aptitudes-category');
+        console.log(`🎨 Aptitudes categories encontradas: ${categories.length}`);
+        
+        if (categories.length === 0) return;
         
         categories.forEach((category, index) => {
-            const observer = Utils.createObserver((entries) => {
+            category.style.opacity = '0';
+            category.style.transform = 'translateY(20px)';
+            category.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
-                            entry.target.classList.add('aptitude-visible');
-                        }, index * 100);
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 150);
                         observer.unobserve(entry.target);
                     }
                 });
-            }, 0.2);
+            }, { threshold: 0.2 });
             
-            this.observers.set(category, observer);
             observer.observe(category);
         });
+        
+        // También animar los items individuales
+        const listItems = document.querySelectorAll('.aptitudes-list li');
+        listItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-10px)';
+            item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateX(0)';
+                        }, index * 50);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            observer.observe(item);
+        });
+        
+        console.log('✅ Aptitudes categories inicializadas');
     }
-}
-
-    // ========================================================================
-    // MÓDULO DE SYSTEM STATUS
-    // ========================================================================
-
-    class SystemStatus extends BaseModule {
-        constructor() {
-            super('systemStatus');
-            this.statusInterval = null;
+    
+    // ============================================
+    // 7. TYPEWRITER EFFECT
+    // ============================================
+    
+    function initTypeWriter() {
+        const element = document.querySelector('.hero-content h1 span.highlight');
+        if (!element) {
+            console.warn('Typewriter: elemento no encontrado');
+            return;
         }
-
-        cacheElements() {
-            this.elements = {
-                container: document.querySelector(APP_CONFIG.selectors.systemStatus),
-                statusText: document.querySelector(`${APP_CONFIG.selectors.systemStatus} ${APP_CONFIG.selectors.statusText}`)
-            };
-        }
-
-        setupStatusUpdates() {
-            this.statusInterval = setInterval(() => this.toggleStatus(), 30000);
-        }
-
-        setupEventListeners() {
-            if (!this.elements.container) return;
-            
-            this.elements.container.addEventListener('click', () => this.toggleStatus());
-            this.elements.container.addEventListener('mouseenter', () => this.showTooltip());
-            this.elements.container.addEventListener('mouseleave', () => this.hideTooltip());
-        }
-
-        toggleStatus() {
-            if (!this.elements.container || !this.elements.statusText) return;
-
-            const isOnline = this.elements.container.classList.contains(APP_CONFIG.classes.offline);
-            
-            if (isOnline) {
-                this.elements.container.classList.remove(APP_CONFIG.classes.offline);
-                this.elements.statusText.textContent = APP_CONFIG.defaults.systemOnline;
-            } else {
-                this.elements.container.classList.add(APP_CONFIG.classes.offline);
-                this.elements.statusText.textContent = APP_CONFIG.defaults.systemOffline;
-            }
-
-            this.animateClick();
-        }
-
-        animateClick() {
-            if (!this.elements.container) return;
-            
-            this.elements.container.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                if (this.elements.container) {
-                    this.elements.container.style.transform = '';
+        
+        const originalText = element.textContent;
+        element.dataset.original = originalText;
+        element.textContent = '';
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    typeWriterEffect(element);
+                    observer.unobserve(element);
                 }
-            }, 200);
-        }
-
-        showTooltip() {
-            if (document.querySelector(`.${APP_CONFIG.classes.statusTooltip}`)) return;
-
-            const tooltip = document.createElement('div');
-            tooltip.className = APP_CONFIG.classes.statusTooltip;
-            tooltip.textContent = APP_CONFIG.defaults.statusTooltip;
-            
-            Object.assign(tooltip.style, {
-                position: 'fixed',
-                bottom: '60px',
-                right: '20px',
-                background: 'var(--bg-elevated)',
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
-                padding: '0.5rem 1rem',
-                borderRadius: 'var(--border-radius-sm)',
-                border: '1px solid var(--border-color)',
-                zIndex: 'calc(var(--z-fixed) - 1)',
-                backdropFilter: 'blur(4px)',
-                opacity: '0',
-                transform: 'translateY(10px)',
-                transition: 'var(--transition-base)',
-                pointerEvents: 'none'
             });
-
-            document.body.appendChild(tooltip);
+        }, { threshold: 0.5 });
+        
+        observer.observe(element);
+        
+        function typeWriterEffect(el) {
+            const text = el.dataset.original;
+            if (!text) return;
             
-            tooltip.offsetHeight;
-            tooltip.style.opacity = '1';
-            tooltip.style.transform = 'translateY(0)';
-        }
-
-        hideTooltip() {
-            const tooltip = document.querySelector(`.${APP_CONFIG.classes.statusTooltip}`);
-            if (tooltip) {
-                tooltip.style.opacity = '0';
-                tooltip.style.transform = 'translateY(10px)';
-                setTimeout(() => tooltip.remove(), 300);
-            }
-        }
-
-        setStatus(text) {
-            if (this.elements.statusText) {
-                this.elements.statusText.textContent = text;
-            }
-        }
-
-        destroy() {
-            if (this.statusInterval) {
-                clearInterval(this.statusInterval);
-            }
-            this.hideTooltip();
-            super.destroy();
-        }
-
-        init() {
-            this.cacheElements();
-            if (!this.elements.container) return;
+            const chars = text.split('');
+            let index = 0;
             
-            this.setupStatusUpdates();
-            this.setupEventListeners();
-            AppState.registerModule(this.name, this);
-        }
-    }
-
-    // ========================================================================
-    // MÓDULO DE WHATSAPP
-    // ========================================================================
-
-    class WhatsAppManager extends BaseModule {
-        constructor() {
-            super('whatsapp');
-        }
-
-        cacheElements() {
-            this.elements = {
-                button: document.querySelector(APP_CONFIG.selectors.whatsappButton),
-                tooltip: document.querySelector(`${APP_CONFIG.selectors.whatsappButton} ${APP_CONFIG.selectors.whatsappTooltip}`)
-            };
-        }
-
-        setupEventListeners() {
-            if (!this.elements.button) return;
-            
-            this.elements.button.addEventListener('click', () => this.trackClick());
-            this.elements.button.addEventListener('mouseenter', () => this.updateTooltipMessage());
-        }
-
-        checkMobile() {
-            if (Utils.isMobile()) {
-                this.elements.button?.removeAttribute('data-tooltip');
-            }
-        }
-
-        trackClick() {
-            Logger.log(`WhatsApp clicked - ${APP_CONFIG.contacts.whatsapp}`);
-            
-            this.elements.button.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                if (this.elements.button) {
-                    this.elements.button.style.transform = '';
+            const interval = setInterval(() => {
+                if (index < chars.length) {
+                    el.textContent += chars[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    console.log('✅ Typewriter completado');
                 }
-            }, 200);
+            }, CONFIG.typingDuration);
         }
-
-        updateTooltipMessage() {
-            if (!this.elements.tooltip) return;
-
-            const hour = Utils.getCurrentHour();
-            let message = APP_CONFIG.defaults.whatsappMessage;
+        
+        console.log('✅ Typewriter inicializado');
+    }
+    
+    // ============================================
+    // 8. HERO VISUAL 3D
+    // ============================================
+    
+    function initHeroVisual3D() {
+        const heroVisual = document.querySelector('.hero-visual');
+        if (!heroVisual) return;
+        
+        let isMoving = false;
+        
+        function handleMouseMove(e) {
+            if (isMoving) return;
+            isMoving = true;
+            
+            const rect = heroVisual.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            let angleX = (y - centerY) / 20;
+            let angleY = (centerX - x) / 20;
+            
+            angleX = Math.max(-12, Math.min(12, angleX));
+            angleY = Math.max(-12, Math.min(12, angleY));
+            
+            heroVisual.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            heroVisual.style.transition = 'transform 0.1s ease-out';
+            
+            setTimeout(() => { isMoving = false; }, 16);
+        }
+        
+        function resetTransform() {
+            heroVisual.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            heroVisual.style.transition = 'transform 0.5s ease-out';
+        }
+        
+        heroVisual.addEventListener('mousemove', handleMouseMove);
+        heroVisual.addEventListener('mouseleave', resetTransform);
+        
+        console.log('✨ Hero visual 3D inicializado');
+    }
+    
+    // ============================================
+    // 9. BACK TO TOP BUTTON
+    // ============================================
+    
+    function initBackToTop() {
+        const backToTop = document.getElementById('backToTop');
+        if (!backToTop) return;
+        
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (window.scrollY > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+        
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            backToTop.style.transform = 'scale(0.8)';
+            setTimeout(() => { backToTop.style.transform = ''; }, 200);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        console.log('🔝 Back to top inicializado');
+    }
+    
+    // ============================================
+    // 10. CUADRADOS FLOTANTES
+    // ============================================
+    
+    function initCuadradosFlotantes() {
+        const cuadrados = document.querySelectorAll('.cuad');
+        console.log(`🎨 Cuadrados flotantes encontrados: ${cuadrados.length}`);
+        
+        if (cuadrados.length === 0) return;
+        
+        // Encender cuadrados secuencialmente
+        cuadrados.forEach((cuad, index) => {
+            setTimeout(() => {
+                cuad.classList.add('encendido');
+            }, index * 500);
+        });
+        
+        // Efecto de brillo aleatorio
+        setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * cuadrados.length);
+            const cuad = cuadrados[randomIndex];
+            cuad.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                if (cuad) cuad.style.transform = '';
+            }, 200);
+        }, 8000);
+        
+        // Click en cuadrados
+        cuadrados.forEach((cuad, index) => {
+            cuad.addEventListener('click', () => {
+                cuad.style.transform = 'scale(0.9)';
+                setTimeout(() => { cuad.style.transform = ''; }, 150);
+                console.log(`Cuadrado ${index + 1} clickeado`);
+            });
+        });
+        
+        console.log('✅ Cuadrados flotantes inicializados');
+    }
+    
+    // ============================================
+    // 11. WHATSAPP BUTTON
+    // ============================================
+    
+    function initWhatsAppButton() {
+        const whatsappBtn = document.querySelector('.whatsapp-button');
+        if (!whatsappBtn) return;
+        
+        const tooltip = whatsappBtn.querySelector('.whatsapp-tooltip');
+        
+        function updateTooltip() {
+            if (!tooltip) return;
+            
+            const hour = new Date().getHours();
+            let message = 'Contáctame';
             
             if (hour >= 9 && hour <= 18) {
-                message = APP_CONFIG.defaults.whatsappAvailable;
+                message = '🟢 ¡Disponible ahora! 💬';
+                tooltip.style.borderColor = '#25D366';
+                tooltip.style.color = '#25D366';
             } else {
-                message = APP_CONFIG.defaults.whatsappOffline;
+                message = '⏰ Deja tu mensaje 💫';
+                tooltip.style.borderColor = '#64748b';
+                tooltip.style.color = '#64748b';
             }
             
-            this.elements.tooltip.textContent = message;
+            tooltip.textContent = message;
         }
-
-        setUnreadCount(count) {
-            if (!this.elements.button) return;
-            
-            let badge = this.elements.button.querySelector(`.${APP_CONFIG.classes.badge}`);
-            
-            if (count > 0) {
-                if (!badge) {
-                    badge = document.createElement('span');
-                    badge.className = APP_CONFIG.classes.badge;
-                    this.elements.button.appendChild(badge);
-                }
-                badge.textContent = count > 9 ? '9+' : count;
-            } else if (badge) {
-                badge.remove();
-            }
-        }
-
-        destroy() {
-            this.elements.button?.removeEventListener('click', this.trackClick);
-            this.elements.button?.removeEventListener('mouseenter', this.updateTooltipMessage);
-            super.destroy();
-        }
-
-        init() {
-            this.cacheElements();
-            if (!this.elements.button) return;
-            
-            this.setupEventListeners();
-            this.checkMobile();
-            AppState.registerModule(this.name, this);
-        }
+        
+        updateTooltip();
+        setInterval(updateTooltip, 30000);
+        
+        whatsappBtn.addEventListener('click', () => {
+            console.log('WhatsApp clickeado');
+            whatsappBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => { whatsappBtn.style.transform = ''; }, 150);
+        });
+        
+        console.log('✅ WhatsApp button inicializado');
     }
-
-    // ========================================================================
-    // MÓDULO DE AUDIO
-    // ========================================================================
-
-    class AudioManager extends BaseModule {
-        constructor() {
-            super('audio');
-            this.state = {
-                isPlaying: false,
-                isMuted: false,
-                currentVolume: APP_CONFIG.animations.defaultVolume
-            };
+    
+    // ============================================
+    // 12. AUDIO CONTROL
+    // ============================================
+    
+    function initAudioControl() {
+        const audio = document.getElementById('bgAudio');
+        const audioBtn = document.getElementById('audioControl');
+        
+        if (!audio || !audioBtn) {
+            console.warn('Audio control: elementos no encontrados');
+            return;
         }
-
-        cacheElements() {
-            this.elements = {
-                audio: document.getElementById('bgAudio'),
-                button: document.getElementById('audioControl'),
-                icon: document.querySelector(`${APP_CONFIG.selectors.audioControl} ${APP_CONFIG.selectors.audioIcon}`)
-            };
-        }
-
-        setupEventListeners() {
-            if (!this.elements.button || !this.elements.audio) return;
-            
-            this.elements.button.addEventListener('click', () => this.toggle());
-            window.addEventListener('beforeunload', () => this.savePreference());
-            document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
-        }
-
-        setupAudioEvents() {
-            if (!this.elements.audio) return;
-            
-            this.elements.audio.addEventListener('error', (e) => this.handleError(e));
-            this.elements.audio.addEventListener('canplay', () => this.handleCanPlay());
-            this.elements.audio.addEventListener('play', () => this.handlePlay());
-            this.elements.audio.addEventListener('pause', () => this.handlePause());
-        }
-
-        toggle() {
-            if (this.state.isMuted) {
-                this.unmute();
-            } else if (this.state.isPlaying) {
-                this.pause();
+        
+        let isPlaying = false;
+        
+        function updateButton() {
+            if (isPlaying) {
+                audioBtn.classList.add('playing');
+                audioBtn.setAttribute('aria-label', 'Pausar música');
             } else {
-                this.play();
-            }
-            
-            this.updateButtonState();
-        }
-
-        async play() {
-            try {
-                this.elements.audio.volume = this.state.currentVolume;
-                await this.elements.audio.play();
-                
-                this.state.isPlaying = true;
-                this.state.isMuted = false;
-                
-                Utils.dispatchEvent('audioStateChange', { 
-                    state: 'audioStarted',
-                    ...this.state 
-                });
-            } catch (error) {
-                Logger.warn('Reproducción automática bloqueada:', error);
-                this.handlePlaybackError();
+                audioBtn.classList.remove('playing');
+                audioBtn.setAttribute('aria-label', 'Reproducir música');
             }
         }
-
-        pause() {
-            this.elements.audio.pause();
-            this.state.isPlaying = false;
-            this.state.isMuted = false;
-            Utils.dispatchEvent('audioStateChange', { state: 'audioPaused', ...this.state });
-        }
-
-        mute() {
-            this.elements.audio.pause();
-            this.state.isPlaying = false;
-            this.state.isMuted = true;
-            Utils.dispatchEvent('audioStateChange', { state: 'audioMuted', ...this.state });
-        }
-
-        unmute() {
-            this.play();
-        }
-
-        handlePlaybackError() {
-            this.elements.button.classList.add(APP_CONFIG.classes.blocked);
-            
-            const enableAudio = () => {
-                this.play();
-                this.elements.button.classList.remove(APP_CONFIG.classes.blocked);
-                document.removeEventListener('click', enableAudio);
-            };
-            
-            document.addEventListener('click', enableAudio, { once: true });
-        }
-
-        handleError(e) {
-            Logger.error('Error cargando audio:', e);
-            this.elements.button.classList.add(APP_CONFIG.classes.error);
-            this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioError);
-        }
-
-        handleCanPlay() {
-            Logger.log('Audio listo para reproducir');
-        }
-
-        handlePlay() {
-            Logger.log('Audio reproduciendo');
-        }
-
-        handlePause() {
-            Logger.log('Audio pausado');
-        }
-
-        updateButtonState() {
-            this.elements.button.classList.remove(
-                APP_CONFIG.classes.playing,
-                APP_CONFIG.classes.muted,
-                APP_CONFIG.classes.blocked
-            );
-            
-            if (this.state.isMuted) {
-                this.elements.button.classList.add(APP_CONFIG.classes.muted);
-                this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioActivate);
-            } else if (this.state.isPlaying) {
-                this.elements.button.classList.add(APP_CONFIG.classes.playing);
-                this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioPause);
+        
+        audioBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
             } else {
-                this.elements.button.setAttribute('aria-label', APP_CONFIG.defaults.audioPlay);
+                audio.play().catch(e => console.log('Autoplay bloqueado:', e));
+                isPlaying = true;
             }
-        }
-
-        loadPreference() {
-            const saved = Utils.safeStorageGet(APP_CONFIG.storage.audioPreference);
+            updateButton();
+        });
+        
+        audio.volume = 0.5;
+        audio.loop = true;
+        
+        console.log('✅ Audio control inicializado');
+    }
+    
+    // ============================================
+    // 13. SYSTEM STATUS DINÁMICO
+    // ============================================
+    
+    function initSystemStatus() {
+        const statusDiv = document.querySelector('.system-status');
+        const statusText = document.querySelector('.status-text');
+        
+        if (!statusDiv || !statusText) return;
+        
+        const statusMessages = [
+            'system_online',
+            'monitoring_network',
+            'scanning_ports',
+            'security_active',
+            'firewall_engaged'
+        ];
+        
+        let index = 0;
+        
+        setInterval(() => {
+            index = (index + 1) % statusMessages.length;
+            statusText.textContent = statusMessages[index];
             
-            if (saved?.wasPlaying) {
-                document.addEventListener('click', () => this.play(), { once: true });
-            }
-        }
-
-        savePreference() {
-            Utils.safeStorageSet(APP_CONFIG.storage.audioPreference, {
-                wasPlaying: this.state.isPlaying,
-                timestamp: Date.now()
-            });
-        }
-
-        handleVisibilityChange() {
-            if (!this.elements.audio) return;
-            
-            if (document.hidden && this.state.isPlaying) {
-                this.elements.audio.volume = 0.1;
-            } else if (!document.hidden && this.state.isPlaying) {
-                this.elements.audio.volume = this.state.currentVolume;
-            }
-        }
-
-        changeTrack(src) {
-            if (!src || !this.elements.audio) return;
-            
-            const wasPlaying = this.state.isPlaying;
-            
-            if (APP_CONFIG.animations.crossfadeEnabled) {
-                this.crossfadeTo(src);
+            // Efecto de typing
+            statusText.classList.add('typing');
+            setTimeout(() => {
+                statusText.classList.remove('typing');
+            }, 500);
+        }, 8000);
+        
+        statusDiv.addEventListener('click', () => {
+            const isOffline = statusDiv.classList.contains('offline');
+            if (isOffline) {
+                statusDiv.classList.remove('offline');
+                statusText.textContent = 'system_online';
             } else {
-                this.elements.audio.src = src;
-                this.elements.audio.load();
-                if (wasPlaying) this.play();
+                statusDiv.classList.add('offline');
+                statusText.textContent = 'system_offline';
             }
-        }
-
-        crossfadeTo(src) {
-            if (!this.elements.audio) return;
-            
-            const currentVolume = this.elements.audio.volume;
-            
-            const fadeOut = setInterval(() => {
-                if (this.elements.audio.volume > 0.05) {
-                    this.elements.audio.volume -= 0.05;
-                } else {
-                    clearInterval(fadeOut);
-                    this.elements.audio.src = src;
-                    this.elements.audio.load();
-                    this.elements.audio.volume = 0;
-                    this.play();
-                    
-                    const fadeIn = setInterval(() => {
-                        if (this.elements.audio.volume < currentVolume) {
-                            this.elements.audio.volume += 0.05;
-                        } else {
-                            clearInterval(fadeIn);
-                        }
-                    }, 100);
-                }
-            }, 100);
-        }
-
-        destroy() {
-            this.savePreference();
-            this.elements.button?.removeEventListener('click', this.toggle);
-            window.removeEventListener('beforeunload', this.savePreference);
-            document.removeEventListener('visibilitychange', this.handleVisibilityChange);
-            super.destroy();
-        }
-
-        /**
- * Configura el botón de volver arriba
- */
-setupBackToTop() {
-    this.backToTopButton = document.getElementById('backToTop');
-    if (!this.backToTopButton) return;
-    
-    // Mostrar/ocultar según scroll
-    window.addEventListener('scroll', Utils.throttle(() => {
-        if (window.scrollY > 500) {
-            this.backToTopButton.classList.add('visible');
-        } else {
-            this.backToTopButton.classList.remove('visible');
-        }
-    }, 100));
-    
-    // Click para volver arriba con animación suave
-    this.backToTopButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.smoothScrollToTop();
-    });
-    
-    Logger.log('🔝 Botón volver arriba configurado');
-}
-
-/**
- * Scroll suave hacia arriba
- */
-smoothScrollToTop() {
-    // Animación de salida del botón
-    this.backToTopButton.style.transform = 'scale(0.8)';
-    setTimeout(() => {
-        this.backToTopButton.style.transform = '';
-    }, 200);
-    
-    // Scroll suave
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-init() {
-    Logger.group('🎬 Inicializando AnimationManager');
-    
-    this.setupStatNumbers();
-    this.setupStatsSection();
-    this.setupSkillBars();
-    this.setupAptitudesAnimations();
-    this.setupTypeWriter();
-    this.setupHeroVisualEffects();
-    this.setupBackToTop();  // ← NUEVA LÍNEA
-    
-    super.init();
-    Logger.groupEnd();
-}
-
-        init() {
-            this.cacheElements();
-            if (!this.elements.audio || !this.elements.button) return;
-            
-            this.loadPreference();
-            this.setupEventListeners();
-            this.setupAudioEvents();
-            AppState.registerModule(this.name, this);
-        }
+        });
+        
+        console.log('📡 System status inicializado');
     }
-
-    // ========================================================================
-    // MÓDULO DE ANALÍTICAS
-    // ========================================================================
-
-    class AnalyticsManager extends BaseModule {
-        constructor() {
-            super('analytics');
-        }
-
-        setupEventListeners() {
-            document.addEventListener('themeChanged', (e) => this.trackThemeChange(e));
-            document.addEventListener('typingComplete', () => this.trackTypingComplete());
-            document.addEventListener('audioStateChange', (e) => this.trackAudioState(e));
-        }
-
-        trackThemeChange(e) {
-            Logger.log(`Theme changed to: ${e.detail.theme}`);
-            
-            if (window.gtag) {
-                window.gtag('event', 'theme_change', { theme: e.detail.theme });
-            }
-        }
-
-        trackTypingComplete() {
-            Logger.log('Typing animation completed');
-        }
-
-        trackAudioState(e) {
-            if (window.gtag) {
-                window.gtag('event', 'audio_control', {
-                    action: e.detail.state,
-                    playing: e.detail.isPlaying
-                });
-            }
-        }
-
-        destroy() {
-            document.removeEventListener('themeChanged', this.trackThemeChange);
-            document.removeEventListener('typingComplete', this.trackTypingComplete);
-            document.removeEventListener('audioStateChange', this.trackAudioState);
-            super.destroy();
-        }
-    }
-
-    // ========================================================================
-    // MÓDULO DE OPTIMIZACIÓN DE RENDIMIENTO
-    // ========================================================================
-
-    class PerformanceOptimizer extends BaseModule {
-        constructor() {
-            super('performance');
-            this.motionQuery = null;
-        }
-
-        checkReducedMotion() {
-            this.motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-            
-            if (this.motionQuery.matches) {
-                this.disableAnimations();
-            }
-            
-            this.motionQuery.addEventListener('change', (e) => {
-                if (e.matches) {
-                    this.disableAnimations();
-                } else {
-                    this.enableAnimations();
-                }
-            });
-        }
-
-        disableAnimations() {
-            document.documentElement.style.setProperty('--transition-base', '0s');
-            document.documentElement.style.setProperty('--transition-smooth', '0s');
-            Utils.cleanupAnimations(AppState.get());
-        }
-
-        enableAnimations() {
-            document.documentElement.style.setProperty('--transition-base', '0.2s ease');
-            document.documentElement.style.setProperty('--transition-smooth', '0.3s ease');
-        }
-
-        optimizeAnimations() {
-            const heroVisual = document.querySelector(APP_CONFIG.selectors.heroVisual);
-            if (heroVisual) {
-                heroVisual.style.willChange = 'transform';
-                
-                setTimeout(() => {
-                    heroVisual.style.willChange = 'auto';
-                }, 1000);
-            }
-        }
-
-        destroy() {
-            this.motionQuery?.removeEventListener('change', this.checkReducedMotion);
-            super.destroy();
-        }
-
-        init() {
-            this.checkReducedMotion();
-            this.optimizeAnimations();
-            AppState.registerModule(this.name, this);
-        }
-    }
-
-    // ========================================================================
-    // INICIALIZADOR PRINCIPAL
-    // ========================================================================
-
-    const App = {
-        modules: [],
-
-        init() {
-            Logger.group('🚀 Inicializando aplicación');
-            
-            AppState.cleanup();
-            
-            this.modules = [
-                new ThemeManager(),
-                new AnimationManager(),
-                new SystemStatus(),
-                new WhatsAppManager(),
-                new AudioManager(),
-                new AnalyticsManager(),
-                new PerformanceOptimizer()
-            ];
-            
-            this.modules.forEach(module => module.init());
-            
-            Logger.log('✅ Aplicación inicializada correctamente');
-            Logger.groupEnd();
-        },
-
-        restart() {
-            this.destroy();
-            this.init();
-        },
-
-        destroy() {
-            Logger.group('🧹 Limpiando aplicación');
-            AppState.cleanup();
-            Logger.log('✅ Aplicación limpiada');
-            Logger.groupEnd();
-        },
-
-        getModule(name) {
-            return this.modules.find(m => m.name === name);
-        }
-    };
-
-    // ========================================================================
-    // INICIALIZACIÓN
-    // ========================================================================
-
+    
+    // ============================================
+    // INICIAR CUANDO EL DOM ESTÉ LISTO
+    // ============================================
+    
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => App.init());
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        App.init();
+        init();
     }
-
-    window.addEventListener('beforeunload', () => App.destroy());
-
-    window.addEventListener('popstate', () => {
-        App.destroy();
-        App.init();
-    });
-
-    // ========================================================================
-    // EXPORTS
-    // ========================================================================
-
-    if (typeof module !== 'undefined' && module.exports) {
-        module.exports = { App, AppState, APP_CONFIG };
-    }
-
-    window.PortfolioApp = App;
-
+    
 })();
-
-// ========================================================================
-// DIAGNÓSTICO - Agregar temporalmente
-// ========================================================================
-
-setTimeout(() => {
-    console.group('🔍 DIAGNÓSTICO DE APTITUDES');
-    
-    // Verificar elementos
-    const categories = document.querySelectorAll('.aptitudes-category');
-    console.log('Categorías encontradas:', categories.length);
-    
-    categories.forEach((cat, i) => {
-        console.log(`Categoría ${i}:`, {
-            clases: cat.className,
-            estilosInline: cat.style.cssText,
-            opacity: window.getComputedStyle(cat).opacity,
-            transform: window.getComputedStyle(cat).transform
-        });
-    });
-    
-    // Verificar porcentajes
-    const percentages = document.querySelectorAll('.apt-percent');
-    console.log('Porcentajes encontrados:', percentages.length);
-    
-    percentages.forEach((p, i) => {
-        console.log(`Porcentaje ${i}:`, {
-            texto: p.textContent,
-            clases: p.className,
-            display: window.getComputedStyle(p).display
-        });
-    });
-    
-    console.groupEnd();
-}, 2000);
