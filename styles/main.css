@@ -18,6 +18,7 @@
 @import 'components/floating.css';
 @import 'components/cards.css';
 @import 'components/certifications.css';  /* ← NUEVO MÓDULO */
+@import 'components/techstack.css';     /* ← NUEVO MÓDULO */
 
 /* Layout - Estructura de páginas */
 @import 'layout/hero.css';
@@ -76,13 +77,13 @@
     
     .navbar {
         flex-direction: column;
-        gap: var(--space-md);
+        gap: var(--space-sm);
         align-items: center;
     }
     
     .nav-links {
         flex-wrap: wrap;
-        gap: var(--space-lg);
+        gap: var(--space-sm);
     }
     
     .about-section,
@@ -92,7 +93,7 @@
     .labs-grid,
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-md);
+        gap: var(--space-sm);
     }
     
     .hero-stats {

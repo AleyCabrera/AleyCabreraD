@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-xl) 0 var(--space-3xl);
+    padding: var(--space-xl) calc(var(--space-xl) * 5.25) var(--space-3xl);
     font-size: 0.9rem;
     border-top: 1px solid var(--border-color);
     margin-top: var(--space-xl);
@@ -40,10 +40,192 @@
     font-size: 0.75rem;
     letter-spacing: 2px;
     margin-bottom: 2rem;
-    margin-left: 9rem;
+    margin-left: 10.5rem;
 }
 
 .light {
     color: var(--accent-primary);
     animation: flash 1.5s infinite;
+}
+
+/* ============================================================================
+   BREAKPOINT: 1280px (Laptop Grande)
+   ============================================================================ */
+@media (max-width: 1280px) {
+    .footer {
+        padding: var(--space-xl) calc(var(--space-xl) * 3) var(--space-3xl);
+    }
+    
+    .interaction {
+        margin-left: 8rem;
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 1024px (Laptop Mediano / Tablet Horizontal)
+   ============================================================================ */
+@media (max-width: 1024px) {
+    .footer {
+        padding: var(--space-xl) var(--space-2xl) var(--space-3xl);
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-lg);
+    }
+    
+    .footer-links {
+        justify-content: center;
+        gap: var(--space-lg);
+    }
+    
+    .interaction {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 768px (Tablet Vertical)
+   ============================================================================ */
+@media (max-width: 768px) {
+    .footer {
+        padding: var(--space-lg) var(--space-xl) var(--space-2xl);
+        gap: var(--space-md);
+    }
+    
+    .footer-links {
+        gap: var(--space-md);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .footer-links a {
+        font-size: 0.8rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .interaction {
+        font-size: 0.7rem;
+        margin-bottom: var(--space-lg);
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 640px (Móvil Grande)
+   ============================================================================ */
+@media (max-width: 640px) {
+    .footer {
+        padding: var(--space-lg) var(--space-lg) var(--space-xl);
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .footer-links {
+        gap: var(--space-sm);
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .interaction {
+        font-size: 0.65rem;
+        margin-bottom: var(--space-md);
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 480px (Móvil Mediano)
+   ============================================================================ */
+@media (max-width: 480px) {
+    .footer {
+        padding: var(--space-md) var(--space-md) var(--space-xl);
+        gap: var(--space-sm);
+    }
+    
+    .footer div:first-child {
+        font-size: 0.7rem;
+        text-align: center;
+        order: 2;
+    }
+    
+    .footer-links {
+        gap: var(--space-sm);
+        order: 1;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+        font-size: 0.7rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .interaction {
+        font-size: 0.6rem;
+        margin-bottom: var(--space-sm);
+        order: 3;
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 390px (Móvil Pequeño)
+   ============================================================================ */
+@media (max-width: 390px) {
+    .footer {
+        padding: var(--space-md) var(--space-sm) var(--space-lg);
+        gap: var(--space-sm);
+    }
+    
+    .footer div:first-child {
+        font-size: 0.65rem;
+        line-height: 1.4;
+    }
+    
+    .footer-links {
+        gap: 8px;
+    }
+    
+    .footer-links a {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+    
+    .interaction {
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+        margin-bottom: var(--space-sm);
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 320px (Móvil Muy Pequeño)
+   ============================================================================ */
+@media (max-width: 320px) {
+    .footer {
+        padding: var(--space-sm) var(--space-sm) var(--space-lg);
+        gap: 6px;
+    }
+    
+    .footer div:first-child {
+        font-size: 0.6rem;
+        line-height: 1.3;
+    }
+    
+    .footer-links {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+    }
+    
+    .interaction {
+        font-size: 0.5rem;
+        letter-spacing: 0.5px;
+        margin-bottom: var(--space-xs);
+    }
 }

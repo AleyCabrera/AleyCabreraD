@@ -48,14 +48,14 @@
 .cuadrados-flotantes {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
     height: 80px;
 }
 
 .cuad {
     background: var(--bg-tertiary);
     border: 0.1px solid var(--border-color-light);
-    border-radius: var(--border-radius-sm);
+    /* border-radius: var(--border-radius-sm); */
     transition: all var(--transition-base);
     animation: flotar 5s infinite ease-in-out;
 }
@@ -78,9 +78,9 @@
                 0 8px 16px -6px rgba(0, 0, 0, 0.15);
 }
 
-.c1 { width: 20px; height: 20px; animation-delay: 0s; }
-.c2 { width: 35px; height: 35px; animation-delay: 0.8s; }
-.c3 { width: 50px; height: 50px; animation-delay: 1.5s; }
+.c1 { width: 12px; height: 12px; animation-delay: 0s; }
+.c2 { width: 24px; height: 24px; animation-delay: 0.8s; }
+.c3 { width: 48px; height: 48px; animation-delay: 1.5s; }
 
 @keyframes flotar {
     0% { transform: translateY(0px); }
@@ -203,4 +203,65 @@
 .menu-overlay.active {
     opacity: 0.1;
     visibility: visible;
+}
+
+/* ============================================================================
+   BREAKPOINT: 1575px (Escritorio Grande)
+   ============================================================================ */
+@media (max-width: 1575px) {
+    /* NAVBAR */
+    .navbar {
+        padding: var(--space-md) var(--space-lg);
+    }
+    
+    .logo-container {
+        gap: var(--space-md);
+    }
+    
+    /* CUADRADOS FLOTANTES - MÁS COMPACTOS */
+    .cuadrados-flotantes {
+        gap: 10px;
+        height: 64px;
+    }
+    
+    .c1 {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .c2 {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .c3 {
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* NAVEGACIÓN */
+    .nav-links {
+        gap: var(--space-xl);
+    }
+    
+    .nav-links a {
+        font-size: 0.88rem;
+    }
+}
+
+/* ============================================================================
+   BREAKPOINT: 1280px (Laptop Grande)
+   ============================================================================ */
+@media (max-width: 1280px) {
+    .navbar {
+        padding: var(--space-sm) var(--space-lg);
+    }
+    
+    .nav-links {
+        gap: var(--space-lg);
+    }
+    
+    .nav-links a {
+        font-size: 0.85rem;
+    }
 }
