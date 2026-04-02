@@ -305,3 +305,14 @@
         gap: var(--space-sm);
     }
 }
+
+@media (max-width: 390px) {
+    .menu-overlay.active {
+        opacity: 0.3;
+    }
+
+    .nav-links {
+        gap: var(--space-xs);
+    }
+    
+}

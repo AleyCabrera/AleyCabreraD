@@ -301,102 +301,11 @@
 
 /* Móvil Pequeño (hasta 390px) - Menú hamburguesa activo */
 @media (max-width: 390px) {
-    .menu-toggle {
+    /* .menu-toggle {
         display: block;
-    }
+    } */
     
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 85%;
-        max-width: 280px;
-        height: 100vh;
-        background: var(--bg-card);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: start; /* Centrado vertical */
-        align-items: center;
-        gap: var(--space-sm); /* Reducido de lg a md */
-        padding: var(--space-3xl) var(--space-lg); /* Padding más equilibrado */
-        transition: right var(--transition-smooth);
-        z-index: 100;
-        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-        border-left: 1px solid var(--border-color);
-    }
     
-    .nav-links.active {
-        right: 0;
-    }
-    
-    .nav-links a {
-        font-size: 1rem; /* Un poco más grande */
-        font-weight: 500;
-        padding: var(--space-md) var(--space-xl); /* Padding más generoso */
-        width: auto;
-        min-width: 160px; /* Ancho mínimo para los botones */
-        text-align: center;
-        border-bottom: none;
-        border-radius: var(--border-radius-md);
-        /* color: var(--text-primary); */
-        transition: all var(--transition-base);
-        position: relative;
-    }
-    
-    .nav-links a:hover {
-        background: var(--accent-glow-subtle);
-        color: var(--accent-primary);
-        transform: scale(1.05); /* Efecto sutil al hacer hover */
-    }
-    
-    .nav-links a::before,
-    .nav-links a::after {
-        display: none;
-    }
-    
-    .navbar {
-        justify-content: space-between;
-        padding: var(--space-md);
-        flex-direction: row;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 99;
-        background: var(--bg-primary);
-    }
-    
-    .logo-container {
-        gap: var(--space-md);
-    }
-    
-    .cuadrados-flotantes {
-        gap: 12px;
-        height: 60px;
-    }
-    
-    .c1 {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .c2 {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .c3 {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .logo-text {
-        font-size: 1rem;
-    }
-    
-    .logo-dot {
-        width: 6px;
-        height: 6px;
-    }
 
     .interaction {
         margin-left: 1rem;
