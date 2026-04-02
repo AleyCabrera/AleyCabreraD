@@ -265,3 +265,43 @@
         font-size: 0.85rem;
     }
 }
+
+/* ============================================================================
+   BREAKPOINT: 1024px (Laptop/Tablet)
+   ============================================================================ */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: var(--space-md);
+    }
+    
+    .nav-links a {
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .menu-overlay.active {
+        opacity: 0.2;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: center;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+    
+    .about-section,
+    .pillars-grid,
+    .blog-grid,
+    .cert-grid,
+    .labs-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+}
