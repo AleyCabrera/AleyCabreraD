@@ -314,16 +314,17 @@
     }
 }
 
+
 /* ============================================
    RESPONSIVE MÓVIL (max-width: 860px)
    ============================================ */
 @media (max-width: 860px) {
     .navbar {
-        padding: var(--space-sm) var(--space-md);
+        padding: var(--space-sm) var(--space-sm);
     }
     
     .nav-links {
-        gap: 1px;
+        gap: 0.5px;
     }
 
     .logo-container {
