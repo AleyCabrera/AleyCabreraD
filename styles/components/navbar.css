@@ -363,7 +363,7 @@
 /* ============================================
    RESPONSIVE MÓVIL (max-width: 800px)
    ============================================ */
-@media (max-width: 800px) {
+@media (max-width: 790px) {
     .navbar {
         padding: var(--space-sm) 1px;
     }
