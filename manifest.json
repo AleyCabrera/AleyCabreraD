@@ -1,0 +1,100 @@
+{
+  "name": "Aley Cabrera · IT/OT Engineer & Software Developer",
+  "short_name": "Aley Cabrera",
+  "description": "Ingeniero IT/OT especializado en ciberseguridad, redes industriales, automatización y desarrollo de software seguro",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#0a0f1f",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "es-CO",
+  "categories": ["portfolio", "technology", "engineering", "software"],
+  "icons": [
+    {
+      "src": "/assets/icon/favicon/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/apple-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/apple-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/ms-icon-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon/favicon/android-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/mobile-home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Pantalla de inicio del portafolio"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Proyectos",
+      "short_name": "Proyectos",
+      "description": "Ver los proyectos y laboratorios IT/OT",
+      "url": "/#proyectos",
+      "icons": [
+        {
+          "src": "/assets/icon/favicon/shortcut-proyectos.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contactar",
+      "short_name": "Contacto",
+      "description": "Enviar mensaje directo",
+      "url": "/#contacto",
+      "icons": [
+        {
+          "src": "/assets/icon/favicon/shortcut-contacto.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
