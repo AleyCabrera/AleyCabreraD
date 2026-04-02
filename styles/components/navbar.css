@@ -361,7 +361,7 @@
 }
 
 /* ============================================
-   RESPONSIVE MÓVIL (max-width: 825px)
+   RESPONSIVE MÓVIL (max-width: 800px)
    ============================================ */
 @media (max-width: 825px) {
     .navbar {
