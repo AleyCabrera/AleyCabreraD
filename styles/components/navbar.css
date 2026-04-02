@@ -360,6 +360,51 @@
     }
 }
 
+/* ============================================
+   RESPONSIVE MÓVIL (max-width: 825px)
+   ============================================ */
+@media (max-width: 825px) {
+    .navbar {
+        padding: var(--space-sm) 1px;
+    }
+    
+    .nav-links {
+        gap: 0.2px;
+    }
+
+    .logo-container {
+        gap: var(--space-sm);
+    }
+    
+    .cuadrados-flotantes {
+        gap: 8px;
+        height: 48px;
+    }
+    
+    .c1 {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .c2 {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .c3 {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .nav-links {
+        gap: var(--space-md);
+    }
+    
+    .nav-links a {
+        font-size: 0.82rem;
+    }
+}
+
 
 /* ============================================
    RESPONSIVE MÓVIL (max-width: 768px)
