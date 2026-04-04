@@ -43,7 +43,8 @@
     
     /* ===== TIPOGRAFÍA ===== */
     --font-primary: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --font-mono: 'Fira Code', 'Share Tech Mono', monospace;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-terminal: 'VT323', 'Courier New', 'Share Tech Mono', 'Source Code Pro', monospace;
     
     /* ===== ESPACIADO ===== */

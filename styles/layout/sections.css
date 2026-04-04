@@ -1,32 +1,254 @@
 /* ============================================================================
-   ABOUT SECTION
+   ABOUT SECTION - Versión Profesional Elite
+   Integrado con tu sistema de variables globales
    ============================================================================ */
 
 .about-section {
-    padding: var(--space-2xl) 0;
+    padding: var(--space-3xl) 0;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     margin: var(--space-2xl) 0;
+}
+
+/* Etiqueta decorativa estilo terminal */
+.about-section::before {
+    content: 'cat about.md';
+    position: absolute;
+    top: -25px;
+    left: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    opacity: 0.6;
+    background: var(--bg-tertiary);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--border-radius-sm);
+    letter-spacing: 1px;
+    backdrop-filter: blur(4px);
+}
+
+.about-section::after {
+    content: '>';
+    position: absolute;
+    bottom: -25px;
+    right: 0;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent-primary);
+    opacity: 0.4;
+}
+
+/* Contenedor principal del contenido */
+.about-content {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* Introducción / header */
+.about-intro {
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.about-intro h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-intro .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    background: var(--accent-glow-subtle);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--border-color-light);
+    backdrop-filter: blur(4px);
+}
+
+/* Grid de 2 columnas para la información principal */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+/* Tarjetas de información */
+.info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-primary);
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.info-card:hover::before {
+    opacity: 1;
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-md);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.info-card h3 i {
+    font-size: 1.2rem;
+}
+
+.info-card .card-content {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.info-card .card-content p {
+    margin-bottom: var(--space-sm);
+}
+
+/* Lista de formación */
+.formation-list {
+    list-style: none;
+    padding: 0;
+}
+
+.formation-list li {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--border-color);
+    transition: border-color var(--transition-smooth);
+}
+
+.formation-list li:hover {
+    border-left-color: var(--accent-primary);
+}
+
+.formation-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.formation-detail {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+/* Frase destacada / filosofía */
+.philosophy-quote {
+    background: linear-gradient(135deg, var(--accent-glow-subtle) 0%, rgba(37, 99, 235, 0.02) 100%);
+    border-left: 3px solid var(--accent-primary);
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+    border-radius: var(--border-radius-sm);
     position: relative;
 }
 
-.about-section::before {
-    content: '{ Sobre mí }';
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--accent-primary);
-    opacity: 0.3;
-    letter-spacing: 2px;
+.philosophy-quote p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    font-style: italic;
+    margin: 0;
 }
 
-.about-section {
-    padding: var(--space-3xl) 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
+.philosophy-quote .quote-author {
+    display: block;
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    font-style: normal;
+}
+
+/* Toque personal (storytelling final) */
+.personal-touch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--bg-tertiary);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius-md);
+    margin-top: var(--space-xl);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(4px);
+}
+
+.personal-touch i {
+    font-size: 2rem;
+    color: var(--accent-primary);
+    opacity: 0.7;
+}
+
+.personal-touch p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.personal-touch strong {
+    color: var(--accent-primary);
+}
+
+/* CTA sutil al final */
+.about-cta {
+    text-align: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
     border-top: 1px solid var(--border-color);
 }
+
+.about-cta .btn-text {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    transition: all var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.about-cta .btn-text:hover {
+    gap: var(--space-md);
+    color: var(--text-primary);
+}
+
 
 /* ============================================================================
    STATS SECTION
@@ -478,4 +700,75 @@
     color: var(--accent-primary);
     opacity: 0.3;
     letter-spacing: 2px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .about-section {
+        padding: var(--space-xl) 0;
+        margin: var(--space-xl) 0;
+    }
+    
+    .about-intro h3 {
+        font-size: 1.4rem;
+    }
+    
+    .philosophy-quote p {
+        font-size: 1rem;
+    }
+    
+    .personal-touch {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-content {
+        padding: 0 var(--space-lg);
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .info-card {
+        padding: var(--space-md);
+    }
+    
+    .about-intro h3 {
+        font-size: 1.2rem;
+    }
+    
+    .philosophy-quote {
+        padding: var(--space-md);
+    }
+    
+    .personal-touch i {
+        font-size: 1.5rem;
+    }
+    
+    .about-content {
+        padding: 0 var(--space-md);
+    }
+}
+
+/* Ajustes para tema claro */
+.light-theme .info-card {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-theme .personal-touch {
+    background: var(--bg-secondary);
+}
+
+.light-theme .about-intro .badge {
+    background: var(--accent-glow-subtle);
 }
