@@ -19,6 +19,7 @@
 @import 'components/cards.css';
 @import 'components/certifications.css';  /* ← NUEVO MÓDULO */
 @import 'components/techstack.css';     /* ← NUEVO MÓDULO */
+@import 'components/logo.css';          /* ← NUEVO MÓDULO */
 
 /* Layout - Estructura de páginas */
 @import 'layout/hero.css';

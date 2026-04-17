@@ -1,0 +1,80 @@
+/* Variables corporativas */
+        :root {
+            --accent-primary: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.5);
+            --accent-glow-strong: rgba(37, 99, 235, 0.8);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.2rem;
+            cursor: pointer;
+        }
+
+        /* EFECTOS APLICADOS A TU PNG */
+        .logo_aley {
+            width: 100px;
+            height: auto;
+            display: block;
+
+            /* Sombra inicial con color corporativo */
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+
+            /* Transición suave */
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+        }
+
+        /* Efecto HOVER - Brillo corporativo */
+        .logo_aley:hover {
+            filter: drop-shadow(0 0 25px var(--accent-primary)) drop-shadow(0 0 5px var(--accent-primary));
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        /* Efecto de pulsación continua */
+        .logo_aley.pulsing {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.7)) drop-shadow(0 0 5px rgba(37, 99, 235, 0.5));
+            }
+        }
+
+        /* Efecto de encendido al cargar */
+        .logo_aley.encendido {
+            animation: encendidoAnim 0.8s ease-out;
+        }
+
+        @keyframes encendidoAnim {
+            0% {
+                opacity: 0.3;
+                filter: drop-shadow(0 0 0px rgba(37, 99, 235, 0));
+                transform: scale(0.95);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.8));
+            }
+
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.3));
+                transform: scale(1);
+            }
+        }
+
+        /* Efecto de click */
+        .logo_aley.click-effect {
+            transform: scale(0.96);
+            filter: drop-shadow(0 0 35px rgba(37, 99, 235, 0.9));
+            transition: all 0.1s ease;
+        }

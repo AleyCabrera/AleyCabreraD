@@ -35,6 +35,11 @@
     z-index: calc(var(--z-sticky) + 5);
 }
 
+.logo_aley {
+    width: 160px;
+    height: 160px;
+}
+
 .logo-text {
     font-weight: 700;
     font-size: var(--space-lg);
