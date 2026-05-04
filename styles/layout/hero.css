@@ -216,17 +216,81 @@
     transform: translateY(-2px);
 }
 
-/* Status badges */
+/* Status badges - Con iconos y tooltips */
 .status-badges {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin: var(--space-2xl) 0;
 }
+
+.badges-des {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: 20px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color-light);
+    transition: var(--transition-smooth);
+    cursor: help;
+    position: relative;
+}
+
+.badges-des i {
+    font-size: 0.7rem;
+}
+
+.badges-des:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+    background: var(--accent-glow-subtle);
+}
+
+/* Tooltip al hacer hover */
+.badges-des::after {
+    content: attr(data-info);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--accent-primary);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+    z-index: 10;
+}
+
+.badges-des:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.badges-des.active {
+    border-color: var(--accent-primary);
+    background: var(--accent-glow-subtle);
+    color: var(--accent-primary);
+}
+
+
 
 /* ===== TERMINAL VISUAL (derecha) ===== */
 .hero-visual {
     justify-self: end;
+    height: 80%;
     width: 100%;
-    max-width: 480px;  /* Aumentado */
+    max-width: 580px;  /* Aumentado */
 }
 
 .terminal-body {
