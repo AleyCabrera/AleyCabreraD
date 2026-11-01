@@ -846,7 +846,7 @@
                         <i class="fas fa-envelope" aria-hidden="true"></i>
                         <div>
                             <span class="label">EMAIL</span>
-                            <a href="mailto:aley.cabrera@gmail.com" class="value">aley.cabrera@gmail.com</a>
+                            <a href="mailto:aley.cabrera@gmail.com" class="value">contacto@aley.cabrera.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -874,7 +874,7 @@
             </div>
     
             <div class="contact-form">
-                <form action="https://formspree.io/f/xjgprdoq" method="post">
+                <form id="myForm" action="https://formspree.io/f/xzeejnjr" method="post" aria-label="Formulario de contacto" target="_blank">
                     <div class="form-group">
                         <label for="name" class="visually-hidden">Nombre completo</label>
                         <input type="text" id="name" name="name" placeholder="Nombre completo" required>
@@ -893,6 +893,10 @@
                     </div>
                     <button type="submit" class="submit-btn">Enviar mensaje</button>
                 </form>
+
+                <!-- Contenedor para mostrar el mensaje de éxito (Oculto por defecto) -->
+                <div id="form-status" style="display: none; margin-top: 15px; font-weight: bold; color: green;">
+                    ¡Gracias por tu mensaje! Me pondré en contacto contigo pronto.
             </div>
         </section>
 </main>
